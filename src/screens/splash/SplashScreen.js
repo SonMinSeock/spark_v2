@@ -8,7 +8,7 @@ const Header = styled.header`
   justify-content: flex-end;
   margin-top: 42px;
   margin-right: 13px;
-  color: #65656D;
+  color: #65656d;
   font-weight: bold;
   @media (min-width: 669px) {
     font-size: 1.5rem;
@@ -16,7 +16,7 @@ const Header = styled.header`
   a {
     cursor: pointer;
     text-decoration: none;
-    color: #65656D;
+    color: #65656d;
   }
 `;
 
@@ -27,7 +27,7 @@ const Section = styled.section`
   &:nth-of-type(2) {
     display: flex;
     justify-content: space-evenly;
-    margin-top: 100px; 
+    margin-top: 100px;
   }
   img {
     width: 20%;
@@ -43,7 +43,7 @@ const Section = styled.section`
     }
     img {
       width: 15%;
-    }    
+    }
   }
   @media (min-width: 2000px) {
     &:nth-of-type(1) {
@@ -55,8 +55,8 @@ const Section = styled.section`
       margin-top: 120px;
     }
     img {
-      width: 13%;      
-    }    
+      width: 13%;
+    }
   }
 `;
 
@@ -73,11 +73,11 @@ const Paragraph = styled.p`
     }
     @media (min-width: 2000px) {
       font-size: 3.4rem;
-      line-height: 4.5rem; 
+      line-height: 4.5rem;
     }
   }
   &:nth-child(2) {
-    color: #76757B;
+    color: #76757b;
     line-height: 1.4rem;
     margin-top: 10px;
     @media (min-width: 669px) {
@@ -86,11 +86,10 @@ const Paragraph = styled.p`
     }
     @media (min-width: 2000px) {
       font-size: 2.2rem;
-      line-height: 3rem; 
+      line-height: 3rem;
     }
   }
-
-`
+`;
 const Footer = styled.footer`
   display: flex;
   justify-content: center;
@@ -101,14 +100,14 @@ const Footer = styled.footer`
   @media (min-width: 2000px) {
     margin-top: 120px;
   }
-`
+`;
 
 const SplashScreen = () => {
   const navigate = useNavigate();
-  
+
   const onClickRediect = () => {
-    navigate("/login");
-  }
+    navigate("/question");
+  };
 
   return (
     <div>
@@ -128,7 +127,7 @@ const SplashScreen = () => {
         </Paragraph>
       </Section>
       <Section>
-        <img src={require("../../images/hoby/hoby_image_01.png")} />        
+        <img src={require("../../images/hoby/hoby_image_01.png")} />
         <img src={require("../../images/hoby/hoby_image_02.png")} />
         <img src={require("../../images/hoby/hoby_image_03.png")} />
         <img src={require("../../images/hoby/hoby_image_04.png")} />

@@ -52,6 +52,13 @@ table {
 html {
 	background-color: #FFFFFF;
 }
+body {
+	height: 100vh;
+}
+
+#root {
+	height: 100%;
+}
   `;
   return (
     <>

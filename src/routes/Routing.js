@@ -3,13 +3,15 @@ import SplashScreen from "../screens/splash/SplashScreen";
 import InitScreen from "../screens/init/InitScreen";
 import QuestionScreen from "../screens/question/QuestionScreen";
 import ShareScreen from "../screens/share/ShareScreen";
+import LoginScreen from "../screens/login/LoginScreen";
 
 const Routing = () => {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<SplashScreen />} />
-        <Route path="/login" element={<InitScreen />} />
+        <Route path="/start" element={<InitScreen />} />
+        <Route path="/login" element={<LoginScreen />} />
         <Route path="/question" element={<QuestionScreen />} />
         <Route path="/share" element={<ShareScreen />} />
       </Routes>
