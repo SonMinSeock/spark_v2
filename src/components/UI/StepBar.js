@@ -5,12 +5,13 @@ const Header = styled.header`
   display: flex;
   justify-content: center;
   margin-top: 42px;
+  padding: 20px;
 `;
 
 const StepBar = ({ currentStep, maxStep, onBackStep }) => {
   const Bar = styled.div`
     width: 28%;
-    height: 5px;
+    height: 9px;
     background-color: ${(props) =>
       props.point <= currentStep ? "#007AFF" : "#DADDE1"};
     border-radius: 5px;
@@ -20,7 +21,7 @@ const StepBar = ({ currentStep, maxStep, onBackStep }) => {
     }
     cursor: pointer;
     @media (min-width: 669px) {
-      height: 10px;
+      height: 15px;
     }
   `;
 

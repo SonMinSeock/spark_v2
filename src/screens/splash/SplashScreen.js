@@ -102,6 +102,38 @@ const Footer = styled.footer`
   }
 `;
 
+const ServiceIntroduceSection = styled.section`
+  max-width: 290px;
+  margin: 0px 30px;
+  padding: 30px 0px;
+  @media (min-width: 669px) {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 1.2em;
+    max-width: none;
+    margin-top: 25px;
+    div {
+      max-width: 650px;
+    }
+  }
+
+  span {
+    display: block;
+    color: #313447;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  p {
+    color: #76757b;
+    margin-bottom: 10px;
+    font-size: 13px;
+    @media (min-width: 669px) {
+      font-size: 1em;
+    }
+  }
+`;
+
 const SplashScreen = () => {
   const navigate = useNavigate();
 
@@ -121,20 +153,42 @@ const SplashScreen = () => {
           경운대학교 친구를 찾아보세요
         </Paragraph>
         <Paragraph>
-          매일 새로운 질문에 관심사를 등록하면
+          5개의 관심사 질문에 대해
           <br />
-          새로운 친구 최대 5명을 추천해 드려요.
+          알려주시면 친구를 소개해 드려요.
         </Paragraph>
       </Section>
       <Section>
-        <img src={require("../../images/hoby/hoby_image_01.png")} />
-        <img src={require("../../images/hoby/hoby_image_02.png")} />
-        <img src={require("../../images/hoby/hoby_image_03.png")} />
-        <img src={require("../../images/hoby/hoby_image_04.png")} />
+        <img src={require("../../images/nobackground/sports/Football.png")} />
+        <img src={require("../../images/nobackground/sports/Basketball.png")} />
+        <img src={require("../../images/nobackground/sports/Baseball.png")} />
+        <img src={require("../../images/nobackground/sports/Football.png")} />
       </Section>
       <Footer>
         <Button onClick={onClickRediect}>시작하기</Button>
       </Footer>
+      <ServiceIntroduceSection>
+        <div>
+          <span>서비스 이용 방법</span>
+          <p>
+            1. 현재는 완성 서비스가 아닙니다. 만약 문제가 발생했다면 인스타그램
+            공식 계정(sparkapp_campus)로 DM 부탁드리겠습니다.
+          </p>
+          <p>
+            2. 서비스를 악용하는 유저를 발견했다면 위와 동일하게 신고해 주시면
+            감사하겠습니다.
+          </p>
+          <p>3. 1인 1회가 최대 이용 횟수입니다.</p>
+          <p>
+            4. 서비스 이용 후 친구 소개는 입력하신 인스타 계정 DM으로
+            보내드립니다. (시간이 걸릴 수 있습니다.)
+          </p>
+          <p>
+            5. 서비스 이용시 기본 1명의 친구를 소개해 드립니다. 만약 친구를
+            초대하면 추가 3명의 친구를 소개해 드려요.
+          </p>
+        </div>
+      </ServiceIntroduceSection>
     </div>
   );
 };
