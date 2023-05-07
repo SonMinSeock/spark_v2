@@ -138,7 +138,7 @@ const SplashScreen = () => {
   const navigate = useNavigate();
 
   const onClickRediect = () => {
-    navigate("/question");
+    navigate("/start");
   };
 
   return (
