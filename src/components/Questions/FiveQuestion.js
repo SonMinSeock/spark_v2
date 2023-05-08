@@ -86,7 +86,10 @@ const Paragraph = styled.p`
   }
 `;
 
-const FourQuestion = () => {
+const FourQuestion = ({ onAddHoby }) => {
+  const onClick = (hoby) => {
+    onAddHoby(5, hoby);
+  };
   return (
     <React.Fragment>
       <Section>
@@ -97,8 +100,8 @@ const FourQuestion = () => {
         </Paragraph>
       </Section>
       <Section>
-        <button>카페</button>
-        <button>산책</button>
+        <button onClick={() => onClick("카페")}>카페</button>
+        <button onClick={() => onClick("산책")}>산책</button>
       </Section>
     </React.Fragment>
   );

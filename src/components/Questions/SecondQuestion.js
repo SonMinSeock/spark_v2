@@ -96,7 +96,10 @@ const ImageWrapper = styled.div`
   }
 `;
 
-const SecondQuestion = () => {
+const SecondQuestion = ({ onAddHoby }) => {
+  const onClick = (hoby) => {
+    onAddHoby(2, hoby);
+  };
   return (
     <React.Fragment>
       <Section>
@@ -108,25 +111,40 @@ const SecondQuestion = () => {
       <Section>
         <div>
           <ImageWrapper>
-            <img src={require("../../images/sports/sports_image_01.png")} />
+            <img
+              src={require("../../images/sports/sports_image_01.png")}
+              onClick={() => onClick("축구")}
+            />
             <span>축구</span>
           </ImageWrapper>
           <ImageWrapper>
-            <img src={require("../../images/sports/sports_image_02.png")} />
+            <img
+              src={require("../../images/sports/sports_image_02.png")}
+              onClick={() => onClick("농구")}
+            />
             <span>농구</span>
           </ImageWrapper>
           <ImageWrapper>
-            <img src={require("../../images/sports/sports_image_03.png")} />
+            <img
+              src={require("../../images/sports/sports_image_03.png")}
+              onClick={() => onClick("야구")}
+            />
             <span>야구</span>
           </ImageWrapper>
         </div>
         <div>
           <ImageWrapper>
-            <img src={require("../../images/sports/sports_image_04.png")} />
+            <img
+              src={require("../../images/sports/sports_image_04.png")}
+              onClick={() => onClick("배구")}
+            />
             <span>배구</span>
           </ImageWrapper>
           <ImageWrapper>
-            <img src={require("../../images/sports/sports_image_05.png")} />
+            <img
+              src={require("../../images/sports/sports_image_05.png")}
+              onClick={() => onClick("헬스")}
+            />
             <span>헬스</span>
           </ImageWrapper>
           <ImageWrapper>

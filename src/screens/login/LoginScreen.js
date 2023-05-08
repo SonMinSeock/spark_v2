@@ -6,15 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { collection, addDoc, getDocs } from "firebase/firestore";
 import { dbService } from "../../db/firebase";
 import { useForm } from "react-hook-form";
-
-const Section = styled.section`
-  &:nth-of-type(1) {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    height: 35%;
-  }
-`;
+import Select from "react-select";
 
 const Form = styled.form`
   padding: 0 25px;
@@ -72,12 +64,63 @@ const Footer = styled.div`
 
 const LoginScreen = () => {
   const [departmentList, setDepartmentList] = useState([]);
+  const [selectDepartment, setSelectDepartment] = useState();
+  const [selectGender, setSelectGender] = useState("female");
+  const [user, setUser] = useState();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
+
   const navigate = useNavigate();
+
+  const Section = styled.section`
+    &:nth-of-type(1) {
+      height: 35%;
+      display: flex;
+      justify-content: center;
+      div {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        span {
+          font-size: 1em;
+          font-weight: bold;
+          color: #000;
+          margin-top: 15px;
+        }
+        @media (min-width: 669px) {
+          span {
+            font-size: 1.4em;
+          }
+        }
+      }
+      .select {
+        /* img {
+          //border: 2px solid rgb(0, 122, 255);
+        } */
+        span {
+          color: rgb(0, 122, 255);
+        }
+      }
+    }
+
+    img {
+      height: 60%;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    @media (min-width: 669px) {
+      img {
+        width: 350px;
+        height: 300px;
+      }
+    }
+  `;
 
   const Input = styled.input`
     width: 100%;
@@ -89,6 +132,7 @@ const LoginScreen = () => {
     border: ${(props) => (props.inValid ? "1px solid blue" : 0)};
     padding: 0px 10px;
     margin-bottom: 25px;
+
     &:last-child {
       margin-bottom: 0px;
     }
@@ -105,37 +149,75 @@ const LoginScreen = () => {
 
   const getDepartmentList = async () => {
     const readData = await getDocs(collection(dbService, "departments"));
+
     readData.forEach((document) => {
       setDepartmentList(() => [...document.data().departmentList]);
     });
+  };
+
+  const onSelectGender = (gender) => {
+    setSelectGender(gender);
   };
 
   useEffect(() => {
     getDepartmentList();
   }, []);
 
+  const onSelect = (event) => {
+    setSelectDepartment(event.value);
+  };
+
   const onValid = async (value) => {
-    console.log(value);
-    await addDoc(collection(dbService, "users"), value);
-    navigate("/question");
+    const addUser = {
+      ...value,
+      department: selectDepartment,
+      gender: selectGender,
+    };
+
+    setUser(addUser);
+
+    await addDoc(collection(dbService, "users"), addUser);
+    navigate("/question", { state: addUser });
   };
 
   return (
     <React.Fragment>
-      <Section></Section>
+      <Section>
+        <div className={selectGender === "female" ? "select" : ""}>
+          <img
+            src={require("../../images/gender/female.png")}
+            onClick={() => onSelectGender("female")}
+          />
+          <span>여성</span>
+        </div>
+        <div className={selectGender === "male" ? "select" : ""}>
+          <img
+            src={require("../../images/gender/male.png")}
+            onClick={() => onSelectGender("male")}
+          />
+          <span>남성</span>
+        </div>
+      </Section>
       <Form onSubmit={handleSubmit(onValid)}>
         <LabelInputWrapper>
           <LabelWrapper>
             <label htmlFor="department">학과</label>
           </LabelWrapper>
-          <Input
+          {/* <Input
             type="text"
             placeholder="학과"
             id="department"
             {...register("department", {
               required: "학과를 입력해주세요",
             })}
-          />
+          /> */}
+          <div style={{ marginBottom: 20 }}>
+            <Select
+              placeholder="학과를 선택하세요"
+              options={departmentList}
+              onChange={onSelect}
+            />
+          </div>
           <LabelWrapper>
             <label htmlFor="student_id">학번</label>
           </LabelWrapper>
@@ -143,7 +225,12 @@ const LoginScreen = () => {
             type="text"
             placeholder="학번"
             id="student_id"
-            {...register("studentId", { required: "학번 입력해주세요" })}
+            {...register("studentId", {
+              required: "학번 입력해주세요",
+              minLength: 9,
+            })}
+            required
+            minLength={9}
           />
           <LabelWrapper>
             <label htmlFor="instargram">

@@ -96,7 +96,10 @@ const ImageWrapper = styled.div`
   }
 `;
 
-const ThirdQuestion = () => {
+const ThirdQuestion = ({ onAddHoby }) => {
+  const onClick = (hoby) => {
+    onAddHoby(3, hoby);
+  };
   return (
     <React.Fragment>
       <Section>
@@ -109,29 +112,47 @@ const ThirdQuestion = () => {
       <Section>
         <div>
           <ImageWrapper>
-            <img src={require("../../images/hoby/hoby_image_02.png")} />
+            <img
+              src={require("../../images/hoby/hoby_image_02.png")}
+              onClick={() => onClick("액션")}
+            />
             <span>액션</span>
           </ImageWrapper>
           <ImageWrapper>
-            <img src={require("../../images/movie/movie_image_01.png")} />
+            <img
+              src={require("../../images/movie/movie_image_01.png")}
+              onClick={() => onClick("호러")}
+            />
             <span>호러</span>
           </ImageWrapper>
           <ImageWrapper>
-            <img src={require("../../images/movie/movie_image_02.png")} />
+            <img
+              src={require("../../images/movie/movie_image_02.png")}
+              onClick={() => onClick("SF")}
+            />
             <span>SF</span>
           </ImageWrapper>
         </div>
         <div>
           <ImageWrapper>
-            <img src={require("../../images/movie/movie_image_03.png")} />
+            <img
+              src={require("../../images/movie/movie_image_03.png")}
+              onClick={() => onClick("코미디")}
+            />
             <span>코미디</span>
           </ImageWrapper>
           <ImageWrapper>
-            <img src={require("../../images/movie/movie_image_04.png")} />
+            <img
+              src={require("../../images/movie/movie_image_04.png")}
+              onClick={() => onClick("로맨스")}
+            />
             <span>로멘스</span>
           </ImageWrapper>
           <ImageWrapper>
-            <img src={require("../../images/hoby/hoby_image_01.png")} />
+            <img
+              src={require("../../images/hoby/hoby_image_01.png")}
+              onClick={() => onClick("애니메이션")}
+            />
             <span>애니메이션</span>
           </ImageWrapper>
         </div>

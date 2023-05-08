@@ -96,7 +96,10 @@ const ImageWrapper = styled.div`
   }
 `;
 
-const FirstQuestion = () => {
+const FirstQuestion = ({ onAddHoby }) => {
+  const onClick = (hoby) => {
+    onAddHoby(1, hoby);
+  };
   return (
     <React.Fragment>
       <Section>
@@ -114,29 +117,47 @@ const FirstQuestion = () => {
       <Section>
         <div>
           <ImageWrapper>
-            <img src={require("../../images/city/city_image_01.png")} />
+            <img
+              src={require("../../images/city/city_image_01.png")}
+              onClick={() => onClick("뉴욕")}
+            />
             <span>뉴욕</span>
           </ImageWrapper>
           <ImageWrapper>
-            <img src={require("../../images/city/city_image_02.png")} />
+            <img
+              src={require("../../images/city/city_image_02.png")}
+              onClick={() => onClick("파리")}
+            />
             <span>파리</span>
           </ImageWrapper>
           <ImageWrapper>
-            <img src={require("../../images/city/city_image_03.png")} />
+            <img
+              src={require("../../images/city/city_image_03.png")}
+              onClick={() => onClick("하와이")}
+            />
             <span>하와이</span>
           </ImageWrapper>
         </div>
         <div>
           <ImageWrapper>
-            <img src={require("../../images/city/city_image_04.png")} />
+            <img
+              src={require("../../images/city/city_image_04.png")}
+              onClick={() => onClick("도쿄")}
+            />
             <span>도쿄</span>
           </ImageWrapper>
           <ImageWrapper>
-            <img src={require("../../images/city/city_image_05.png")} />
+            <img
+              src={require("../../images/city/city_image_05.png")}
+              onClick={() => onClick("제주도")}
+            />
             <span>제주도</span>
           </ImageWrapper>
           <ImageWrapper>
-            <img src={require("../../images/city/city_image_06.png")} />
+            <img
+              src={require("../../images/city/city_image_06.png")}
+              onClick={() => onClick("홍콩")}
+            />
             <span>홍콩</span>
           </ImageWrapper>
         </div>

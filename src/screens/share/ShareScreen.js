@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import Button from "../../components/UI/Button";
 import { FaInfoCircle } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Section = styled.section`
   &:nth-of-type(1) {
@@ -179,9 +179,58 @@ const Footer = styled.div`
 
 const ShareScreen = () => {
   const navigate = useNavigate();
+  const taste = useLocation();
+
   const onSubmit = () => {
     navigate("/share");
   };
+
+  const shareHoby = (hobyId) => {
+    if (hobyId === 1) {
+      if (taste.state.movieGenre === "액션") {
+        return <img src={require("../../images/hoby/hoby_image_02.png")} />;
+      } else if (taste.state.movieGenre === "호러") {
+        return <img src={require("../../images/movie/movie_image_01.png")} />;
+      } else if (taste.state.movieGenre === "SF") {
+        return <img src={require("../../images/hoby/hoby_image_02.png")} />;
+      } else if (taste.state.movieGenre === "코미디") {
+        return <img src={require("../../images/hoby/hoby_image_03.png")} />;
+      } else if (taste.state.movieGenre === "로맨스") {
+        return <img src={require("../../images/movie/movie_image_04.png")} />;
+      } else if (taste.state.movieGenre === "애니메이션") {
+        return <img src={require("../../images/hoby/hoby_image_01.png")} />;
+      }
+    } else if (hobyId === 2) {
+      if (taste.state.travelCity === "뉴욕") {
+        return <img src={require("../../images/hoby/hoby_image_02.png")} />;
+      } else if (taste.state.travelCity === "파리") {
+        return <img src={require("../../images/city/city_image_02.png")} />;
+      } else if (taste.state.travelCity === "하와이") {
+        return <img src={require("../../images/city/city_image_03.png")} />;
+      } else if (taste.state.travelCity === "도쿄") {
+        return <img src={require("../../images/city/city_image_04.png")} />;
+      } else if (taste.state.travelCity === "제주도") {
+        return <img src={require("../../images/city/city_image_05.png")} />;
+      } else if (taste.state.travelCity === "홍콩") {
+        return <img src={require("../../images/city/city_image_06.png")} />;
+      }
+    } else if (hobyId === 3) {
+      if (taste.state.sports === "축구") {
+        return <img src={require("../../images/sports/sports_image_01.png")} />;
+      } else if (taste.state.sports === "농구") {
+        return <img src={require("../../images/sports/sports_image_02.png")} />;
+      } else if (taste.state.sports === "야구") {
+        return <img src={require("../../images/sports/sports_image_03.png")} />;
+      } else if (taste.state.sports === "배구") {
+        return <img src={require("../../images/sports/sports_image_04.png")} />;
+      } else if (taste.state.sports === "헬스") {
+        return <img src={require("../../images/sports/sports_image_05.png")} />;
+      } else if (taste.state.sports === "배드미턴") {
+        return <img src={require("../../images/sports/sports_image_06.png")} />;
+      }
+    }
+  };
+
   return (
     <React.Fragment>
       <Section>
@@ -193,31 +242,33 @@ const ShareScreen = () => {
         <Wrapper>
           <Card>
             <GenderWrapper>
-              <img src={require("../../images/gender/male.png")} />
+              {taste.state.gender === "female" ? (
+                <img src={require("../../images/gender/female.png")} />
+              ) : (
+                <img src={require("../../images/gender/male.png")} />
+              )}
             </GenderWrapper>
             <HobyWrapper>
               <HobyRow>
                 <Hoby>
-                  <img src={require("../../images/hoby/hoby_image_02.png")} />
-                  <span>액션</span>
+                  {shareHoby(1)}
+                  <span>{taste.state.movieGenre}</span>
                 </Hoby>
                 <Hoby>
-                  <img src={require("../../images/city/city_image_02.png")} />
-                  <span>파리</span>
+                  {shareHoby(2)}
+                  <span>{taste.state.travelCity}</span>
                 </Hoby>
                 <Hoby>
-                  <img
-                    src={require("../../images/sports/sports_image_01.png")}
-                  />
-                  <span>축구</span>
+                  {shareHoby(3)}
+                  <span>{taste.state.sports}</span>
                 </Hoby>
               </HobyRow>
               <HobyRow>
                 <div>
-                  <span>전화</span>
+                  <span>{taste.state.communication}</span>
                 </div>
                 <div>
-                  <span>카페</span>
+                  <span>{taste.state.meeting}</span>
                 </div>
               </HobyRow>
             </HobyWrapper>
