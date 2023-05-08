@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 const Section = styled.section`
   &:nth-of-type(1) {
@@ -94,10 +94,16 @@ const ImageWrapper = styled.div`
     font-weight: bold;
     margin-top: 15px;
   }
+  .select {
+    color: rgb(0, 122, 255);
+  }
 `;
 
 const ThirdQuestion = ({ onAddHoby }) => {
+  const [selectHoby, setSelectHoby] = useState();
+
   const onClick = (hoby) => {
+    setSelectHoby(hoby);
     onAddHoby(3, hoby);
   };
   return (
@@ -116,21 +122,21 @@ const ThirdQuestion = ({ onAddHoby }) => {
               src={require("../../images/hoby/hoby_image_02.png")}
               onClick={() => onClick("액션")}
             />
-            <span>액션</span>
+            <span className={selectHoby === "액션" ? "select" : ""}>액션</span>
           </ImageWrapper>
           <ImageWrapper>
             <img
               src={require("../../images/movie/movie_image_01.png")}
               onClick={() => onClick("호러")}
             />
-            <span>호러</span>
+            <span className={selectHoby === "호러" ? "select" : ""}>호러</span>
           </ImageWrapper>
           <ImageWrapper>
             <img
               src={require("../../images/movie/movie_image_02.png")}
               onClick={() => onClick("SF")}
             />
-            <span>SF</span>
+            <span className={selectHoby === "SF" ? "select" : ""}>SF</span>
           </ImageWrapper>
         </div>
         <div>
@@ -139,21 +145,27 @@ const ThirdQuestion = ({ onAddHoby }) => {
               src={require("../../images/movie/movie_image_03.png")}
               onClick={() => onClick("코미디")}
             />
-            <span>코미디</span>
+            <span className={selectHoby === "코미디" ? "select" : ""}>
+              코미디
+            </span>
           </ImageWrapper>
           <ImageWrapper>
             <img
               src={require("../../images/movie/movie_image_04.png")}
               onClick={() => onClick("로맨스")}
             />
-            <span>로멘스</span>
+            <span className={selectHoby === "로맨스" ? "select" : ""}>
+              로멘스
+            </span>
           </ImageWrapper>
           <ImageWrapper>
             <img
               src={require("../../images/hoby/hoby_image_01.png")}
               onClick={() => onClick("애니메이션")}
             />
-            <span>애니메이션</span>
+            <span className={selectHoby === "애니메이션" ? "select" : ""}>
+              애니메이션
+            </span>
           </ImageWrapper>
         </div>
       </Section>

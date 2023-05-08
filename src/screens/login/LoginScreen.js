@@ -109,8 +109,8 @@ const LoginScreen = () => {
     }
 
     img {
-      height: 60%;
-      border-radius: 50%;
+      height: 120px;
+      border-radius: 150px;
       cursor: pointer;
     }
 

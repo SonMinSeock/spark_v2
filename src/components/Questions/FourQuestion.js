@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 const Section = styled.section`
   &:nth-of-type(1) {
@@ -51,6 +51,11 @@ const Section = styled.section`
         font-size: 1.5em;
       }
     }
+    .select {
+      background-color: #007aff;
+      color: #ffffff;
+      border: none;
+    }
   }
 `;
 
@@ -87,7 +92,10 @@ const Paragraph = styled.p`
 `;
 
 const FourQuestion = ({ onAddHoby }) => {
+  const [selectHoby, setSelectHoby] = useState();
+
   const onClick = (hoby) => {
+    setSelectHoby(hoby);
     onAddHoby(4, hoby);
   };
   return (
@@ -100,8 +108,18 @@ const FourQuestion = ({ onAddHoby }) => {
         </Paragraph>
       </Section>
       <Section>
-        <button onClick={() => onClick("전화")}>전화</button>
-        <button onClick={() => onClick("매시지")}>메시지</button>
+        <button
+          className={selectHoby === "전화" ? "select" : ""}
+          onClick={() => onClick("전화")}
+        >
+          전화
+        </button>
+        <button
+          className={selectHoby === "메시지" ? "select" : ""}
+          onClick={() => onClick("메시지")}
+        >
+          메시지
+        </button>
       </Section>
     </React.Fragment>
   );

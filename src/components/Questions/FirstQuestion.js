@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 const Section = styled.section`
   &:nth-of-type(1) {
@@ -94,10 +94,15 @@ const ImageWrapper = styled.div`
     font-weight: bold;
     margin-top: 15px;
   }
+  .select {
+    color: rgb(0, 122, 255);
+  }
 `;
 
 const FirstQuestion = ({ onAddHoby }) => {
+  const [selectHoby, setSelectHoby] = useState();
   const onClick = (hoby) => {
+    setSelectHoby(hoby);
     onAddHoby(1, hoby);
   };
   return (
@@ -121,21 +126,23 @@ const FirstQuestion = ({ onAddHoby }) => {
               src={require("../../images/city/city_image_01.png")}
               onClick={() => onClick("뉴욕")}
             />
-            <span>뉴욕</span>
+            <span className={selectHoby === "뉴욕" ? "select" : ""}>뉴욕</span>
           </ImageWrapper>
           <ImageWrapper>
             <img
               src={require("../../images/city/city_image_02.png")}
               onClick={() => onClick("파리")}
             />
-            <span>파리</span>
+            <span className={selectHoby === "파리" ? "select" : ""}>파리</span>
           </ImageWrapper>
           <ImageWrapper>
             <img
               src={require("../../images/city/city_image_03.png")}
               onClick={() => onClick("하와이")}
             />
-            <span>하와이</span>
+            <span className={selectHoby === "하와이" ? "select" : ""}>
+              하와이
+            </span>
           </ImageWrapper>
         </div>
         <div>
@@ -144,21 +151,23 @@ const FirstQuestion = ({ onAddHoby }) => {
               src={require("../../images/city/city_image_04.png")}
               onClick={() => onClick("도쿄")}
             />
-            <span>도쿄</span>
+            <span className={selectHoby === "도쿄" ? "select" : ""}>도쿄</span>
           </ImageWrapper>
           <ImageWrapper>
             <img
               src={require("../../images/city/city_image_05.png")}
               onClick={() => onClick("제주도")}
             />
-            <span>제주도</span>
+            <span className={selectHoby === "제주도" ? "select" : ""}>
+              제주도
+            </span>
           </ImageWrapper>
           <ImageWrapper>
             <img
               src={require("../../images/city/city_image_06.png")}
               onClick={() => onClick("홍콩")}
             />
-            <span>홍콩</span>
+            <span className={selectHoby === "홍콩" ? "select" : ""}>홍콩</span>
           </ImageWrapper>
         </div>
       </Section>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 const Section = styled.section`
   &:nth-of-type(1) {
@@ -94,10 +94,16 @@ const ImageWrapper = styled.div`
     font-weight: bold;
     margin-top: 15px;
   }
+  .select {
+    color: rgb(0, 122, 255);
+  }
 `;
 
 const SecondQuestion = ({ onAddHoby }) => {
+  const [selectHoby, setSelectHoby] = useState();
+
   const onClick = (hoby) => {
+    setSelectHoby(hoby);
     onAddHoby(2, hoby);
   };
   return (
@@ -115,21 +121,21 @@ const SecondQuestion = ({ onAddHoby }) => {
               src={require("../../images/sports/sports_image_01.png")}
               onClick={() => onClick("축구")}
             />
-            <span>축구</span>
+            <span className={selectHoby === "축구" ? "select" : ""}>축구</span>
           </ImageWrapper>
           <ImageWrapper>
             <img
               src={require("../../images/sports/sports_image_02.png")}
               onClick={() => onClick("농구")}
             />
-            <span>농구</span>
+            <span className={selectHoby === "농구" ? "select" : ""}>농구</span>
           </ImageWrapper>
           <ImageWrapper>
             <img
               src={require("../../images/sports/sports_image_03.png")}
               onClick={() => onClick("야구")}
             />
-            <span>야구</span>
+            <span className={selectHoby === "야구" ? "select" : ""}>야구</span>
           </ImageWrapper>
         </div>
         <div>
@@ -138,18 +144,20 @@ const SecondQuestion = ({ onAddHoby }) => {
               src={require("../../images/sports/sports_image_04.png")}
               onClick={() => onClick("배구")}
             />
-            <span>배구</span>
+            <span className={selectHoby === "배구" ? "select" : ""}>배구</span>
           </ImageWrapper>
           <ImageWrapper>
             <img
               src={require("../../images/sports/sports_image_05.png")}
               onClick={() => onClick("헬스")}
             />
-            <span>헬스</span>
+            <span className={selectHoby === "헬스" ? "select" : ""}>헬스</span>
           </ImageWrapper>
           <ImageWrapper>
             <img src={require("../../images/sports/sports_image_06.png")} />
-            <span>배드미턴</span>
+            <span className={selectHoby === "배드미턴" ? "select" : ""}>
+              배드미턴
+            </span>
           </ImageWrapper>
         </div>
       </Section>
