@@ -99,11 +99,12 @@ const ImageWrapper = styled.div`
   }
 `;
 
-const SecondQuestion = ({ onAddHoby }) => {
+const SecondQuestion = ({ onAddHoby, onValidate }) => {
   const [selectHoby, setSelectHoby] = useState();
 
   const onClick = (hoby) => {
     setSelectHoby(hoby);
+    onValidate(hoby);
     onAddHoby(2, hoby);
   };
   return (
@@ -154,9 +155,12 @@ const SecondQuestion = ({ onAddHoby }) => {
             <span className={selectHoby === "헬스" ? "select" : ""}>헬스</span>
           </ImageWrapper>
           <ImageWrapper>
-            <img src={require("../../images/sports/sports_image_06.png")} />
-            <span className={selectHoby === "배드미턴" ? "select" : ""}>
-              배드미턴
+            <img
+              src={require("../../images/sports/sports_image_06.png")}
+              onClick={() => onClick("배드민턴")}
+            />
+            <span className={selectHoby === "배드민턴" ? "select" : ""}>
+              배드민턴
             </span>
           </ImageWrapper>
         </div>

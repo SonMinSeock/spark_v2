@@ -99,11 +99,12 @@ const ImageWrapper = styled.div`
   }
 `;
 
-const ThirdQuestion = ({ onAddHoby }) => {
+const ThirdQuestion = ({ onAddHoby, onValidate }) => {
   const [selectHoby, setSelectHoby] = useState();
 
   const onClick = (hoby) => {
     setSelectHoby(hoby);
+    onValidate(hoby);
     onAddHoby(3, hoby);
   };
   return (

@@ -28,6 +28,9 @@ const LabelInputWrapper = styled.div`
     flex-direction: column;
     min-width: 620px;
   }
+  .invalid {
+    border: 1px solid #007aff;
+  }
 `;
 const LabelWrapper = styled.div`
   display: flex;
@@ -67,12 +70,13 @@ const LoginScreen = () => {
   const [selectDepartment, setSelectDepartment] = useState();
   const [selectGender, setSelectGender] = useState("female");
   const [user, setUser] = useState();
+  const [userInputValid, setUserInputValid] = useState(false);
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({ mode: "onBlur" });
 
   const navigate = useNavigate();
 
@@ -110,8 +114,18 @@ const LoginScreen = () => {
 
     img {
       height: 120px;
-      border-radius: 150px;
+      border-radius: 20%;
+      border: 2px solid #ececec;
       cursor: pointer;
+      &:first-child {
+        margin-right: 10px;
+      }
+    }
+    &:nth-child(2) {
+      margin-right: 10px;
+    }
+    .select {
+      border-color: #007aff;
     }
 
     @media (min-width: 669px) {
@@ -129,10 +143,16 @@ const LoginScreen = () => {
     background-color: #eaeef1;
     color: #878d98;
     font-weight: 600;
-    border: ${(props) => (props.inValid ? "1px solid blue" : 0)};
+    border: none;
+    /* &:nth-of-type(1) {
+      border: ${errors.studentId ? "1px solid blue" : ""};
+    }
+    &:nth-of-type(2) {
+      border: ${errors.instargramUrl ? "1px solid blue" : ""};
+    } */
+
     padding: 0px 10px;
     margin-bottom: 25px;
-
     &:last-child {
       margin-bottom: 0px;
     }
@@ -180,12 +200,14 @@ const LoginScreen = () => {
     navigate("/question", { state: addUser });
   };
 
+  console.log(errors);
   return (
     <React.Fragment>
       <Section>
         <div className={selectGender === "female" ? "select" : ""}>
           <img
             src={require("../../images/gender/female.png")}
+            className={selectGender === "female" ? "select" : ""}
             onClick={() => onSelectGender("female")}
           />
           <span>여성</span>
@@ -193,6 +215,7 @@ const LoginScreen = () => {
         <div className={selectGender === "male" ? "select" : ""}>
           <img
             src={require("../../images/gender/male.png")}
+            className={selectGender === "male" ? "select" : ""}
             onClick={() => onSelectGender("male")}
           />
           <span>남성</span>
@@ -223,14 +246,15 @@ const LoginScreen = () => {
           </LabelWrapper>
           <Input
             type="text"
-            placeholder="학번"
+            placeholder="ex) 20학번"
             id="student_id"
             {...register("studentId", {
               required: "학번 입력해주세요",
-              minLength: 9,
+              maxLength: 4,
             })}
+            className={errors.studentId ? "invalid" : ""}
             required
-            minLength={9}
+            maxLength={4}
           />
           <LabelWrapper>
             <label htmlFor="instargram">
@@ -240,9 +264,13 @@ const LoginScreen = () => {
           </LabelWrapper>
           <Input
             type="text"
-            placeholder="instargram link"
+            placeholder="인스타 아이디:Sparkapp_campus"
             id="instargram"
-            {...register("instargramUrl")}
+            {...register("instargramUrl", {
+              required: "인스타 아이디 입력 해주세요",
+            })}
+            className={errors.instargramUrl ? "invalid" : ""}
+            required
           />
         </LabelInputWrapper>
         <Footer>

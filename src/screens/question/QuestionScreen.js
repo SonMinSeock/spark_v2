@@ -21,6 +21,7 @@ const Footer = styled.footer`
 const QuestionScreen = () => {
   const [currentStep, setCurrentStep] = useState(1);
   const [hobys, setHobys] = useState();
+  const [validate, setValidate] = useState(false);
   const navigator = useNavigate();
   const user = useLocation();
 
@@ -28,8 +29,10 @@ const QuestionScreen = () => {
   const maxStep = 5;
 
   const onNextStep = async (maxStep) => {
-    if (maxStep > currentStep) {
+    if (maxStep > currentStep && validate === true) {
       setCurrentStep((prev) => prev + 1);
+      console.log(validate);
+      setValidate(false);
     } else if (maxStep === currentStep) {
       const taste = {
         ...hobys,
@@ -40,6 +43,14 @@ const QuestionScreen = () => {
       };
       await addDoc(collection(dbService, "taste"), taste);
       navigator("/share", { state: taste });
+    }
+  };
+
+  const onValidate = (select) => {
+    if (select === "") {
+      setValidate(false);
+    } else {
+      setValidate(true);
     }
   };
 
@@ -65,15 +76,15 @@ const QuestionScreen = () => {
   };
 
   if (currentStep === 1) {
-    question = <FirstQuestion onAddHoby={addHoby} />;
+    question = <FirstQuestion onAddHoby={addHoby} onValidate={onValidate} />;
   } else if (currentStep === 2) {
-    question = <SecondQuestion onAddHoby={addHoby} />;
+    question = <SecondQuestion onAddHoby={addHoby} onValidate={onValidate} />;
   } else if (currentStep === 3) {
-    question = <ThirdQuestion onAddHoby={addHoby} />;
+    question = <ThirdQuestion onAddHoby={addHoby} onValidate={onValidate} />;
   } else if (currentStep === 4) {
-    question = <FourQuestion onAddHoby={addHoby} />;
+    question = <FourQuestion onAddHoby={addHoby} onValidate={onValidate} />;
   } else if (currentStep === maxStep) {
-    question = <FiveQuestion onAddHoby={addHoby} />;
+    question = <FiveQuestion onAddHoby={addHoby} onValidate={onValidate} />;
   }
 
   return (

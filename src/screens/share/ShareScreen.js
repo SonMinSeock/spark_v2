@@ -192,9 +192,9 @@ const ShareScreen = () => {
       } else if (taste.state.movieGenre === "호러") {
         return <img src={require("../../images/movie/movie_image_01.png")} />;
       } else if (taste.state.movieGenre === "SF") {
-        return <img src={require("../../images/hoby/hoby_image_02.png")} />;
+        return <img src={require("../../images/movie/movie_image_02.png")} />;
       } else if (taste.state.movieGenre === "코미디") {
-        return <img src={require("../../images/hoby/hoby_image_03.png")} />;
+        return <img src={require("../../images/movie/movie_image_03.png")} />;
       } else if (taste.state.movieGenre === "로맨스") {
         return <img src={require("../../images/movie/movie_image_04.png")} />;
       } else if (taste.state.movieGenre === "애니메이션") {
@@ -202,7 +202,7 @@ const ShareScreen = () => {
       }
     } else if (hobyId === 2) {
       if (taste.state.travelCity === "뉴욕") {
-        return <img src={require("../../images/hoby/hoby_image_02.png")} />;
+        return <img src={require("../../images/city/city_image_01.png")} />;
       } else if (taste.state.travelCity === "파리") {
         return <img src={require("../../images/city/city_image_02.png")} />;
       } else if (taste.state.travelCity === "하와이") {
@@ -225,7 +225,7 @@ const ShareScreen = () => {
         return <img src={require("../../images/sports/sports_image_04.png")} />;
       } else if (taste.state.sports === "헬스") {
         return <img src={require("../../images/sports/sports_image_05.png")} />;
-      } else if (taste.state.sports === "배드미턴") {
+      } else if (taste.state.sports === "배드민턴") {
         return <img src={require("../../images/sports/sports_image_06.png")} />;
       }
     }

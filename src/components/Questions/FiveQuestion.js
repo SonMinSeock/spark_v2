@@ -54,7 +54,6 @@ const Section = styled.section`
     .select {
       background-color: #007aff;
       color: #ffffff;
-      border: none;
     }
   }
 `;
@@ -91,10 +90,11 @@ const Paragraph = styled.p`
   }
 `;
 
-const FourQuestion = ({ onAddHoby }) => {
+const FiveQuestion = ({ onAddHoby, onValidate }) => {
   const [selectHoby, setSelectHoby] = useState();
   const onClick = (hoby) => {
     setSelectHoby(hoby);
+    onValidate(hoby);
     onAddHoby(5, hoby);
   };
   return (
@@ -124,4 +124,4 @@ const FourQuestion = ({ onAddHoby }) => {
   );
 };
 
-export default FourQuestion;
+export default FiveQuestion;
