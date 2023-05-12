@@ -68,7 +68,7 @@ const Footer = styled.div`
 const LoginScreen = () => {
   const [departmentList, setDepartmentList] = useState([]);
   const [selectDepartment, setSelectDepartment] = useState();
-  const [selectGender, setSelectGender] = useState("female");
+  const [selectGender, setSelectGender] = useState("");
   const [user, setUser] = useState();
   const [userInputValid, setUserInputValid] = useState(false);
 
@@ -188,16 +188,19 @@ const LoginScreen = () => {
   };
 
   const onValid = async (value) => {
-    const addUser = {
-      ...value,
-      department: selectDepartment,
-      gender: selectGender,
-    };
+    if (selectGender !== "") {
+      const addUser = {
+        ...value,
+        department: selectDepartment,
+        gender: selectGender,
+      };
 
-    setUser(addUser);
-
-    await addDoc(collection(dbService, "users"), addUser);
-    navigate("/notification", { state: addUser });
+      setUser(addUser);
+      await addDoc(collection(dbService, "users"), addUser);
+      navigate("/notification", { state: addUser });
+    } else {
+      alert("입력 안한 항목이 있습니다.");
+    }
   };
 
   return (
