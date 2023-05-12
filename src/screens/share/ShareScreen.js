@@ -7,7 +7,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 const Section = styled.section`
   &:nth-of-type(1) {
     /*margin-top: 137px; */
-    height: 83%;
+    height: 90%;
     padding-top: 50px;
     padding-left: 50px;
     padding-right: 50px;
@@ -19,6 +19,18 @@ const Section = styled.section`
     @media (min-width: 2000px) {
       padding-left: 250px;
       padding-right: 250px;
+    }
+  }
+  .info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    p {
+      font-size: 0.9rem;
+      @media (min-width: 669px) {
+        font-size: 1.5rem;
+      }
     }
   }
 `;
@@ -40,32 +52,15 @@ const Paragraph = styled.p`
       line-height: 4.5rem;
     }
   }
-  &:nth-of-type(2) {
-    height: 10%;
-    color: #76757b;
-    font-size: 0.9rem;
-    font-weight: bold;
-    line-height: 1.4rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 10px 0px;
-    @media (min-width: 669px) {
-      height: 18%;
-      font-size: 1.5rem;
-      line-height: 2rem;
-    }
-  }
 `;
 
 const Wrapper = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 15px;
+  height: 400px;
   @media (min-width: 669px) {
-    height: 70%;
-  }
-  @media (min-width: 2000px) {
+    height: 500px;
   }
 `;
 
@@ -81,7 +76,7 @@ const Card = styled.div`
   }
 
   @media (min-width: 669px) {
-    min-width: 520px;
+    min-width: 420px;
   }
   @media (min-width: 2000px) {
   }
@@ -94,15 +89,14 @@ const GenderWrapper = styled.div`
     width: 120px;
     height: 120px;
     border-radius: 50%;
+
     @media (min-width: 400px) {
       width: 150px;
       height: 150px;
     }
     @media (min-width: 669px) {
-      width: 250px;
-      height: 250px;
-    }
-    @media (min-width: 2000px) {
+      width: 150px;
+      height: 150px;
     }
   }
   margin-bottom: 15px;
@@ -125,8 +119,8 @@ const HobyRow = styled.div`
       height: 70px;
     }
     @media (min-width: 669px) {
-      width: 100px;
-      height: 100px;
+      width: 80px;
+      height: 80px;
     }
   }
   &:nth-of-type(2) {
@@ -165,7 +159,7 @@ const Hoby = styled.div`
 `;
 const Footer = styled.div`
   display: flex;
-  height: 20%;
+  height: 10%;
   align-items: center;
   justify-content: center;
   padding: 0px 7px;
@@ -181,8 +175,13 @@ const ShareScreen = () => {
   const navigate = useNavigate();
   const taste = useLocation();
 
-  const onSubmit = () => {
-    navigate("/share");
+  const handleCopyClipBoard = async (link) => {
+    try {
+      await navigator.clipboard.writeText(link);
+      alert("웹사이트 링크 복사되었습니다.");
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   const shareHoby = (hobyId) => {
@@ -274,10 +273,20 @@ const ShareScreen = () => {
             </HobyWrapper>
           </Card>
         </Wrapper>
-        <Paragraph>곧 안내 문자가 인스타그램 DM으로 갈꺼에요</Paragraph>
+        <div className="info">
+          <Paragraph>곧 안내 문자가 인스타그램 DM으로 갈꺼에요</Paragraph>
+        </div>
       </Section>
       <Footer>
-        <Button type="submit" style="fluid">
+        <Button
+          type="submit"
+          style="fluid"
+          onClick={() =>
+            handleCopyClipBoard(
+              "https://web-spark-app-4c7jj2blhejxep3.sel4.cloudtype.app"
+            )
+          }
+        >
           나도 친구에게 공유하기
         </Button>
       </Footer>

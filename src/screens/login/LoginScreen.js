@@ -197,10 +197,9 @@ const LoginScreen = () => {
     setUser(addUser);
 
     await addDoc(collection(dbService, "users"), addUser);
-    navigate("/question", { state: addUser });
+    navigate("/notification", { state: addUser });
   };
 
-  console.log(errors);
   return (
     <React.Fragment>
       <Section>
@@ -260,16 +259,15 @@ const LoginScreen = () => {
             <label htmlFor="instargram">
               <img src={require("../../images/instagram.png")} />
             </label>
-            <FaInfoCircle />
           </LabelWrapper>
           <Input
             type="text"
             placeholder="인스타 아이디:Sparkapp_campus"
             id="instargram"
-            {...register("instargramUrl", {
+            {...register("instagramId", {
               required: "인스타 아이디 입력 해주세요",
             })}
-            className={errors.instargramUrl ? "invalid" : ""}
+            className={errors.instagramId ? "invalid" : ""}
             required
           />
         </LabelInputWrapper>

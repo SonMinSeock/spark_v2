@@ -133,7 +133,11 @@ const InitScreen = () => {
             <label htmlFor="recommender">추천인</label>
             <FaInfoCircle />
           </LabelWrapper>
-          <Input type="text" placeholder="이름" id="recommender" />
+          <Input
+            type="text"
+            placeholder="추천한 친구의 인스타 아이디"
+            id="recommender"
+          />
         </div>
         <Footer>
           <Button type="submit" style="fluid">

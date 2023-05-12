@@ -138,13 +138,30 @@ const SplashScreen = () => {
   const navigate = useNavigate();
 
   const onClickRediect = () => {
-    navigate("/start");
+    navigate("/login");
+  };
+
+  const handleCopyClipBoard = async (link) => {
+    try {
+      await navigator.clipboard.writeText(link);
+      alert("웹사이트 링크 복사되었습니다.");
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
     <div>
       <Header>
-        <Link to="/share">공유하기</Link>
+        <span
+          onClick={() =>
+            handleCopyClipBoard(
+              "https://web-spark-app-4c7jj2blhejxep3.sel4.cloudtype.app"
+            )
+          }
+        >
+          공유하기
+        </span>
       </Header>
       <Section>
         <Paragraph>
