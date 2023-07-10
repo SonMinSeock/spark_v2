@@ -1,5 +1,6 @@
 import { createGlobalStyle } from "styled-components";
 import Routing from "./routes/Routing";
+import { useLocation } from "react-router-dom";
 
 function App() {
   const GlobalStyle = createGlobalStyle`
@@ -60,10 +61,13 @@ body {
 	height: 100%;
 }
   `;
+
+  const isLogin = false;
+
   return (
     <>
       <GlobalStyle />
-      <Routing />
+      <Routing isLogin={isLogin} />
     </>
   );
 }

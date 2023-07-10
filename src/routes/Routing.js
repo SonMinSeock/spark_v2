@@ -1,21 +1,26 @@
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import SplashScreen from "../screens/splash/SplashScreen";
-import InitScreen from "../screens/init/InitScreen";
-import QuestionScreen from "../screens/question/QuestionScreen";
-import ShareScreen from "../screens/share/ShareScreen";
-import LoginScreen from "../screens/login/LoginScreen";
-import Notification from "../screens/notification/NotificationScreen";
+import {
+  Navigate,
+  Route,
+  BrowserRouter as Router,
+  Routes,
+} from "react-router-dom";
+import Home from "../screens/Home";
+import Login from "../screens/login/Login";
+import New from "../screens/login/New";
 
-const Routing = () => {
+const Routing = ({ isLogin }) => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<SplashScreen />} />
-        <Route path="/start" element={<InitScreen />} />
-        <Route path="/login" element={<LoginScreen />} />
-        <Route path="/notification" element={<Notification />} />
-        <Route path="/question" element={<QuestionScreen />} />
-        <Route path="/share" element={<ShareScreen />} />
+        <Route path="/login/new" element={<New />} />
+        <Route
+          path="/login"
+          element={isLogin ? <Navigate replace to="/" /> : <Login />}
+        />
+        <Route
+          path="/"
+          element={isLogin ? <Home /> : <Navigate replace to="/login" />}
+        />
       </Routes>
     </Router>
   );
