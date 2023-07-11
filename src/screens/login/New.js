@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { IoIosArrowBack, IoMdArrowDropdown } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
+import Button from "../UI/Button/Button";
 function New() {
   const Header = styled.header`
     height: 6rem;
@@ -115,19 +116,13 @@ function New() {
     background-color: blue;
   `;
 
-  const Button = styled.button`
-    width: 100%;
-    background-color: #58c5b0;
-    border: none;
-    padding: 1rem;
-    color: #ffffff;
-    font-size: 1.1rem;
-    font-weight: bold;
-  `;
-
   const navigate = useNavigate();
   const backHandler = () => {
     navigate("/login");
+  };
+
+  const onSubmitHandler = () => {
+    navigate("/login/new/question");
   };
   return (
     <>
@@ -147,7 +142,7 @@ function New() {
           </h2>
         </section>
       </Main>
-      <Form>
+      <Form onSubmit={onSubmitHandler}>
         <div>
           <label htmlFor="username">닉네임</label>
           <Input
@@ -183,7 +178,7 @@ function New() {
             <Mail className="male" name="gender" value="male" />
           </div>
         </GenderContainer>
-        <Button>다음</Button>
+        <Button type="submit">다음</Button>
       </Form>
     </>
   );
