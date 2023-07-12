@@ -135,7 +135,10 @@ function Info() {
   const backHandler = () => {
     navigate(-1);
   };
-
+  const formSubmitHandler = (event) => {
+    event.preventDefault();
+    navigate("/");
+  };
   return (
     <>
       <Header>
@@ -163,7 +166,7 @@ function Info() {
           <div></div>
         </Section>
       </Main>
-      <Form>
+      <Form onSubmit={formSubmitHandler}>
         <div>
           <label htmlFor="onpen__chatlink">내 오픈채팅방 링크</label>
           <Input
@@ -177,7 +180,7 @@ function Info() {
             생성해야합니다(그룹채팅방 X)
           </span>
         </div>
-        <Button>시작하기</Button>
+        <Button type="submit">시작하기</Button>
       </Form>
     </>
   );
