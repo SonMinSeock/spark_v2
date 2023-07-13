@@ -3,6 +3,7 @@ import { IoIosArrowBack } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import Button from "../UI/Button/Button";
 import { useState } from "react";
+import InfoImage from "../../assets/info_image.png";
 
 function Info() {
   const Header = styled.header`
@@ -73,10 +74,9 @@ function Info() {
     &:nth-child(2) {
       display: flex;
       justify-content: center;
-      div {
+      img {
         width: 150px;
-        height: 200px;
-        background-color: yellow;
+        height: 230px;
       }
     }
     @media (min-width: 40rem) {
@@ -86,12 +86,16 @@ function Info() {
           height: 350px;
           background-color: yellow;
         }
+        img {
+          width: 200px;
+          height: 330px;
+        }
       }
     }
   `;
 
   const Form = styled.form`
-    height: calc(100vh - 8rem - 20.3rem);
+    height: calc(100vh - 30rem);
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -107,7 +111,7 @@ function Info() {
     @media (min-width: 40rem) {
       margin: 0 auto;
       max-width: 25rem;
-      height: calc(100vh - 8rem - 31.6rem);
+      height: calc(100vh - 38.4rem);
     }
   `;
   const Input = styled.input`
@@ -163,7 +167,7 @@ function Info() {
           </p>
         </Section>
         <Section>
-          <div></div>
+          <img src={InfoImage} />
         </Section>
       </Main>
       <Form onSubmit={formSubmitHandler}>

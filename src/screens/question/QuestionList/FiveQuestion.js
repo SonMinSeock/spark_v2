@@ -40,6 +40,7 @@ function FiveQuestion() {
     outline: none;
     border-radius: 0.5rem;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    font-size: 0.8rem;
     &:focus {
       box-shadow: #58c5b0 0px 1px 4px;
     }

@@ -9,11 +9,15 @@ import Login from "../screens/login/Login";
 import New from "../screens/login/New";
 import Question from "../screens/question/Question";
 import Info from "../screens/info/Info";
+import Profile from "../screens/profile/Profile";
+import Report from "../screens/profile/report/Report";
 
 const Routing = ({ isLogin }) => {
   return (
     <Router>
       <Routes>
+        <Route path="/profile/:id/report" element={<Report />} />
+        <Route path="/profile" element={<Profile />} />
         <Route path="/info" element={<Info />} />
         <Route path="/login/new/question" element={<Question />} />
         <Route path="/login/new" element={<New />} />

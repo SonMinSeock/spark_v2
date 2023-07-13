@@ -1,6 +1,10 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { IoMdContact } from "react-icons/io";
+import CoinIcon from "../assets/akar-icons_coin.png";
+import FemaleImage from "../assets/female_image.png";
+import MaleImage from "../assets/male_image.png";
+import { useNavigate } from "react-router-dom";
 
 function Home() {
   const HomeBackgroundBox = styled.div`
@@ -35,10 +39,9 @@ function Home() {
     }
   `;
 
-  const HomeLogo = styled.div`
+  const CoinLogo = styled.img`
     width: 1.3rem;
     height: 1.3rem;
-    background-color: pink;
   `;
 
   const RecomendBox = styled.div`
@@ -83,10 +86,10 @@ function Home() {
       font-weight: bold;
     }
   `;
-  const ProfileImg = styled.div`
-    width: 2.2rem;
+  const ProfileImg = styled.img`
+    display: block;
+    width: 3rem;
     height: 3rem;
-    background-color: aqua;
   `;
   const Main = styled.main`
     padding: 0 1.2rem;
@@ -125,11 +128,12 @@ function Home() {
     }
     & span:last-child {
       color: gray;
-      margin-bottom: 0.3rem;
     }
     font-size: 0.8rem;
   `;
+
   const [coin, setCoin] = useState(0);
+  const navigate = useNavigate();
 
   const recomendFriends = [
     {
@@ -176,15 +180,19 @@ function Home() {
     },
   ];
 
+  const onNavigate = () => {
+    navigate("/profile", { state: { isMe: true } });
+  };
+
   return (
     <HomeBackgroundBox>
       <Header>
         <Top>
           <div>
-            <HomeLogo />
+            <CoinLogo src={CoinIcon} />
             <span>남은 횟수 {coin}</span>
           </div>
-          <IoMdContact size={28} color="white" />
+          <IoMdContact size={28} color="white" onClick={onNavigate} />
         </Top>
         <RecomendBox>
           <Text>
@@ -194,7 +202,9 @@ function Home() {
           <RecomendFriends>
             {recomendFriends.map((friend) => (
               <RecomendFriend>
-                <ProfileImg />
+                <ProfileImg
+                  src={friend.gender === "female" ? FemaleImage : MaleImage}
+                />
                 <span>{friend.username}</span>
               </RecomendFriend>
             ))}
@@ -205,8 +215,12 @@ function Home() {
         <span>모든 대화방</span>
         <ChatFriends>
           {chatRooms.map((friend) => (
-            <ChatFriend>
-              <ProfileImg />
+            <ChatFriend
+              onClick={() => navigate("/profile", { state: { isMe: false } })}
+            >
+              <ProfileImg
+                src={friend.gender === "female" ? FemaleImage : MaleImage}
+              />
               <FriendInfo>
                 <span>{friend.username}</span>
                 <span>{friend.university}</span>

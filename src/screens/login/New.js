@@ -2,6 +2,8 @@ import styled from "styled-components";
 import { IoIosArrowBack, IoMdArrowDropdown } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import Button from "../UI/Button/Button";
+import FemaleProfile from "../../assets/female_profile_image.png";
+import MaleProfile from "../../assets/male_profile_image.png";
 function New() {
   const Header = styled.header`
     height: 6rem;
@@ -99,7 +101,7 @@ function New() {
     }
   `;
 
-  const Box = styled.div`
+  const Box = styled.img`
     width: 9rem;
     height: 9rem;
     border-radius: 1.5rem;
@@ -109,12 +111,8 @@ function New() {
       border-color: #a7dfd4;
     }
   `;
-  const Femail = styled(Box)`
-    background-color: yellow;
-  `;
-  const Mail = styled(Box)`
-    background-color: blue;
-  `;
+  const Femail = styled(Box)``;
+  const Mail = styled(Box)``;
 
   const navigate = useNavigate();
   const backHandler = () => {
@@ -174,8 +172,18 @@ function New() {
         <GenderContainer>
           <span>성별</span>
           <div className="gender__container">
-            <Femail className="femal selected" name="gender" value="female" />
-            <Mail className="male" name="gender" value="male" />
+            <Femail
+              className="femal selected"
+              name="gender"
+              value="female"
+              src={FemaleProfile}
+            />
+            <Mail
+              className="male"
+              name="gender"
+              value="male"
+              src={MaleProfile}
+            />
           </div>
         </GenderContainer>
         <Button type="submit">다음</Button>
