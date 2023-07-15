@@ -5,7 +5,11 @@ import CoinIcon from "../../assets/akar-icons_coin.png";
 import ReportIcon from "../../assets/Vector.png";
 import FemaleImage from "../../assets/female_profile_image.png";
 import MaleImage from "../../assets/male_profile_image.png";
+import RobotImage from "../../assets/robot_sad_image.png";
+import NoLinkFemaleImage from "../../assets/modal_nolink.png";
 import { useLocation, useNavigate } from "react-router-dom";
+import Backdrop from "../UI/Modal/Backdrop";
+import Modal from "../UI/Modal/Modal";
 
 function Profile() {
   const HomeBackgroundBox = styled.div`
@@ -114,6 +118,9 @@ function Profile() {
   `;
 
   const [coin, setCoin] = useState(0);
+  const [modal, setModal] = useState(false);
+  const isUserAddLink = false;
+
   const {
     state: { isMe },
   } = useLocation();
@@ -123,9 +130,45 @@ function Profile() {
   const backHandler = () => {
     navigate(-1);
   };
+  const onModal = () => {
+    console.log("on modal...");
+    setModal((prev) => !prev);
+  };
+  const onClickAddLinkBtn = () => {
+    setModal(false);
+  };
+  const conditionalShowModal = () => {
+    if (coin === 0) {
+      return (
+        <Modal>
+          <span>소지하신 코인을 다 소모했어요</span>
+          <span>코인은 매일 3개씩 지급돼요!</span>
+          <img src={RobotImage} />
+          <span className="noCoinLastText">내일 다시 접속해주실거죠?</span>
+        </Modal>
+      );
+    }
+    if (!isUserAddLink) {
+      return (
+        <Modal>
+          <span>혹시 오픈채팅 링크 등록했나요?</span>
+          <img src={NoLinkFemaleImage} />
+          <span>
+            내 오픈채팅 링크 등록하면 코인 2개를
+            <br /> 추가 지급해 드려요!
+          </span>
+          <button onClick={onClickAddLinkBtn}>
+            내 링크 등록하고 코인 받기
+          </button>
+        </Modal>
+      );
+    }
+  };
 
   return (
     <HomeBackgroundBox>
+      {modal ? <Backdrop onClick={onModal} /> : null}
+      {modal ? conditionalShowModal() : null}
       <Header>
         <Top>
           <div>
@@ -175,7 +218,9 @@ function Profile() {
         </UserInfoContainer>
       </Main>
       <Footer>
-        <Button>{!isMe ? "메시지 보내기" : "내 오픈채팅방 링크"}</Button>
+        <Button onClick={onModal}>
+          {!isMe ? "메시지 보내기" : "내 오픈채팅방 링크"}
+        </Button>
       </Footer>
     </HomeBackgroundBox>
   );
