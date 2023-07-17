@@ -40,7 +40,7 @@ function KakaoCallback({ loginHandler }) {
             console.log(res);
             loginHandler();
             navigate("/login/new", {
-              state: { kakao_account: res.data.kakao_account },
+              state: { kakao_data: res.data },
             });
           });
       });

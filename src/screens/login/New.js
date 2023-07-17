@@ -5,6 +5,7 @@ import Button from "../UI/Button/Button";
 import FemaleProfile from "../../assets/female_profile_image.png";
 import MaleProfile from "../../assets/male_profile_image.png";
 import useInput from "../../hooks/use-input";
+import { useState } from "react";
 const Header = styled.header`
   height: 6rem;
   display: flex;
@@ -127,9 +128,10 @@ const ErrorMessage = styled.p`
   margin-bottom: 0.5rem;
 `;
 function New() {
+  const [isGnder, setIsGender] = useState(false);
   const navigate = useNavigate();
   const {
-    state: { kakao_account },
+    state: { kakao_data },
   } = useLocation();
 
   const {
@@ -152,7 +154,7 @@ function New() {
     ["금오공과대학교", "경운대학교"].includes(value.trim())
   );
 
-  console.log(kakao_account);
+  console.log(kakao_data);
 
   let formIsValid = false;
 
@@ -173,7 +175,11 @@ function New() {
 
     resetNameInput();
 
-    navigate("/login/new/question");
+    navigate("/login/new/question", { state: { kakao_data } });
+  };
+
+  const toggleGenderHandler = (event) => {
+    setIsGender(event.target.name);
   };
 
   const nameInputClasses = nameInputHasError ? "invalid" : "";
@@ -244,16 +250,16 @@ function New() {
           <span>성별</span>
           <div className="gender__container">
             <Femail
-              className="femal selected"
-              name="gender"
-              value="female"
+              className={`femal ${isGnder === "female" ? "selected" : null}`}
+              name="female"
               src={FemaleProfile}
+              onClick={toggleGenderHandler}
             />
             <Mail
-              className="male"
-              name="gender"
-              value="male"
+              className={`male ${isGnder === "male" ? "selected" : null}`}
+              name="male"
               src={MaleProfile}
+              onClick={toggleGenderHandler}
             />
           </div>
         </GenderContainer>

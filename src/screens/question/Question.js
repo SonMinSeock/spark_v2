@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { IoIosArrowBack } from "react-icons/io";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Stepper from "react-stepper-enhanced";
 import Button from "../UI/Button/Button";
 import { useState } from "react";
@@ -64,10 +64,12 @@ function Question() {
   const [activeStep, setActiveStep] = useState(0);
 
   const navigate = useNavigate();
-
+  const {
+    state: { kakao_data },
+  } = useLocation();
   const backHandler = () => {
     if (activeStep === 0) {
-      navigate("/login/new");
+      navigate("/login/new", { state: kakao_data });
     } else {
       setActiveStep((prev) => prev - 1);
     }

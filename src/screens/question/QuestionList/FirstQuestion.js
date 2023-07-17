@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styled from "styled-components";
 
 function FirstQuestion() {
@@ -17,6 +18,11 @@ function FirstQuestion() {
       margin-top: 0.8rem;
       margin-right: 0.8rem;
       cursor: pointer;
+      &.selected {
+        background-color: #a7dfd4;
+        color: white;
+        border-color: #a7dfd4;
+      }
     }
   `;
   const mbtiList = [
@@ -27,6 +33,9 @@ function FirstQuestion() {
     ["ESFP", "ESFJ", "ESTP"],
     ["ESTJ", "관심없어요"],
   ];
+
+  const [isMbti, setIsMbti] = useState("");
+
   return (
     <>
       <Section>
@@ -42,7 +51,14 @@ function FirstQuestion() {
           return (
             <MbtiContainer key={index}>
               {mbtis.map((mbti, index) => (
-                <button key={index}>{mbti}</button>
+                <button
+                  key={index}
+                  value={mbti}
+                  className={isMbti === mbti ? `selected` : null}
+                  onClick={(event) => setIsMbti(event.target.value)}
+                >
+                  {mbti}
+                </button>
               ))}
             </MbtiContainer>
           );
