@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { IoIosArrowBack, IoMdArrowDropdown } from "react-icons/io";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Button from "../UI/Button/Button";
 import FemaleProfile from "../../assets/female_profile_image.png";
 import MaleProfile from "../../assets/male_profile_image.png";
@@ -115,6 +115,10 @@ function New() {
   const Mail = styled(Box)``;
 
   const navigate = useNavigate();
+  const {
+    state: { kakao_account },
+  } = useLocation();
+  console.log(kakao_account);
   const backHandler = () => {
     navigate("/login");
   };

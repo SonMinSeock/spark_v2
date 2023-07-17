@@ -11,11 +11,13 @@ import Question from "../screens/question/Question";
 import Info from "../screens/info/Info";
 import Profile from "../screens/profile/Profile";
 import Report from "../screens/profile/report/Report";
+import KakaoCallback from "../components/KakaoCallback/KakaoCallback";
 
 const Routing = ({ isLogin }) => {
   return (
     <Router>
       <Routes>
+        <Route path="/oauth" element={<KakaoCallback />} />
         <Route path="/profile/:id/report" element={<Report />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/info" element={<Info />} />
