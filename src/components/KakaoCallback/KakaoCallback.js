@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 
-function KakaoCallback() {
+function KakaoCallback({ loginHandler }) {
   const { search } = useLocation();
   const navigate = useNavigate();
   const code = search.slice(6);
@@ -38,6 +38,7 @@ function KakaoCallback() {
           )
           .then((res) => {
             console.log(res);
+            loginHandler();
             navigate("/login/new", {
               state: { kakao_account: res.data.kakao_account },
             });

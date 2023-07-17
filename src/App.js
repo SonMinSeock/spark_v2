@@ -1,6 +1,7 @@
 import { createGlobalStyle } from "styled-components";
 import Routing from "./routes/Routing";
 import { useLocation } from "react-router-dom";
+import { useState } from "react";
 
 function App() {
   const GlobalStyle = createGlobalStyle`
@@ -62,12 +63,15 @@ body {
 }
   `;
 
-  const isLogin = false;
+  const [isLogin, setIsLogin] = useState(false);
 
+  const loginHandler = () => {
+    setIsLogin(true);
+  };
   return (
     <>
       <GlobalStyle />
-      <Routing isLogin={isLogin} />
+      <Routing isLogin={isLogin} loginHandler={loginHandler} />
     </>
   );
 }
