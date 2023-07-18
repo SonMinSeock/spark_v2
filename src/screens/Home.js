@@ -5,6 +5,9 @@ import CoinIcon from "../assets/akar-icons_coin.png";
 import FemaleImage from "../assets/female_image.png";
 import MaleImage from "../assets/male_image.png";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { dbService } from "../db/firebase";
+import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 
 function Home() {
   const HomeBackgroundBox = styled.div`
@@ -132,8 +135,27 @@ function Home() {
     font-size: 0.8rem;
   `;
 
-  const [coin, setCoin] = useState(0);
+  const [users, setUsers] = useState([]);
+
   const navigate = useNavigate();
+
+  const readUsers = () => {
+    const q = query(
+      collection(dbService, "users"),
+      orderBy("createdAt", "desc")
+    );
+
+    onSnapshot(q, (snapshot) => {
+      const users = snapshot.docs.map((doc) => ({
+        ...doc.data(),
+      }));
+
+      setUsers(users);
+    });
+  };
+  useEffect(() => {
+    readUsers();
+  }, []);
 
   const recomendFriends = [
     {
@@ -151,7 +173,7 @@ function Home() {
     ,
     { id: 1002, username: "라이언", university: "경운대학교", gender: "male" },
   ];
-
+  /*
   const chatRooms = [
     {
       id: 2000,
@@ -179,7 +201,7 @@ function Home() {
       gender: "male",
     },
   ];
-
+*/
   const {
     state: { user: userInfo },
   } = useLocation();
@@ -195,7 +217,7 @@ function Home() {
         <Top>
           <div>
             <CoinLogo src={CoinIcon} />
-            <span>남은 횟수 {coin}</span>
+            <span>남은 횟수 {userInfo.coin}</span>
           </div>
           <IoMdContact size={28} color="white" onClick={onNavigate} />
         </Top>
@@ -219,16 +241,20 @@ function Home() {
       <Main>
         <span>모든 대화방</span>
         <ChatFriends>
-          {chatRooms.map((friend) => (
+          {users.map((friend) => (
             <ChatFriend
-              onClick={() => navigate("/profile", { state: { isMe: false } })}
+              onClick={() =>
+                navigate(`/profile/${friend.id}`, {
+                  state: { userInfo, friend },
+                })
+              }
             >
               <ProfileImg
                 src={friend.gender === "female" ? FemaleImage : MaleImage}
               />
               <FriendInfo>
-                <span>{friend.username}</span>
-                <span>{friend.university}</span>
+                <span>{friend.name}</span>
+                <span>{friend.school}</span>
               </FriendInfo>
             </ChatFriend>
           ))}

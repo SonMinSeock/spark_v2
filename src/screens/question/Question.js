@@ -68,8 +68,7 @@ function Question() {
 
   const navigate = useNavigate();
 
-  const [activeStep, setActiveStep] = useState(0);
-  const [enteredUserInfo, setEnteredUserInfo] = useState({
+  const initUserInfo = {
     ...userObj,
     mbti: "",
     secondQuestion: "",
@@ -77,7 +76,10 @@ function Question() {
     fourQuestion: "",
     fiveQuestion: "",
     openChatLink: "",
-  });
+    coin: 0,
+  };
+  const [activeStep, setActiveStep] = useState(0);
+  const [enteredUserInfo, setEnteredUserInfo] = useState(initUserInfo);
 
   console.log(enteredUserInfo);
 

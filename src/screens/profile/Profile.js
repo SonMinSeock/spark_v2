@@ -117,15 +117,18 @@ function Profile() {
     border-radius: 1.2rem;
   `;
 
-  const [coin, setCoin] = useState(0);
   const [modal, setModal] = useState(false);
 
   const {
-    state: { userInfo },
+    state: { userInfo, friend },
   } = useLocation();
 
   const navigate = useNavigate();
   const { id } = useParams();
+
+  console.log(id, userInfo.id);
+
+  const isMe = +id === userInfo.id;
 
   const onNavigateReport = () => navigate("/profile/2000/report");
   const backHandler = () => {
@@ -139,7 +142,7 @@ function Profile() {
     setModal(false);
   };
   const conditionalShowModal = () => {
-    if (coin === 0) {
+    if (userInfo.coin === 0) {
       return (
         <Modal>
           <span>소지하신 코인을 다 소모했어요</span>
@@ -175,9 +178,9 @@ function Profile() {
           <div>
             <IoIosArrowBack size={25} onClick={backHandler} />
             <CoinLogo src={CoinIcon} />
-            <span>남은 횟수 {coin}</span>
+            <span>남은 횟수 {isMe ? userInfo.coin : friend.coin}</span>
           </div>
-          {+id !== userInfo.id ? (
+          {!isMe ? (
             <img
               className="remport--img"
               src={ReportIcon}
@@ -187,42 +190,52 @@ function Profile() {
         </Top>
         <UserProfile>
           <ProfileImg
-            src={userInfo.gender !== "female" ? MaleImage : FemaleImage}
+            src={
+              isMe
+                ? userInfo.gender !== "female"
+                  ? MaleImage
+                  : FemaleImage
+                : friend.gender !== "female"
+                ? MaleImage
+                : FemaleImage
+            }
           />
-          <span>{userInfo.name}</span>
+          <span>{isMe ? userInfo.name : friend.name}</span>
         </UserProfile>
       </Header>
       <Main>
         <UserInfoContainer>
           <UserInfo>
             <span>나의 학교는</span>
-            <span>{userInfo.school}</span>
+            <span>{isMe ? userInfo.school : friend.school}</span>
           </UserInfo>
           <UserInfo>
             <span>나의 MBTI는</span>
-            <span>{userInfo.mbti}</span>
+            <span>{isMe ? userInfo.mbti : friend.mbti}</span>
           </UserInfo>
           <UserInfo>
             <span>나의 주량은</span>
-            <span>{userInfo.secondQuestion}</span>
+            <span>
+              {isMe ? userInfo.secondQuestion : friend.secondQuestion}
+            </span>
           </UserInfo>
           <UserInfo>
             <span>애인이 있다면 더 싫은 상황은</span>
-            <span>{userInfo.thirdQuestion}</span>
+            <span>{isMe ? userInfo.thirdQuestion : friend.thirdQuestion}</span>
           </UserInfo>
           <UserInfo>
             <span>친구/애인과 가고싶은 운동경기는</span>
-            <span>{userInfo.fourQuestion}</span>
+            <span>{isMe ? userInfo.fourQuestion : friend.fourQuestion}</span>
           </UserInfo>
           <UserInfo>
             <span>내가 만나고 싶은 사람은</span>
-            <span>{userInfo.fiveQuestion}</span>
+            <span>{isMe ? userInfo.fiveQuestion : friend.fiveQuestion}</span>
           </UserInfo>
         </UserInfoContainer>
       </Main>
       <Footer>
         <Button onClick={onModal}>
-          {+id !== userInfo.id ? "메시지 보내기" : "내 오픈채팅방 링크"}
+          {!isMe ? "메시지 보내기" : "내 오픈채팅방 링크"}
         </Button>
       </Footer>
     </HomeBackgroundBox>
