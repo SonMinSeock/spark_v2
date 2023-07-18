@@ -1,9 +1,11 @@
 import styled from "styled-components";
 import { IoIosArrowBack } from "react-icons/io";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Button from "../UI/Button/Button";
 import { useState } from "react";
 import InfoImage from "../../assets/info_image.png";
+import { dbService } from "../../db/firebase";
+import { collection, addDoc } from "firebase/firestore";
 
 function Info() {
   const Header = styled.header`
@@ -136,13 +138,28 @@ function Info() {
 
   const navigate = useNavigate();
 
+  const {
+    state: { enteredUserInfo: userInfo },
+  } = useLocation();
+
+  console.log("info user info :", userInfo);
   const backHandler = () => {
     navigate(-1);
   };
+
+  const createUser = async () => {
+    await addDoc(collection(dbService, "users"), {
+      ...userInfo,
+      createdAt: Date.now(),
+    });
+  };
+
   const formSubmitHandler = (event) => {
     event.preventDefault();
-    navigate("/");
+    createUser();
+    navigate("/", { state: { userInfo } });
   };
+
   return (
     <>
       <Header>

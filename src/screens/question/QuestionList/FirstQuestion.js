@@ -1,7 +1,8 @@
+import { useRef } from "react";
 import { useState } from "react";
 import styled from "styled-components";
 
-function FirstQuestion() {
+function FirstQuestion({ inputQuestionHandler, mbti: enteredMbti }) {
   const Section = styled.section`
     &:nth-child(2) {
       margin-top: 2rem;
@@ -34,7 +35,7 @@ function FirstQuestion() {
     ["ESTJ", "관심없어요"],
   ];
 
-  const [isMbti, setIsMbti] = useState("");
+  console.log(enteredMbti);
 
   return (
     <>
@@ -54,8 +55,10 @@ function FirstQuestion() {
                 <button
                   key={index}
                   value={mbti}
-                  className={isMbti === mbti ? `selected` : null}
-                  onClick={(event) => setIsMbti(event.target.value)}
+                  className={enteredMbti === mbti ? `selected` : null}
+                  onClick={() => {
+                    inputQuestionHandler(1, mbti);
+                  }}
                 >
                   {mbti}
                 </button>

@@ -56,7 +56,7 @@ const Form = styled.form`
     }
   }
   & .invalid input {
-    border: 1px solid red;
+    box-shadow: red 0px 1px 4px;
   }
   @media (min-width: 40rem) {
     margin: 0 auto;
@@ -66,7 +66,7 @@ const Form = styled.form`
 const Input = styled.input`
   width: 100%;
   padding: 0.5rem 1rem;
-  margin-bottom: 0.5rem;
+  /* margin-bottom: 0.5rem; */
   border: none;
   outline: none;
   border-radius: 0.5rem;
@@ -77,6 +77,7 @@ const Input = styled.input`
     color: gray;
     font-size: 0.6rem;
     font-weight: bold;
+    margin-top: 0.5rem;
   }
   &:focus {
     box-shadow: #58c5b0 0px 1px 4px;
@@ -95,8 +96,8 @@ const Select = styled.select`
   &:focus {
     box-shadow: #58c5b0 0px 1px 4px;
   }
-  &.schoolSelectClasses {
-    border: 1px solid red;
+  &.invalid {
+    box-shadow: red 0px 1px 4px;
   }
 `;
 
@@ -125,10 +126,10 @@ const ErrorMessage = styled.p`
   color: red;
   font-weight: bold;
   font-size: 0.8rem;
-  margin-bottom: 0.5rem;
+  margin: 0.5rem;
 `;
 function New() {
-  const [isGnder, setIsGender] = useState(false);
+  const [isGnder, setIsGender] = useState("");
   const navigate = useNavigate();
   const {
     state: { kakao_data },
@@ -158,7 +159,7 @@ function New() {
 
   let formIsValid = false;
 
-  if (enteredNameIsValid && enteredSchoolNameIsValid) {
+  if (enteredNameIsValid && enteredSchoolNameIsValid && isGnder !== "") {
     formIsValid = true;
   }
 
@@ -169,19 +170,27 @@ function New() {
   const formSubmitHandler = (event) => {
     event.preventDefault();
 
-    if (!enteredNameIsValid && !enteredSchoolNameIsValid) {
+    if (!enteredNameIsValid && !enteredSchoolNameIsValid && isGnder === "") {
       return;
     }
 
     resetNameInput();
 
-    navigate("/login/new/question", { state: { kakao_data } });
+    const userObj = {
+      id: kakao_data.id,
+      name: enteredName,
+      school: enteredSchoolName,
+      gender: isGnder,
+    };
+
+    navigate("/login/new/question", { state: { userObj } });
   };
 
   const toggleGenderHandler = (event) => {
     setIsGender(event.target.name);
   };
 
+  console.log(schoolSelectHasError);
   const nameInputClasses = nameInputHasError ? "invalid" : "";
   const schoolSelectClasses = schoolSelectHasError ? "invalid" : "";
 
@@ -210,14 +219,17 @@ function New() {
             id="username"
             type="text"
             name="username"
-            placeholder="사용하실 닉네임을 입력해주세요"
+            placeholder="사용하실 닉네임을 입력해주세요, 최대 길이 5자이내"
+            required
+            maxLength={5}
+            minLength={1}
             onChange={nameChangeHandler}
             onBlur={nameBlurHandler}
             value={enteredName}
           />
           {nameInputHasError ? (
             <ErrorMessage>
-              닉네임 입력창 다시 확인 해보시길 바랍니다.
+              *닉네임 입력창 다시 확인 해보시길 바랍니다.
             </ErrorMessage>
           ) : null}
           <span className="info__text">
@@ -244,6 +256,9 @@ function New() {
             <div className="IoMdArrowDropdown">
               <IoMdArrowDropdown size={30} color="gray" />
             </div>
+            {schoolSelectHasError ? (
+              <ErrorMessage>*학교 선택 안했습니다.</ErrorMessage>
+            ) : null}
           </div>
         </div>
         <GenderContainer>
@@ -262,8 +277,17 @@ function New() {
               onClick={toggleGenderHandler}
             />
           </div>
+          {isGnder === "" ? (
+            <ErrorMessage>*성별 선택 안했습니다.</ErrorMessage>
+          ) : null}
         </GenderContainer>
-        <Button type="submit">다음</Button>
+        <Button
+          type="submit"
+          className={!formIsValid ? "disabled__btn" : ""}
+          disabled={!formIsValid}
+        >
+          다음
+        </Button>
       </Form>
     </>
   );

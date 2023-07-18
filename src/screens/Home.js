@@ -4,7 +4,7 @@ import { IoMdContact } from "react-icons/io";
 import CoinIcon from "../assets/akar-icons_coin.png";
 import FemaleImage from "../assets/female_image.png";
 import MaleImage from "../assets/male_image.png";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 function Home() {
   const HomeBackgroundBox = styled.div`
@@ -179,6 +179,10 @@ function Home() {
       gender: "male",
     },
   ];
+
+  const {
+    state: { userInfo },
+  } = useLocation();
 
   const onNavigate = () => {
     navigate("/profile", { state: { isMe: true } });

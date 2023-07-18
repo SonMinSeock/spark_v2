@@ -1,6 +1,15 @@
 import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { dbService } from "../../db/firebase";
+import {
+  collection,
+  getDocs,
+  onSnapshot,
+  orderBy,
+  query,
+} from "firebase/firestore";
+import { useState } from "react";
 
 function KakaoCallback({ loginHandler }) {
   const { search } = useLocation();
@@ -11,6 +20,28 @@ function KakaoCallback({ loginHandler }) {
   const grantType = "authorization_code";
   const kakaoURL = `https://kauth.kakao.com/oauth/token?grant_type=${grantType}&client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&code=${code}`;
 
+  const [isSign, setIsSign] = useState(false);
+
+  function readUser(kakaoId) {
+    // 카카오 id와 유저의 id 같은지 확인.
+    const q = query(
+      collection(dbService, "users"),
+      orderBy("createdAt", "desc")
+    );
+    onSnapshot(q, (snapshot) => {
+      const users = snapshot.docs.map((doc) => ({
+        ...doc.data(),
+      }));
+      if (users.find((user) => user.id === kakaoId) !== undefined) {
+        if (users.find((user) => user.id === kakaoId).length !== 0) {
+          console.log("등록 했었음");
+          let user = users.find((user) => user.id === kakaoId)[0];
+          loginHandler();
+          navigate("/", { state: { user } });
+        }
+      }
+    });
+  }
   useEffect(() => {
     axios
       .post(
@@ -38,7 +69,8 @@ function KakaoCallback({ loginHandler }) {
           )
           .then((res) => {
             console.log(res);
-            loginHandler();
+            readUser(res.data.id);
+
             navigate("/login/new", {
               state: { kakao_data: res.data },
             });
