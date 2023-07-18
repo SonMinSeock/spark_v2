@@ -35,7 +35,7 @@ function KakaoCallback({ loginHandler }) {
       if (users.find((user) => user.id === kakaoId) !== undefined) {
         if (users.find((user) => user.id === kakaoId).length !== 0) {
           console.log("등록 했었음");
-          let user = users.find((user) => user.id === kakaoId)[0];
+          let user = users.find((user) => user.id === kakaoId);
           loginHandler();
           navigate("/", { state: { user } });
         }

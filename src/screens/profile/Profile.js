@@ -7,7 +7,7 @@ import FemaleImage from "../../assets/female_profile_image.png";
 import MaleImage from "../../assets/male_profile_image.png";
 import RobotImage from "../../assets/robot_sad_image.png";
 import NoLinkFemaleImage from "../../assets/modal_nolink.png";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import Backdrop from "../UI/Modal/Backdrop";
 import Modal from "../UI/Modal/Modal";
 
@@ -119,12 +119,13 @@ function Profile() {
 
   const [coin, setCoin] = useState(0);
   const [modal, setModal] = useState(false);
-  const isUserAddLink = false;
 
   const {
-    state: { isMe },
+    state: { userInfo },
   } = useLocation();
+
   const navigate = useNavigate();
+  const { id } = useParams();
 
   const onNavigateReport = () => navigate("/profile/2000/report");
   const backHandler = () => {
@@ -148,7 +149,7 @@ function Profile() {
         </Modal>
       );
     }
-    if (!isUserAddLink) {
+    if (!userInfo.openChatLink) {
       return (
         <Modal>
           <span>혹시 오픈채팅 링크 등록했나요?</span>
@@ -176,7 +177,7 @@ function Profile() {
             <CoinLogo src={CoinIcon} />
             <span>남은 횟수 {coin}</span>
           </div>
-          {!isMe ? (
+          {+id !== userInfo.id ? (
             <img
               className="remport--img"
               src={ReportIcon}
@@ -185,41 +186,43 @@ function Profile() {
           ) : null}
         </Top>
         <UserProfile>
-          <ProfileImg src={FemaleImage} />
-          <span>어피치</span>
+          <ProfileImg
+            src={userInfo.gender !== "female" ? MaleImage : FemaleImage}
+          />
+          <span>{userInfo.name}</span>
         </UserProfile>
       </Header>
       <Main>
         <UserInfoContainer>
           <UserInfo>
             <span>나의 학교는</span>
-            <span>경운대학교</span>
+            <span>{userInfo.school}</span>
           </UserInfo>
           <UserInfo>
             <span>나의 MBTI는</span>
-            <span>INFP</span>
+            <span>{userInfo.mbti}</span>
           </UserInfo>
           <UserInfo>
             <span>나의 주량은</span>
-            <span>맥주 한 캔 정도?</span>
+            <span>{userInfo.secondQuestion}</span>
           </UserInfo>
           <UserInfo>
             <span>애인이 있다면 더 싫은 상황은</span>
-            <span>이성친구와 여행가는 애인</span>
+            <span>{userInfo.thirdQuestion}</span>
           </UserInfo>
           <UserInfo>
             <span>친구/애인과 가고싶은 운동경기는</span>
-            <span>축구 경기</span>
+            <span>{userInfo.fourQuestion}</span>
           </UserInfo>
           <UserInfo>
             <span>내가 만나고 싶은 사람은</span>
-            <span>한결같은 사람</span>
+            <span>{userInfo.fiveQuestion}</span>
           </UserInfo>
         </UserInfoContainer>
       </Main>
       <Footer>
         <Button onClick={onModal}>
-          {!isMe ? "메시지 보내기" : "내 오픈채팅방 링크"}
+          {+id !== userInfo.id ? "메시지 보내기" : "내 오픈채팅방 링크"}
         </Button>
       </Footer>
     </HomeBackgroundBox>

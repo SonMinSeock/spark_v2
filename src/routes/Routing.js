@@ -21,8 +21,8 @@ const Routing = ({ isLogin, loginHandler }) => {
           path="/oauth"
           element={<KakaoCallback loginHandler={loginHandler} />}
         />
+        <Route path="/profile/:id" element={<Profile />} />
         <Route path="/profile/:id/report" element={<Report />} />
-        <Route path="/profile" element={<Profile />} />
         <Route path="/info" element={<Info />} />
         <Route path="/login/new/question" element={<Question />} />
         <Route path="/login/new" element={<New />} />

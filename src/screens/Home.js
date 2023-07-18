@@ -181,11 +181,12 @@ function Home() {
   ];
 
   const {
-    state: { userInfo },
+    state: { user: userInfo },
   } = useLocation();
 
+  console.log("Home ", userInfo);
   const onNavigate = () => {
-    navigate("/profile", { state: { isMe: true } });
+    navigate(`/profile/${userInfo.id}`, { state: { userInfo } });
   };
 
   return (
