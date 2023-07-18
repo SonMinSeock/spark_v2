@@ -13,8 +13,14 @@ function Login() {
   const Header = styled.header`
     height: 14rem;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    & h2 {
+      font-size: 2rem;
+      font-weight: bold;
+      margin-top: 0.3rem;
+    }
     @media (min-width: 40rem) {
       margin: 0 auto;
       max-width: 25rem;
@@ -29,6 +35,18 @@ function Login() {
 
     .login__img {
       width: 100%;
+    }
+
+    & section {
+      display: flex;
+      height: 100%;
+      flex-direction: column;
+      justify-content: space-between;
+      align-items: center;
+      & p {
+        margin-bottom: 1.2rem;
+        font-weight: bold;
+      }
     }
     @media (min-width: 40rem) {
       margin: 0 auto;
@@ -88,16 +106,18 @@ function Login() {
       <LoginBackgroundColor>
         <Header>
           <LogoTitle>spark</LogoTitle>
+          <h2>대학교 친구 찾기 서비스</h2>
         </Header>
         <Main>
           <section>
             <img className="login__img" src={MockupSVG} />
+            <p>내 주변 대학 친구를 간편하게 사귀고 싶다면?</p>
           </section>
         </Main>
         <Footer>
           <div className="login__btn" onClick={createUserHandler}>
             <img className="kakaoBubble" src={kakaoBubbleSVG} />
-            <span>카카오계정으로 로그인</span>
+            <span>카카오계정으로 화원가입</span>
           </div>
         </Footer>
       </LoginBackgroundColor>

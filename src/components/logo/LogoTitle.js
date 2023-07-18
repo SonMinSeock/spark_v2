@@ -5,6 +5,7 @@ function LogoTitle({ children }) {
     text-transform: uppercase;
     font-weight: bold;
     font-size: 2.6rem;
+    font-family: "Notable", sans-serif;
   `;
   return <Title>{children}</Title>;
 }
