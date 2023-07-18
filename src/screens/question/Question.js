@@ -110,11 +110,7 @@ function Question() {
       setEnteredUserInfo((prev) => ({
         ...prev,
         secondQuestion:
-          value === ""
-            ? anotherValue !== anotherValue
-              ? ""
-              : anotherValue
-            : value,
+          value === "" ? (anotherValue !== "" ? anotherValue : "") : value,
       }));
     } else if (questionNum === 3) {
       setEnteredUserInfo((prev) => ({
@@ -125,11 +121,7 @@ function Question() {
       setEnteredUserInfo((prev) => ({
         ...prev,
         fourQuestion:
-          value === ""
-            ? anotherValue !== anotherValue
-              ? ""
-              : anotherValue
-            : value,
+          value === "" ? (anotherValue !== "" ? anotherValue : "") : value,
       }));
     } else if (questionNum === 5) {
       setEnteredUserInfo((prev) => ({
@@ -172,7 +164,7 @@ function Question() {
       return (
         <FiveQuestion
           inputQuestionHandler={inputQuestionHandler}
-          questin={enteredUserInfo.fiveQuestion}
+          question={enteredUserInfo.fiveQuestion}
         />
       );
   };

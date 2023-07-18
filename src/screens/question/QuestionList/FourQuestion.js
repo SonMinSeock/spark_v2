@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styled from "styled-components";
 
 const Section = styled.section`
@@ -45,6 +46,7 @@ const Input = styled.input`
   }
 `;
 function FourQuestion({ inputQuestionHandler, question, anotherQuestion }) {
+  const [enteredQuestion, setEnteredQuestion] = useState("");
   return (
     <>
       <Section>
@@ -58,14 +60,20 @@ function FourQuestion({ inputQuestionHandler, question, anotherQuestion }) {
         <div>
           <button
             className={question === "축구 경기" ? "selected" : null}
-            onClick={(event) => inputQuestionHandler(4, event.target.value, "")}
+            onClick={(event) => {
+              setEnteredQuestion("");
+              inputQuestionHandler(4, event.target.value, "");
+            }}
             value="축구 경기"
           >
             축구 경기
           </button>
           <button
             className={question === "야구 경기" ? "selected" : null}
-            onClick={(event) => inputQuestionHandler(4, event.target.value, "")}
+            onClick={(event) => {
+              setEnteredQuestion("");
+              inputQuestionHandler(4, event.target.value, "");
+            }}
             value="야구 경기"
           >
             야구 경기
@@ -77,8 +85,11 @@ function FourQuestion({ inputQuestionHandler, question, anotherQuestion }) {
         <Input
           type="text"
           placeholder="자유롭게 대답해주세요~!"
-          onChange={(event) => inputQuestionHandler(4, "", event.target.value)}
-          value={anotherQuestion}
+          onChange={(event) => {
+            inputQuestionHandler(4, "", event.target.value);
+            setEnteredQuestion(event.target.value);
+          }}
+          value={enteredQuestion}
         />
       </Form>
     </>

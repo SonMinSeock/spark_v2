@@ -49,6 +49,7 @@ function SecondQuestion({ inputQuestionHandler, question, anotherQuestion }) {
   const [enteredQuestion, setEnteredQuestion] = useState("");
   const onChangeHandler = (event) => {
     inputQuestionHandler(2, "", event.target.value);
+    setEnteredQuestion(event.target.value);
   };
   return (
     <>
@@ -64,14 +65,20 @@ function SecondQuestion({ inputQuestionHandler, question, anotherQuestion }) {
         <div>
           <button
             className={question === "맥주 한 캔 정도?" ? "selected" : null}
-            onClick={(evnet) => inputQuestionHandler(2, evnet.target.value, "")}
+            onClick={(evnet) => {
+              inputQuestionHandler(2, evnet.target.value, "");
+              setEnteredQuestion("");
+            }}
             value="맥주 한 캔 정도?"
           >
             맥주 한 캔 정도?
           </button>
           <button
             className={question === "소주 한병은 거뜬하지~" ? "selected" : null}
-            onClick={(evnet) => inputQuestionHandler(2, evnet.target.value, "")}
+            onClick={(evnet) => {
+              inputQuestionHandler(2, evnet.target.value, "");
+              setEnteredQuestion("");
+            }}
             value="소주 한병은 거뜬하지~"
           >
             소주 한병은 거뜬하지~
@@ -84,7 +91,7 @@ function SecondQuestion({ inputQuestionHandler, question, anotherQuestion }) {
           type="text"
           placeholder="자유롭게 대답해주세요~!"
           onChange={onChangeHandler}
-          value={anotherQuestion}
+          value={enteredQuestion}
         />
       </Form>
     </>
