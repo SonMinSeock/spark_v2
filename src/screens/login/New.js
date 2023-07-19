@@ -55,8 +55,16 @@ const Form = styled.form`
       right: 0.5rem;
     }
   }
+  & div .info__text {
+    display: block;
+    color: gray;
+    font-size: 0.8rem;
+    font-weight: bold;
+    margin: 0 0.5rem;
+    margin-top: 0.5rem;
+  }
   & .invalid input {
-    box-shadow: red 0px 1px 4px;
+    border-color: red;
   }
   @media (min-width: 40rem) {
     margin: 0 auto;
@@ -67,20 +75,11 @@ const Input = styled.input`
   width: 100%;
   padding: 0.5rem 1rem;
   /* margin-bottom: 0.5rem; */
-  border: none;
   outline: none;
   border-radius: 0.5rem;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-  /* box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; */
-  & + .info__text {
-    display: block;
-    color: gray;
-    font-size: 0.6rem;
-    font-weight: bold;
-    margin-top: 0.5rem;
-  }
+  border: 2px solid gray;
   &:focus {
-    box-shadow: #58c5b0 0px 1px 4px;
+    border-color: #58c5b0;
   }
 `;
 
@@ -91,14 +90,13 @@ const Select = styled.select`
   width: 100%;
   padding: 0.5rem 1rem;
   border-radius: 0.5rem;
-  border: none;
+  border: 2px solid gray;
   outline: none;
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   &:focus {
-    box-shadow: #58c5b0 0px 1px 4px;
+    border: 2px solid #58c5b0;
   }
   &.invalid {
-    box-shadow: red 0px 1px 4px;
+    border: 2px solid red;
   }
 `;
 
@@ -127,7 +125,7 @@ const ErrorMessage = styled.p`
   color: red;
   font-weight: bold;
   font-size: 0.8rem;
-  margin: 0.5rem;
+  margin: 0.5rem 0.5rem;
 `;
 function New() {
   const [isGnder, setIsGender] = useState("");
@@ -181,6 +179,7 @@ function New() {
 
     const userObj = {
       id: kakao_data.id,
+      email: kakao_data.kakao_account.email,
       name: enteredName,
       school: enteredSchoolName,
       gender: isGnder,

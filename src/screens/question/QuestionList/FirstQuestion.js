@@ -6,18 +6,25 @@ function FirstQuestion({ inputQuestionHandler, mbti: enteredMbti }) {
   const Section = styled.section`
     &:nth-child(2) {
       margin-top: 2rem;
+      display: flex;
+      flex-direction: column;
     }
   `;
   const MbtiContainer = styled.div`
     padding: 0rem 1.2rem;
+    display: flex;
+    justify-content: space-between;
+    margin: 0.48rem 0;
+    &:last-child {
+      justify-content: space-between;
+      width: 68%;
+    }
     button {
       border-radius: 1rem;
       border: 1px solid gray;
       background-color: #ffffff;
-      padding: 0.3rem 0.8rem;
+      padding: 0.4rem 1rem;
       font-size: 1.1rem;
-      margin-top: 0.8rem;
-      margin-right: 0.8rem;
       cursor: pointer;
       &.selected {
         background-color: #a7dfd4;

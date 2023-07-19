@@ -168,7 +168,6 @@ function Info() {
           className="back__icon"
           onClick={backHandler}
         />
-        <span>건너뛰기</span>
       </Header>
       <Main>
         <Section>

@@ -37,12 +37,13 @@ const Form = styled.form`
 const Input = styled.input`
   padding: 0.5rem 1rem;
   margin-top: 1rem;
-  border: none;
   outline: none;
   border-radius: 0.5rem;
+  border: 2px solid gray;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  font-size: 0.9rem;
   &:focus {
-    box-shadow: #58c5b0 0px 1px 4px;
+    border-color: #58c5b0;
   }
 `;
 function SecondQuestion({ inputQuestionHandler, question, anotherQuestion }) {

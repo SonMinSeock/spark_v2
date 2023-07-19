@@ -177,7 +177,6 @@ function Question() {
           className="back__icon"
           onClick={backHandler}
         />
-        <span>대답하기 싫어요</span>
       </Header>
       <StepbarContainer>
         <Stepper
