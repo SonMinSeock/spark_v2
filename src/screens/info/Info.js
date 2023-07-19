@@ -119,12 +119,12 @@ function Info() {
   const Input = styled.input`
     padding: 0.5rem 1rem;
     margin: 1rem 0;
-    border: none;
+    border: 2px solid gray;
     outline: none;
     border-radius: 0.5rem;
-    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+    font-size: 0.9rem;
     &:focus {
-      box-shadow: #58c5b0 0px 1px 4px;
+      border-color: #58c5b0;
     }
     & + .info__text {
       color: gray;
