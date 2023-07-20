@@ -216,9 +216,43 @@ function Home() {
 */
 
   const onNavigate = () => {
-    navigate(`/profile/${userInfo.id}`, { state: { userInfo } });
+    navigate(`/profile/${userInfo.id}`, { state: { userInfo, users } });
   };
 
+  const showRecomend = () => {
+    const recomendUsers = users.map((user) => {
+      if (user.coin >= 1) {
+        return user;
+      } else if (
+        user.openChatLink !== "" ||
+        user.firstQuestion !== "" ||
+        user.secondQuestion !== "" ||
+        user.thirdQuestion !== "" ||
+        user.fourQuestion !== "" ||
+        user.fiveQuestion !== ""
+      ) {
+        return user;
+      } else {
+        return user;
+      }
+    });
+    console.log(recomendUsers.slice(0, 3));
+    return recomendUsers.slice(0, 3).map((friend, idx) => (
+      <RecomendFriend
+        key={idx}
+        onClick={() =>
+          navigate(`/profile/${friend.id}`, {
+            state: { userInfo, friend, users },
+          })
+        }
+      >
+        <ProfileImg
+          src={friend.gender === "female" ? FemaleImage : MaleImage}
+        />
+        <span>{friend.name}</span>
+      </RecomendFriend>
+    ));
+  };
   return (
     <HomeBackgroundBox>
       <Header>
@@ -234,16 +268,7 @@ function Home() {
             <span>새로운 친구들을 만나보세요!</span>
             <span>나와 잘 통할 것 같은 친구를 매일 3명 추천해요!</span>
           </Text>
-          <RecomendFriends>
-            {recomendFriends.map((friend) => (
-              <RecomendFriend>
-                <ProfileImg
-                  src={friend.gender === "female" ? FemaleImage : MaleImage}
-                />
-                <span>{friend.username}</span>
-              </RecomendFriend>
-            ))}
-          </RecomendFriends>
+          <RecomendFriends>{showRecomend()}</RecomendFriends>
         </RecomendBox>
       </Header>
       <Main>
