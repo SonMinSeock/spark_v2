@@ -206,7 +206,7 @@ function Profile() {
         ? onClipboard(userInfo.openChatLink)
         : onModal();
     } else {
-      friend.coin !== 0 && friend.openChatLink !== ""
+      userInfo.coin !== 0 && friend.openChatLink !== ""
         ? onClipboard(friend.openChatLink)
         : onModal();
     }
