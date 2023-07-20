@@ -22,7 +22,7 @@ function KakaoCallback({ loginHandler }) {
 
   const [isSign, setIsSign] = useState(false);
 
-  function readUser(kakaoEmail) {
+  function readUser(kakaoData) {
     // 카카오 id와 유저의 id 같은지 확인.
     const q = query(
       collection(dbService, "users"),
@@ -32,13 +32,24 @@ function KakaoCallback({ loginHandler }) {
       const users = snapshot.docs.map((doc) => ({
         ...doc.data(),
       }));
-      if (users.find((user) => user.email === kakaoEmail) !== undefined) {
-        if (users.find((user) => user.email === kakaoEmail).length !== 0) {
-          console.log("등록 했었음");
-          let user = users.find((user) => user.email === kakaoEmail);
+      if (
+        users.find((user) => user.email === kakaoData.kakao_account.email) !==
+        undefined
+      ) {
+        if (
+          users.find((user) => user.email === kakaoData.kakao_account.email)
+            .length !== 0
+        ) {
+          let user = users.find(
+            (user) => user.email === kakaoData.kakao_account.email
+          );
           loginHandler();
           navigate("/", { state: { user } });
         }
+      } else {
+        navigate("/login/new", {
+          state: { kakao_data: kakaoData },
+        });
       }
     });
   }
@@ -68,12 +79,7 @@ function KakaoCallback({ loginHandler }) {
             }
           )
           .then((res) => {
-            console.log(res);
-            readUser(res.data.kakao_account.email);
-
-            navigate("/login/new", {
-              state: { kakao_data: res.data },
-            });
+            readUser(res.data);
           });
       });
   }, []);

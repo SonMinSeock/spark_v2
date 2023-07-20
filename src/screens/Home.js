@@ -138,6 +138,17 @@ function Home() {
   const [users, setUsers] = useState([]);
 
   const navigate = useNavigate();
+  const {
+    state: { user: userInfo },
+  } = useLocation();
+
+  const isMeInfoSetDocId = () => {
+    for (let i = 0; i < users.length; i++) {
+      if (users[i].id === userInfo.id) {
+        userInfo = { ...users[i] };
+      }
+    }
+  };
 
   const readUsers = () => {
     const q = query(
@@ -148,6 +159,7 @@ function Home() {
     onSnapshot(q, (snapshot) => {
       const users = snapshot.docs.map((doc) => ({
         ...doc.data(),
+        document_id: doc.id,
       }));
 
       setUsers(users);
@@ -202,11 +214,7 @@ function Home() {
     },
   ];
 */
-  const {
-    state: { user: userInfo },
-  } = useLocation();
 
-  console.log("Home ", userInfo);
   const onNavigate = () => {
     navigate(`/profile/${userInfo.id}`, { state: { userInfo } });
   };
@@ -245,7 +253,7 @@ function Home() {
             <ChatFriend
               onClick={() =>
                 navigate(`/profile/${friend.id}`, {
-                  state: { userInfo, friend },
+                  state: { userInfo, friend, users },
                 })
               }
             >

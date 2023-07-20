@@ -36,6 +36,9 @@ function Modal({ children }) {
     & span:last-child {
       margin-bottom: 0;
     }
+    & .last__text {
+      padding-bottom: 1rem;
+    }
     .noCoinLastText {
       padding-bottom: 1rem;
     }

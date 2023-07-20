@@ -150,13 +150,7 @@ function New() {
     valueChangeHandler: schoolNameChangeHandler,
     inputBlurHandler: schoolNameBlurHandler,
     reset: resetSchoolNameSelect,
-  } = useInput((value) =>
-    ["강남대학교", "단국대학교", "금오공과대학교", "경운대학교"].includes(
-      value.trim()
-    )
-  );
-
-  console.log(kakao_data);
+  } = useInput((value) => ["강남대학교", "단국대학교"].includes(value.trim()));
 
   let formIsValid = false;
 
@@ -192,7 +186,6 @@ function New() {
     setIsGender(event.target.name);
   };
 
-  console.log(schoolSelectHasError);
   const nameInputClasses = nameInputHasError ? "invalid" : "";
   const schoolSelectClasses = schoolSelectHasError ? "invalid" : "";
 
@@ -253,8 +246,6 @@ function New() {
                 본인의 학교를 입력해주세요
               </option>
               <option value="강남대학교">강남대학교</option>
-              <option value="경운대학교">경운대학교</option>
-              <option value="금오공과대학교">금오공과대학교</option>
               <option value="단국대학교">단국대학교</option>
             </Select>
             <div className="IoMdArrowDropdown">

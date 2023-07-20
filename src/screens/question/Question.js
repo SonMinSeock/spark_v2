@@ -81,8 +81,6 @@ function Question() {
   const [activeStep, setActiveStep] = useState(0);
   const [enteredUserInfo, setEnteredUserInfo] = useState(initUserInfo);
 
-  console.log(enteredUserInfo);
-
   const backHandler = () => {
     if (activeStep === 0) {
       // navigate("/login/new", { state: userObj });

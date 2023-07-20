@@ -42,8 +42,6 @@ function FirstQuestion({ inputQuestionHandler, mbti: enteredMbti }) {
     ["ESTJ", "관심없어요"],
   ];
 
-  console.log(enteredMbti);
-
   return (
     <>
       <Section>

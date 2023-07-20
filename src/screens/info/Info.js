@@ -5,7 +5,7 @@ import Button from "../UI/Button/Button";
 import { useState } from "react";
 import InfoImage from "../../assets/info_image.png";
 import { dbService } from "../../db/firebase";
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, doc, updateDoc } from "firebase/firestore";
 
 function Info() {
   const Header = styled.header`
@@ -137,12 +137,16 @@ function Info() {
   `;
 
   const navigate = useNavigate();
+  const {
+    state: { userId, user },
+  } = useLocation();
+
+  const [openChatUrl, setOpenChatUrl] = useState("");
 
   const {
     state: { enteredUserInfo: userInfo },
   } = useLocation();
 
-  console.log("info user info :", userInfo);
   const backHandler = () => {
     navigate(-1);
   };
@@ -150,14 +154,30 @@ function Info() {
   const createUser = async () => {
     await addDoc(collection(dbService, "users"), {
       ...userInfo,
+      openChatLink: openChatUrl,
       createdAt: Date.now(),
     });
   };
 
+  const updateUser = async () => {
+    const userRef = doc(dbService, "users", `${user.document_id}`);
+    await updateDoc(userRef, {
+      openChatLink: openChatUrl,
+    });
+  };
   const formSubmitHandler = (event) => {
     event.preventDefault();
-    createUser();
-    navigate("/", { state: { userInfo } });
+    if (!userId) {
+      createUser();
+      navigate("/", { state: { userInfo } });
+    } else {
+      updateUser();
+      navigate("/", { state: { user } });
+    }
+  };
+
+  const urlInputChangeHandler = (event) => {
+    setOpenChatUrl(event.target.value);
   };
 
   return (
@@ -190,9 +210,11 @@ function Info() {
         <div>
           <label htmlFor="onpen__chatlink">내 오픈채팅방 링크</label>
           <Input
-            type="text"
+            type="url"
             placeholder="링크를 입력해주세요"
             id="onpen__chatlink"
+            onChange={urlInputChangeHandler}
+            value={openChatUrl}
           />
           <span className="info__text">
             <span className="star__char">*</span>

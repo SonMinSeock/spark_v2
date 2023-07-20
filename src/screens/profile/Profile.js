@@ -6,6 +6,7 @@ import ReportIcon from "../../assets/Vector.png";
 import FemaleImage from "../../assets/female_profile_image.png";
 import MaleImage from "../../assets/male_profile_image.png";
 import RobotImage from "../../assets/robot_sad_image.png";
+import RobotSmileImage from "../../assets/robot_smile.png";
 import NoLinkFemaleImage from "../../assets/modal_nolink.png";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import Backdrop from "../UI/Modal/Backdrop";
@@ -120,13 +121,11 @@ function Profile() {
   const [modal, setModal] = useState(false);
 
   const {
-    state: { userInfo, friend },
+    state: { userInfo, friend, users },
   } = useLocation();
 
   const navigate = useNavigate();
   const { id } = useParams();
-
-  console.log(id, userInfo.id);
 
   const isMe = +id === userInfo.id;
 
@@ -135,11 +134,20 @@ function Profile() {
     navigate(-1);
   };
   const onModal = () => {
-    console.log("on modal...");
     setModal((prev) => !prev);
+  };
+  const isMeInfoSetDocumentId = () => {
+    for (let user of users) {
+      if (user.id === userInfo.id) {
+        userInfo.document_id = user.document_id;
+      }
+    }
   };
   const onClickAddLinkBtn = () => {
     setModal(false);
+    isMeInfoSetDocumentId();
+
+    navigate("/info", { state: { userId: userInfo.id, user: userInfo } });
   };
   const conditionalShowModal = () => {
     if (userInfo.coin === 0) {
@@ -152,7 +160,7 @@ function Profile() {
         </Modal>
       );
     }
-    if (!userInfo.openChatLink) {
+    if (isMe && !userInfo.openChatLink) {
       return (
         <Modal>
           <span>혹시 오픈채팅 링크 등록했나요?</span>
@@ -166,6 +174,41 @@ function Profile() {
           </button>
         </Modal>
       );
+    } else {
+      return (
+        <Modal>
+          <span>
+            채팅방 링크를 등록하지 않은 <br />
+            사용자입니다
+          </span>
+          <span>코인이 차감되지 않아요!</span>
+          <img src={RobotSmileImage} />
+          <span className="last__text">
+            상대방에게 링크 등록 알림을 발송했어요!
+          </span>
+        </Modal>
+      );
+    }
+  };
+
+  const onClipboard = async (openChatLink) => {
+    try {
+      await navigator.clipboard.writeText(openChatLink);
+      alert("오픈 채팅링크 복사 했습니다.");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const onMessageBtnClickHandler = () => {
+    if (isMe) {
+      userInfo.coin !== 0 && userInfo.openChatLink !== ""
+        ? onClipboard(userInfo.openChatLink)
+        : onModal();
+    } else {
+      friend.coin !== 0 && friend.openChatLink !== ""
+        ? onClipboard(friend.openChatLink)
+        : onModal();
     }
   };
 
@@ -234,7 +277,7 @@ function Profile() {
         </UserInfoContainer>
       </Main>
       <Footer>
-        <Button onClick={onModal}>
+        <Button onClick={onMessageBtnClickHandler}>
           {!isMe ? "메시지 보내기" : "내 오픈채팅방 링크"}
         </Button>
       </Footer>
