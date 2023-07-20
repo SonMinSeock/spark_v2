@@ -152,6 +152,10 @@ function Info() {
   };
 
   const createUser = async () => {
+    if (openChatUrl !== "") {
+      userInfo.coin += 3;
+    }
+
     await addDoc(collection(dbService, "users"), {
       ...userInfo,
       openChatLink: openChatUrl,
@@ -160,10 +164,13 @@ function Info() {
   };
 
   const updateUser = async () => {
-    const userRef = doc(dbService, "users", `${user.document_id}`);
-    await updateDoc(userRef, {
-      openChatLink: openChatUrl,
-    });
+    if (openChatUrl !== "") {
+      const userRef = doc(dbService, "users", `${user.document_id}`);
+      await updateDoc(userRef, {
+        coin: user.coin + 3,
+        openChatLink: openChatUrl,
+      });
+    }
   };
   const formSubmitHandler = (event) => {
     event.preventDefault();

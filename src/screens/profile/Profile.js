@@ -150,17 +150,7 @@ function Profile() {
     navigate("/info", { state: { userId: userInfo.id, user: userInfo } });
   };
   const conditionalShowModal = () => {
-    if (userInfo.coin === 0) {
-      return (
-        <Modal>
-          <span>소지하신 코인을 다 소모했어요</span>
-          <span>코인은 매일 3개씩 지급돼요!</span>
-          <img src={RobotImage} />
-          <span className="noCoinLastText">내일 다시 접속해주실거죠?</span>
-        </Modal>
-      );
-    }
-    if (isMe && !userInfo.openChatLink) {
+    if (isMe && userInfo.openChatLink === "") {
       return (
         <Modal>
           <span>혹시 오픈채팅 링크 등록했나요?</span>
@@ -172,6 +162,16 @@ function Profile() {
           <button onClick={onClickAddLinkBtn}>
             내 링크 등록하고 코인 받기
           </button>
+        </Modal>
+      );
+    }
+    if (userInfo.coin === 0) {
+      return (
+        <Modal>
+          <span>소지하신 코인을 다 소모했어요</span>
+          <span>코인은 매일 3개씩 지급돼요!</span>
+          <img src={RobotImage} />
+          <span className="noCoinLastText">내일 다시 접속해주실거죠?</span>
         </Modal>
       );
     } else {
