@@ -169,52 +169,6 @@ function Home() {
     readUsers();
   }, []);
 
-  const recomendFriends = [
-    {
-      id: 1000,
-      username: "지오니",
-      university: "경운대학교",
-      gender: "female",
-    },
-    {
-      id: 1001,
-      username: "스폰지밥",
-      university: "금오공과대학교",
-      gender: "female",
-    },
-    ,
-    { id: 1002, username: "라이언", university: "경운대학교", gender: "male" },
-  ];
-  /*
-  const chatRooms = [
-    {
-      id: 2000,
-      username: "어피치",
-      university: "경운대학교",
-      gender: "female",
-    },
-    {
-      id: 2001,
-      username: "치킨먹고싶다",
-      university: "단국대학교",
-      gender: "male",
-    },
-    { id: 2002, username: "춘식이", university: "경희대학교", gender: "male" },
-    {
-      id: 2003,
-      username: "고양이집사",
-      university: "부산대학교",
-      gender: "female",
-    },
-    {
-      id: 2004,
-      username: "비빔냉면",
-      university: "한양대학교",
-      gender: "male",
-    },
-  ];
-*/
-
   const onNavigate = () => {
     navigate(`/profile/${userInfo.id}`, { state: { userInfo, users } });
   };

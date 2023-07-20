@@ -221,7 +221,7 @@ function Profile() {
           <div>
             <IoIosArrowBack size={25} onClick={backHandler} />
             <CoinLogo src={CoinIcon} />
-            <span>남은 횟수 {isMe ? userInfo.coin : friend.coin}</span>
+            <span>남은 횟수 {userInfo.coin}</span>
           </div>
           {!isMe ? (
             <img
