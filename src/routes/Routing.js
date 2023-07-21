@@ -12,6 +12,7 @@ import Info from "../screens/info/Info";
 import Profile from "../screens/profile/Profile";
 import Report from "../screens/profile/report/Report";
 import KakaoCallback from "../components/KakaoCallback/KakaoCallback";
+import Intro from "../screens/intro/Intro";
 
 const Routing = ({ isLogin, loginHandler }) => {
   return (
@@ -25,6 +26,7 @@ const Routing = ({ isLogin, loginHandler }) => {
         <Route path="/profile/:id/report" element={<Report />} />
         <Route path="/info" element={<Info />} />
         <Route path="/login/new/question" element={<Question />} />
+        <Route path="/intro" element={<Intro />} />
         <Route path="/login/new" element={<New />} />
         <Route
           path="/login"

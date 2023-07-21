@@ -20,7 +20,7 @@ const Header = styled.header`
   .back__icon {
     cursor: pointer;
   }
-  span {
+  & span {
     cursor: pointer;
   }
   @media (min-width: 40rem) {

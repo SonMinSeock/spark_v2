@@ -179,7 +179,7 @@ function New() {
       gender: isGnder,
     };
 
-    navigate("/login/new/question", { state: { userObj } });
+    navigate("/intro", { state: { userObj } });
   };
 
   const toggleGenderHandler = (event) => {

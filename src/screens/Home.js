@@ -67,7 +67,6 @@ function Home() {
   `;
   const RecomendFriends = styled.div`
     display: flex;
-    justify-content: space-between;
     padding: 0 1.2rem;
   `;
   const RecomendFriend = styled.div`
@@ -79,6 +78,13 @@ function Home() {
     width: 6.5rem;
     height: 7.6rem;
     border-radius: 0.4rem;
+    margin: 0rem 0.5rem;
+    &:first-child {
+      margin-left: 0rem;
+    }
+    &:last-child {
+      margin-right: 0rem;
+    }
     color: #000;
     cursor: pointer;
     &:last-child {
