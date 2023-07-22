@@ -177,6 +177,7 @@ function New() {
       name: enteredName,
       school: enteredSchoolName,
       gender: isGnder,
+      reportList: [],
     };
 
     navigate("/intro", { state: { userObj } });
