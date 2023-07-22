@@ -129,7 +129,6 @@ function Profile() {
 
   const isMe = +id === userInfo.id;
 
-  const onNavigateReport = () => navigate("/profile/2000/report");
   const backHandler = () => {
     navigate(-1);
   };
@@ -142,6 +141,10 @@ function Profile() {
         userInfo.document_id = user.document_id;
       }
     }
+  };
+  const onNavigateReport = () => {
+    isMeInfoSetDocumentId();
+    navigate("/profile/2000/report", { state: { userInfo, friend } });
   };
   const onClickAddLinkBtn = () => {
     setModal(false);

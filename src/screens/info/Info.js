@@ -161,6 +161,8 @@ function Info() {
       openChatLink: openChatUrl,
       createdAt: Date.now(),
     });
+
+    alert("신고 접수 완료했습니다.");
   };
 
   const updateUser = async () => {

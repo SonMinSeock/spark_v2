@@ -196,7 +196,6 @@ function Home() {
         return user;
       }
     });
-    console.log(recomendUsers.slice(0, 3));
     return recomendUsers.slice(0, 3).map((friend, idx) => (
       <RecomendFriend
         key={idx}

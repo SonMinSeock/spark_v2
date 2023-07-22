@@ -1,7 +1,7 @@
 import ReactDOM from "react-dom";
 import styled from "styled-components";
 
-function Modal({ children }) {
+function Modal({ children, type = "default" }) {
   const ModalWrap = styled.div`
     position: fixed;
     top: 20vh;
@@ -53,6 +53,14 @@ function Modal({ children }) {
       font-weight: bold;
       border: none;
       padding: 0.5rem 0;
+    }
+    & .btn__container {
+      width: 100%;
+      display: flex;
+    }
+
+    & .cancle {
+      background-color: red;
     }
   `;
 
