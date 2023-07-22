@@ -89,11 +89,11 @@ function Report() {
     if (report !== "") {
       sendReport(report);
       updateUser();
+      alert("신고 접수 완료 했습니다.");
     }
     onModal();
     setReport("");
     navigate(-1);
-    alert("신고 접수 완료 했습니다.");
   };
   const cancleReport = () => {
     onModal();
