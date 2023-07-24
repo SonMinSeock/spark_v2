@@ -211,10 +211,14 @@ function Profile() {
 
   const onClipboard = async (openChatLink) => {
     try {
-      await navigator.clipboard.writeText(openChatLink);
-      updateUser();
+      if (isMe) {
+        await navigator.clipboard.writeText(openChatLink);
+      } else {
+        await navigator.clipboard.writeText(openChatLink);
+        updateUser();
+        setLinkModal(false);
+      }
       alert("링크 복사했습니다.");
-      setLinkModal(false);
     } catch (err) {
       console.log(err);
     }
@@ -245,6 +249,7 @@ function Profile() {
     <HomeBackgroundBox>
       {modal ? <Backdrop onClick={onModal} /> : null}
       {modal ? conditionalShowModal() : null}
+      {linkModal ? <Backdrop onClick={showLinkModal} /> : null}
       {linkModal ? (
         <Modal>
           <span>메세지 보내실건가요? 코인 1감소 됩니다.</span>
