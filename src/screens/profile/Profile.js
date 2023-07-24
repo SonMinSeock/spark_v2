@@ -9,8 +9,10 @@ import RobotImage from "../../assets/robot_sad_image.png";
 import RobotSmileImage from "../../assets/robot_smile.png";
 import NoLinkFemaleImage from "../../assets/modal_nolink.png";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { collection, doc, updateDoc } from "firebase/firestore";
 import Backdrop from "../UI/Modal/Backdrop";
 import Modal from "../UI/Modal/Modal";
+import { dbService } from "../../db/firebase";
 
 function Profile() {
   const HomeBackgroundBox = styled.div`
@@ -116,10 +118,15 @@ function Profile() {
     color: #ffffff;
     cursor: pointer;
     border-radius: 1.2rem;
+    & .badge {
+      font-size: 0.5rem;
+      border-radius: 50%;
+    }
   `;
 
   const [modal, setModal] = useState(false);
-
+  const [linkModal, setLinkModal] = useState(false);
+  const [report, setReport] = useState(false);
   const {
     state: { userInfo, friend, users },
   } = useLocation();
@@ -194,14 +201,33 @@ function Profile() {
     }
   };
 
+  const updateUser = async () => {
+    isMeInfoSetDocumentId();
+    const userRef = doc(dbService, "users", `${userInfo.document_id}`);
+    await updateDoc(userRef, {
+      coin: userInfo.coin - 1,
+    });
+  };
+
   const onClipboard = async (openChatLink) => {
     try {
       await navigator.clipboard.writeText(openChatLink);
-      alert("오픈 채팅링크 복사 했습니다.");
+      updateUser();
+      alert("링크 복사했습니다.");
+      setLinkModal(false);
     } catch (err) {
       console.log(err);
     }
   };
+
+  const confirmReport = (openChatLink) => {
+    onClipboard(openChatLink);
+    setLinkModal((prev) => !prev);
+  };
+
+  const cancleReport = () => setLinkModal((prev) => !prev);
+
+  const showLinkModal = () => setLinkModal((prev) => !prev);
 
   const onMessageBtnClickHandler = () => {
     if (isMe) {
@@ -210,7 +236,7 @@ function Profile() {
         : onModal();
     } else {
       userInfo.coin !== 0 && friend.openChatLink !== ""
-        ? onClipboard(friend.openChatLink)
+        ? showLinkModal()
         : onModal();
     }
   };
@@ -219,6 +245,20 @@ function Profile() {
     <HomeBackgroundBox>
       {modal ? <Backdrop onClick={onModal} /> : null}
       {modal ? conditionalShowModal() : null}
+      {linkModal ? (
+        <Modal>
+          <span>메세지 보내실건가요? 코인 1감소 됩니다.</span>
+          <img src={NoLinkFemaleImage} />
+          <div className="btn__container">
+            <button className="confirm" onClick={confirmReport}>
+              확인
+            </button>
+            <button className="cancle" onClick={cancleReport}>
+              취소
+            </button>
+          </div>
+        </Modal>
+      ) : null}
       <Header>
         <Top>
           <div>
@@ -281,7 +321,7 @@ function Profile() {
       </Main>
       <Footer>
         <Button onClick={onMessageBtnClickHandler}>
-          {!isMe ? "메시지 보내기" : "내 오픈채팅방 링크"}
+          {!isMe ? `메시지 보내기 ` : `내 오픈채팅방 링크`}
         </Button>
       </Footer>
     </HomeBackgroundBox>
