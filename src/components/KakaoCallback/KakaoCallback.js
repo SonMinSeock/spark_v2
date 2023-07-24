@@ -52,8 +52,11 @@ function KakaoCallback({ loginHandler }) {
       //   });
       // }
       if (
-        users.find((user) => user.email === kakaoData.kakao_account.email) !==
-        undefined
+        users.find(
+          (user) =>
+            user.email === kakaoData.kakao_account.email ||
+            user.id === kakaoData.id
+        ) !== undefined
       ) {
         if (
           users.find(
