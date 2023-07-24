@@ -93,7 +93,6 @@ function Report() {
     }
     onModal();
     setReport("");
-    navigate(-1);
   };
   const cancleReport = () => {
     onModal();

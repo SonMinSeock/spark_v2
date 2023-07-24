@@ -211,25 +211,25 @@ function Profile() {
 
   const onClipboard = async (openChatLink) => {
     try {
+      await navigator.clipboard.writeText(openChatLink);
       if (isMe) {
-        await navigator.clipboard.writeText(openChatLink);
+        alert("링크 복사했습니다.");
       } else {
-        await navigator.clipboard.writeText(openChatLink);
         updateUser();
         setLinkModal(false);
+        alert("링크 복사했습니다.");
       }
-      alert("링크 복사했습니다.");
     } catch (err) {
       console.log(err);
     }
   };
 
-  const confirmReport = (openChatLink) => {
+  const onConfirm = (openChatLink) => {
     onClipboard(openChatLink);
     setLinkModal((prev) => !prev);
   };
 
-  const cancleReport = () => setLinkModal((prev) => !prev);
+  const onCancle = () => setLinkModal((prev) => !prev);
 
   const showLinkModal = () => setLinkModal((prev) => !prev);
 
@@ -255,10 +255,13 @@ function Profile() {
           <span>메세지 보내실건가요? 코인 1감소 됩니다.</span>
           <img src={NoLinkFemaleImage} />
           <div className="btn__container">
-            <button className="confirm" onClick={confirmReport}>
+            <button
+              className="confirm"
+              onClick={() => onConfirm(friend.openChatLink)}
+            >
               확인
             </button>
-            <button className="cancle" onClick={cancleReport}>
+            <button className="cancle" onClick={onCancle}>
               취소
             </button>
           </div>
