@@ -126,7 +126,7 @@ function Profile() {
 
   const [modal, setModal] = useState(false);
   const [linkModal, setLinkModal] = useState(false);
-  const [report, setReport] = useState(false);
+  const [update, setUpdate] = useState(false);
   const {
     state: { userInfo, friend, users },
   } = useLocation();
@@ -201,12 +201,14 @@ function Profile() {
     }
   };
 
-  const updateUser = async () => {
+  const updateUser = async (openChatLink) => {
     isMeInfoSetDocumentId();
     const userRef = doc(dbService, "users", `${userInfo.document_id}`);
     await updateDoc(userRef, {
       coin: userInfo.coin - 1,
     });
+    setUpdate(true);
+    window.location.href = openChatLink;
   };
 
   const onClipboard = async (openChatLink) => {
@@ -225,7 +227,8 @@ function Profile() {
   };
 
   const onConfirm = (openChatLink) => {
-    onClipboard(openChatLink);
+    //onClipboard(openChatLink);
+    redirectOpenChat(openChatLink);
     setLinkModal((prev) => !prev);
   };
 
@@ -233,6 +236,9 @@ function Profile() {
 
   const showLinkModal = () => setLinkModal((prev) => !prev);
 
+  const redirectOpenChat = (openChatLink) => {
+    updateUser(openChatLink);
+  };
   const onMessageBtnClickHandler = () => {
     if (isMe) {
       userInfo.coin !== 0 && userInfo.openChatLink !== ""
@@ -241,7 +247,9 @@ function Profile() {
     } else {
       userInfo.coin !== 0 && friend.openChatLink !== ""
         ? showLinkModal()
-        : onModal();
+        : //? redirectOpenChat(friend.openChatLink)
+          // ? showLinkModal()
+          onModal();
     }
   };
 
