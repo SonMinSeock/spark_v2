@@ -32,18 +32,43 @@ function KakaoCallback({ loginHandler }) {
       const users = snapshot.docs.map((doc) => ({
         ...doc.data(),
       }));
+      // if (
+      //   users.find((user) => user.email === kakaoData.kakao_account.email) !==
+      //   undefined
+      // ) {
+      //   if (
+      //     users.find((user) => user.email === kakaoData.kakao_account.email)
+      //       .length !== 0
+      //   ) {
+      //     let user = users.find(
+      //       (user) => user.email === kakaoData.kakao_account.email
+      //     );
+      //     loginHandler();
+      //     navigate("/", { state: { user } });
+      //   }
+      // } else {
+      //   navigate("/login/new", {
+      //     state: { kakao_data: kakaoData },
+      //   });
+      // }
       if (
         users.find((user) => user.email === kakaoData.kakao_account.email) !==
         undefined
       ) {
         if (
-          users.find((user) => user.email === kakaoData.kakao_account.email)
-            .length !== 0
+          users.find(
+            (user) =>
+              user.email === kakaoData.kakao_account.email ||
+              user.id === kakaoData.id
+          ).length !== 0
         ) {
           let user = users.find(
-            (user) => user.email === kakaoData.kakao_account.email
+            (user) =>
+              user.email === kakaoData.kakao_account.email ||
+              user.id === kakaoData.id
           );
           loginHandler();
+          console.log("user : ", user);
           navigate("/", { state: { user } });
         }
       } else {
