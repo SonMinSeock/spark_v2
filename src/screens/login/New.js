@@ -173,7 +173,7 @@ function New() {
 
     const userObj = {
       id: kakao_data.id,
-      email: kakao_data.kakao_account.email,
+      email: kakao_data.kakao_account.email || "",
       name: enteredName,
       school: enteredSchoolName,
       gender: isGnder,
