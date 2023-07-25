@@ -22,11 +22,11 @@ const Header = styled.header`
   }
 `;
 const Main = styled.main`
+  height: 5rem;
   section h2 {
     line-height: 2.1rem;
     font-size: 1.6rem;
     padding: 0 1.2rem;
-    margin-top: 2rem;
     .hilight {
       color: #8cd7c7;
     }
@@ -38,81 +38,49 @@ const Main = styled.main`
   }
 `;
 
-const Section = styled.section`
-  /* &:nth-child(2) {
-      margin-top: 2rem;
-      padding: 1.2rem;
-      div {
-        display: flex;
-        flex-direction: column;
-        button {
-          font-size: 1.2rem;
-          padding: 0.4rem 0rem;
-          border: 2px solid gray;
-          font-weight: bold;
-          background-color: #ffffff;
-          &:last-child {
-            margin-top: 1rem;
-            border-color: #58c5b0;
-            background-color: #58c5b0;
-            color: #ffffff;
-          }
-          border-radius: 1rem;
-          cursor: pointer;
-        }
-      }
-    } */
-  h2 {
-    margin-bottom: 1rem;
-  }
-  p {
-    padding: 0 1.2rem;
-    color: gray;
-    font-weight: bold;
-    font-size: 0.8rem;
-    margin-bottom: 1rem;
-  }
-  &:nth-child(2) {
-    display: flex;
-    justify-content: center;
-    img {
-      width: 150px;
-      height: 230px;
-    }
-  }
-  @media (min-width: 40rem) {
-    &:nth-child(2) {
-      div {
-        width: 220px;
-        height: 350px;
-        background-color: yellow;
-      }
-      img {
-        width: 200px;
-        height: 330px;
-      }
-    }
-  }
-`;
+const Section = styled.section``;
 
 const Form = styled.form`
-  height: calc(100vh - 30rem);
+  height: calc(100vh - 6rem - 5rem);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  label {
-    margin-top: 2rem;
+  & label {
+    font-weight: bold;
   }
   & > div {
     display: flex;
     flex-direction: column;
     padding: 0 1.2rem;
   }
-
+  & .InfoImageContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    & img {
+      width: 60%;
+      margin: 1.2rem 0;
+    }
+  }
   @media (min-width: 40rem) {
+    & .InfoImageContainer {
+      & img {
+        width: 50%;
+        margin: 1.2rem 0;
+      }
+    }
+
     margin: 0 auto;
     max-width: 25rem;
-    height: calc(100vh - 38.4rem);
+  }
+
+  @media (max-height: 715px) {
+    & .InfoImageContainer {
+      & img {
+        width: 40%;
+        margin: 1.2rem 0;
+      }
+    }
   }
 `;
 const Input = styled.input`
@@ -151,13 +119,16 @@ function Info() {
   };
 
   const createUser = async () => {
+    userInfo.coin += 3;
+
     if (openChatUrl !== "") {
-      userInfo.coin += 3;
+      userInfo.coin += 2;
     }
 
     await addDoc(collection(dbService, "users"), {
       ...userInfo,
       openChatLink: openChatUrl,
+      coin: userInfo.coin,
       createdAt: Date.now(),
     });
   };
@@ -166,7 +137,7 @@ function Info() {
     if (openChatUrl !== "") {
       const userRef = doc(dbService, "users", `${user.document_id}`);
       await updateDoc(userRef, {
-        coin: user.coin + 3,
+        coin: user.coin + 2,
         openChatLink: openChatUrl,
       });
     }
@@ -202,14 +173,6 @@ function Info() {
             <br />
             메시지 기회를 얻어가세요!
           </h2>
-          <p>
-            친구들이 먼저 나에게 메시지를 보낼 수 있어요.
-            <br />
-            다른 친구에게 메시지 보낼 수 있는 코인 추가지급 까지!
-          </p>
-        </Section>
-        <Section>
-          <img src={InfoImage} />
         </Section>
       </Main>
       <Form onSubmit={formSubmitHandler}>
@@ -227,6 +190,9 @@ function Info() {
             오픈채팅방은 반드시 <span className="hilight">1:1 채팅방</span>으로
             생성해야합니다(그룹채팅방 X)
           </span>
+        </div>
+        <div className="InfoImageContainer">
+          <img src={InfoImage} />
         </div>
         <Button type="submit">시작하기</Button>
       </Form>
