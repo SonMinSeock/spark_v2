@@ -7,7 +7,14 @@ import MaleImage from "../assets/male_image.png";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { dbService } from "../db/firebase";
-import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
+import {
+  collection,
+  onSnapshot,
+  orderBy,
+  query,
+  doc,
+  updateDoc,
+} from "firebase/firestore";
 
 function Home() {
   const HomeBackgroundBox = styled.div`
@@ -152,10 +159,44 @@ function Home() {
     state: { user: userInfo },
   } = useLocation();
 
-  const isMeInfoSetDocId = () => {
-    for (let i = 0; i < users.length; i++) {
-      if (users[i].id === userInfo.id) {
-        userInfo = { ...users[i] };
+  const isMeInfoSetDocId = (docUsers) => {
+    for (let docUser of docUsers) {
+      if (docUser.id === userInfo.id) {
+        userInfo.document_id = docUser.document_id;
+      }
+    }
+  };
+
+  // DB 유저 업데이트 함수
+  const updateUser = async (date, reword = false) => {
+    const userRef = doc(dbService, "users", `${userInfo.document_id}`);
+    if (reword) {
+      await updateDoc(userRef, {
+        coin: userInfo.coin + 3,
+        currentDate: date,
+        dateViewList: [...userInfo.dateViewList, date],
+      });
+    } else {
+      await updateDoc(userRef, {
+        currentDate: date,
+        dateViewList: [...userInfo.dateViewList, date],
+      });
+    }
+  };
+
+  // 출석 보상.
+  const rewordCoin = () => {
+    const date = new Date();
+    const currentDate = `${date.getFullYear()}.${
+      date.getMonth() + 1
+    }.${date.getDate()}`;
+
+    // 첫 출석인지 아닌지, 첫 출석이면 보상X, 출석하면 보상.
+    if (userInfo.dateViewList.length === 0) {
+      updateUser(currentDate, false);
+    } else {
+      if (userInfo.currentDate !== currentDate) {
+        updateUser(currentDate, true);
       }
     }
   };
@@ -167,14 +208,17 @@ function Home() {
     );
 
     onSnapshot(q, (snapshot) => {
-      const users = snapshot.docs.map((doc) => ({
+      let docUsers = snapshot.docs.map((doc) => ({
         ...doc.data(),
         document_id: doc.id,
       }));
 
-      setUsers(users);
+      setUsers(docUsers);
+      isMeInfoSetDocId(docUsers);
+      rewordCoin();
     });
   };
+
   useEffect(() => {
     readUsers();
   }, []);
@@ -241,6 +285,7 @@ function Home() {
         <ChatFriends>
           {users.map((friend) => (
             <ChatFriend
+              key={friend.id}
               onClick={() =>
                 navigate(`/profile/${friend.id}`, {
                   state: { userInfo, friend, users },

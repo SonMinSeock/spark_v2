@@ -178,6 +178,8 @@ function New() {
       school: enteredSchoolName,
       gender: isGnder,
       reportList: [],
+      currentDate: "",
+      dateViewList: [],
     };
 
     navigate("/intro", { state: { userObj } });

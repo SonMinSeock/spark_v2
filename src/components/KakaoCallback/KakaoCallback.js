@@ -71,7 +71,7 @@ function KakaoCallback({ loginHandler }) {
               user.id === kakaoData.id
           );
           loginHandler();
-          console.log("user : ", user);
+          //console.log("user : ", user);
           navigate("/", { state: { user } });
         }
       } else {
