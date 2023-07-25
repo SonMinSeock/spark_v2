@@ -68,6 +68,7 @@ body {
   const loginHandler = () => {
     setIsLogin(true);
   };
+
   return (
     <>
       <GlobalStyle />
