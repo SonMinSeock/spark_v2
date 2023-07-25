@@ -48,16 +48,17 @@ function FiveQuestion({ inputQuestionHandler, question }) {
     <>
       <Section>
         <h2>
-          당신은
-          <span className="hilight">어떤 사람</span>과<br />
-          만나고 싶나요?
+          만약 새로운 친구를 사귄다면
+          <br />
+          <span className="hilight">어떤 친구</span>와 사귀고 싶나요?
         </h2>
       </Section>
       <Form>
         <Textarea
           rows={11}
           cols={30}
-          placeholder="자유롭게 대답해주세요~!"
+          placeholder="예시) 새로운 동성 친구라면 함께 게임을,
+          이성 친구라면 함께 카페를 갈 수 있는 친구를 만들고 싶어요!"
           onChange={(event) => inputQuestionHandler(5, event.target.value)}
         />
       </Form>

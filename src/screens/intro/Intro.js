@@ -7,7 +7,7 @@ import useInput from "../../hooks/use-input";
 import { useState } from "react";
 
 const Main = styled.main`
-  height: 35rem;
+  height: 37rem;
   & section:first-child h2 {
     line-height: 2.5rem;
     font-size: 1.8rem;
@@ -16,11 +16,31 @@ const Main = styled.main`
     .hilight {
       color: #8cd7c7;
     }
+    @media (min-width: 800px) {
+      & {
+        font-size: 2.2rem;
+      }
+    }
   }
   & section:nth-child(2) {
     display: flex;
     justify-content: center;
     align-items: center;
+    & img {
+      height: 568px;
+    }
+
+    @media (min-width: 765px) {
+      & img {
+        height: 750px;
+      }
+    }
+
+    @media (min-width: 900px) {
+      & img {
+        height: 500px;
+      }
+    }
   }
   & section:nth-child(3) {
     display: flex;
@@ -41,14 +61,12 @@ const Main = styled.main`
     margin: 0 auto;
     max-width: 25rem;
   }
-  @media (max-height: 47.5rem) {
+
+  @media (max-height: 46.5rem) {
     & section:nth-child(2) {
       & img {
-        height: 380px;
+        height: 400px;
       }
-    }
-    & section:nth-child(3) p {
-      margin: 1rem 0rem;
     }
   }
 `;
@@ -62,11 +80,11 @@ const IntroImgContainer = styled.div`
 const Footer = styled.footer`
   display: flex;
   align-items: flex-end;
-  height: calc(100vh - 35rem);
+  height: calc(100vh - 37rem);
   @media (min-width: 40rem) {
     margin: 0 auto;
     max-width: 25rem;
-    height: calc(100vh - 37rem);
+    height: calc(100vh - 40rem);
   }
 `;
 
@@ -95,12 +113,6 @@ function Intro() {
           <IntroImgContainer>
             <img src={IntroImage} />
           </IntroImgContainer>
-        </section>
-        <section>
-          <p>
-            5개의 간단한 질문에 답하면
-            <br /> 나와 맞는 친구와 이야기를 나눌 수 있어요!
-          </p>
         </section>
       </Main>
       <Footer>

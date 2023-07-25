@@ -56,10 +56,9 @@ function SecondQuestion({ inputQuestionHandler, question, anotherQuestion }) {
     <>
       <Section>
         <h2>
-          당신의
-          <span className="hilight">주량</span>은
+          평소<span className="hilight">주량</span>은
           <br />
-          얼마나 되나요?
+          어느 정도 인가요?
         </h2>
       </Section>
       <Section>

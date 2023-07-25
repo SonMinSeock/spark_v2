@@ -28,7 +28,7 @@ function Home() {
     padding: 1rem 1.2rem;
     display: flex;
     justify-content: space-between;
-    margin-bottom: 1.5rem;
+    /* margin-bottom: 1.5rem; */
     & div {
       display: flex;
       align-items: center;
@@ -110,6 +110,10 @@ function Home() {
       font-weight: bold;
       margin-bottom: 1rem;
     }
+  `;
+  const TextBox = styled.div`
+    padding: 0 1.2rem;
+    margin-bottom: 2rem;
   `;
   const ChatFriends = styled.div`
     height: calc(100vh - 22rem);
@@ -222,10 +226,12 @@ function Home() {
           </div>
           <IoMdContact size={28} color="white" onClick={onNavigate} />
         </Top>
+        <TextBox>
+          <span>코인은 매일 3개씩 지급돼요!</span>
+        </TextBox>
         <RecomendBox>
           <Text>
             <span>새로운 친구들을 만나보세요!</span>
-            <span>나와 잘 통할 것 같은 친구를 매일 3명 추천해요!</span>
           </Text>
           <RecomendFriends>{showRecomend()}</RecomendFriends>
         </RecomendBox>

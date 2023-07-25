@@ -8,8 +8,8 @@ function Modal({ children, type = "default" }) {
     left: 13%;
     width: 75%;
     background-color: #ffffff;
-    padding-top: 1rem;
     z-index: 30;
+    /*padding-top: 1rem;*/
     @media (min-width: 40rem) {
       width: 26%;
       max-width: 700px;
@@ -29,6 +29,7 @@ function Modal({ children, type = "default" }) {
       line-height: 1.1rem;
     }
     & span:first-child {
+      margin-top: 1rem;
       font-size: 1rem;
       font-weight: bold;
       color: black;

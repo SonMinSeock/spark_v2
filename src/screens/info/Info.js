@@ -147,7 +147,7 @@ function Info() {
     }
   };
 
-  const condtitonal = (isLogin) => {
+  const condtitonal = () => {
     if (!userId) {
       createUser();
       navigate("/", { state: { userInfo } });
@@ -170,10 +170,20 @@ function Info() {
     if (!userId) {
       if (openChatUrl === "") {
         toggleModal();
+      } else {
+        if (openChatUrl !== "") {
+          createUser();
+          navigate("/", { state: { userInfo } });
+        }
       }
     } else {
       if (openChatUrl === "") {
         toggleModal();
+      } else {
+        if (openChatUrl !== "") {
+          updateUser();
+          navigate("/", { state: { user } });
+        }
       }
     }
   };

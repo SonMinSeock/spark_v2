@@ -53,7 +53,7 @@ function FourQuestion({ inputQuestionHandler, question, anotherQuestion }) {
         <h2>
           Spark에서 생긴 친구/애인과
           <br />
-          <span className="hilight">가고싶은 운동경기는?</span>
+          <span className="hilight">가고싶은 운동경기</span>는
         </h2>
       </Section>
       <Section>
