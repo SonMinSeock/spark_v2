@@ -33,24 +33,26 @@ function Login() {
     height: calc(100vh - 14rem - 5rem);
     padding: 0 1.2rem;
 
-    .login__img {
-      width: 100%;
-    }
-
     & section {
       display: flex;
       height: 100%;
+
       flex-direction: column;
-      justify-content: space-between;
+      justify-content: center;
       align-items: center;
       & p {
-        margin-bottom: 1.2rem;
+        margin: 1.2rem 0rem;
         font-weight: bold;
       }
     }
     @media (min-width: 40rem) {
       margin: 0 auto;
       max-width: 25rem;
+    }
+    @media (max-height: 715px) {
+      .login__img {
+        width: 320px;
+      }
     }
   `;
   const Footer = styled.footer`
