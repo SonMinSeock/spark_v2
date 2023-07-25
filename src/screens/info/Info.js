@@ -4,8 +4,11 @@ import { useLocation, useNavigate } from "react-router-dom";
 import Button from "../UI/Button/Button";
 import { useState } from "react";
 import InfoImage from "../../assets/info_image.png";
+import NoLinkFemaleImage from "../../assets/modal_nolink.png";
 import { dbService } from "../../db/firebase";
 import { collection, addDoc, doc, updateDoc } from "firebase/firestore";
+import Modal from "../UI/Modal/Modal";
+import Backdrop from "../UI/Modal/Backdrop";
 
 const Header = styled.header`
   height: 6rem;
@@ -103,6 +106,7 @@ const Input = styled.input`
   }
 `;
 function Info() {
+  const [modal, setModal] = useState(false);
   const navigate = useNavigate();
   const {
     state: { userId, user },
@@ -142,14 +146,35 @@ function Info() {
       });
     }
   };
-  const formSubmitHandler = (event) => {
-    event.preventDefault();
+
+  const condtitonal = (isLogin) => {
     if (!userId) {
       createUser();
       navigate("/", { state: { userInfo } });
     } else {
-      updateUser();
+      createUser();
       navigate("/", { state: { user } });
+    }
+  };
+  const toggleModal = () => setModal((prev) => !prev);
+  const onConfirm = () => {
+    toggleModal();
+    condtitonal();
+  };
+  const onCancle = () => {
+    toggleModal();
+  };
+
+  const formSubmitHandler = (event) => {
+    event.preventDefault();
+    if (!userId) {
+      if (openChatUrl === "") {
+        toggleModal();
+      }
+    } else {
+      if (openChatUrl === "") {
+        toggleModal();
+      }
     }
   };
 
@@ -159,6 +184,26 @@ function Info() {
 
   return (
     <>
+      {modal ? <Backdrop onClick={toggleModal} /> : null}
+      {modal ? (
+        <Modal>
+          <span>메세지를 이용할 수 없어요</span>
+          <img src={NoLinkFemaleImage} />
+          <span>
+            내 오픈채팅 링크를 등록하지 않으면
+            <br />
+            새로운 친구들과 이야기 할 수 없어요
+          </span>
+          <div className="btn__container">
+            <button className="cancle" onClick={onCancle}>
+              취소
+            </button>
+            <button className="confirm" onClick={onConfirm}>
+              건너뛰기
+            </button>
+          </div>
+        </Modal>
+      ) : null}
       <Header>
         <IoIosArrowBack
           size={25}

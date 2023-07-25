@@ -133,11 +133,11 @@ function Report() {
           <span>신고 하실건가요?</span>
           <img src={NoLinkFemaleImage} />
           <div className="btn__container">
-            <button className="confirm" onClick={confirmReport}>
-              확인
-            </button>
             <button className="cancle" onClick={cancleReport}>
               취소
+            </button>
+            <button className="confirm" onClick={confirmReport}>
+              확인
             </button>
           </div>
         </Modal>
