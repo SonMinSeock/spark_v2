@@ -5,7 +5,10 @@ import Button from "../UI/Button/Button";
 import FemaleProfile from "../../assets/female_profile_image.png";
 import MaleProfile from "../../assets/male_profile_image.png";
 import useInput from "../../hooks/use-input";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
+import { dbService } from "../../db/firebase";
+
 const Header = styled.header`
   height: 6rem;
   display: flex;
@@ -129,6 +132,8 @@ const ErrorMessage = styled.p`
 `;
 function New() {
   const [isGnder, setIsGender] = useState("");
+  const [users, setUsers] = useState([]);
+
   const navigate = useNavigate();
   const {
     state: { kakao_data },
@@ -141,7 +146,16 @@ function New() {
     valueChangeHandler: nameChangeHandler,
     inputBlurHandler: nameBlurHandler,
     reset: resetNameInput,
-  } = useInput((value) => value.trim() !== "");
+  } = useInput((value) => {
+    const inputName = value.trim();
+    for (let user of users) {
+      if (inputName !== "" && inputName !== user.name) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+  });
 
   const {
     value: enteredSchoolName,
@@ -160,6 +174,23 @@ function New() {
 
   const backHandler = () => {
     navigate("/login");
+  };
+
+  // db read users
+  const readUsers = () => {
+    const q = query(
+      collection(dbService, "users"),
+      orderBy("createdAt", "desc")
+    );
+
+    onSnapshot(q, (snapshot) => {
+      const docUsers = snapshot.docs.map((doc) => ({
+        ...doc.data(),
+        document_id: doc.id,
+      }));
+
+      setUsers(docUsers);
+    });
   };
 
   const formSubmitHandler = (event) => {
@@ -188,6 +219,10 @@ function New() {
   const toggleGenderHandler = (event) => {
     setIsGender(event.target.name);
   };
+
+  useEffect(() => {
+    readUsers();
+  }, []);
 
   const nameInputClasses = nameInputHasError ? "invalid" : "";
   const schoolSelectClasses = schoolSelectHasError ? "invalid" : "";
