@@ -214,13 +214,7 @@ function Info() {
           </div>
         </Modal>
       ) : null}
-      <Header>
-        <IoIosArrowBack
-          size={25}
-          className="back__icon"
-          onClick={backHandler}
-        />
-      </Header>
+      <Header></Header>
       <Main>
         <Section>
           <h2>
