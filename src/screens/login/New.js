@@ -95,6 +95,7 @@ const Select = styled.select`
   border-radius: 0.5rem;
   border: 2px solid gray;
   outline: none;
+  color: black;
   &:focus {
     border: 2px solid #58c5b0;
   }
@@ -148,12 +149,16 @@ function New() {
     reset: resetNameInput,
   } = useInput((value) => {
     const inputName = value.trim();
-    for (let user of users) {
-      if (inputName !== "" && inputName !== user.name) {
-        return true;
-      } else {
-        return false;
+    if (users.length !== 0) {
+      for (let user of users) {
+        if (inputName !== "" && inputName !== user.name) {
+          return true;
+        } else {
+          return false;
+        }
       }
+    } else {
+      return true;
     }
   });
 
@@ -262,7 +267,7 @@ function New() {
           />
           {nameInputHasError ? (
             <ErrorMessage>
-              *닉네임 입력창 다시 확인 해보시길 바랍니다.
+              *닉네임 공백 혹은 이미 사용중인 닉네임 입니다.
             </ErrorMessage>
           ) : null}
           <span className="info__text">
