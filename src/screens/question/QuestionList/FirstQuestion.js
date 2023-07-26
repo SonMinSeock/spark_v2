@@ -42,6 +42,7 @@ function FirstQuestion({ inputQuestionHandler, mbti: enteredMbti }) {
       }
     }
     button {
+      color: black;
       border-radius: 1rem;
       border: 1px solid gray;
       background-color: #ffffff;

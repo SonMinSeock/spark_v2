@@ -9,6 +9,7 @@ const Section = styled.section`
       flex-direction: column;
       justify-content: space-between;
       button {
+        color: black;
         font-size: 1.2rem;
         padding: 0.4rem 0rem;
         border: 2px solid gray;
