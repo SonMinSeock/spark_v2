@@ -104,7 +104,9 @@ function Intro() {
       <Main>
         <section>
           <h2>
-            <span className="hilight">1분만에</span> 나와 맞는
+            <span className="hilight">질문</span>에 답하고
+            <br />
+            <span className="hilight">1분만</span>에 나와 맞는
             <br />
             대학교 <span className="hilight">친구</span>를 찾아보세요
           </h2>

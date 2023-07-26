@@ -61,7 +61,7 @@ function ThirdQuestion({ inputQuestionHandler, question }) {
         <h2>
           다음 중<span className="hilight"> 더 싫은</span>
           <br />
-          상황은?
+          상황은
         </h2>
       </Section>
       <Section>
