@@ -13,6 +13,7 @@ import { collection, doc, updateDoc } from "firebase/firestore";
 import Backdrop from "../UI/Modal/Backdrop";
 import Modal from "../UI/Modal/Modal";
 import { dbService } from "../../db/firebase";
+import { analyticsButtonLogEvent } from "../../libs/analytics";
 
 function Profile() {
   const HomeBackgroundBox = styled.div`
@@ -238,6 +239,7 @@ function Profile() {
 
   const redirectOpenChat = (openChatLink) => {
     updateUser(openChatLink);
+    analyticsButtonLogEvent(`Friend Profile ${friend.name} Send Message`);
   };
   const onMessageBtnClickHandler = () => {
     if (isMe) {
