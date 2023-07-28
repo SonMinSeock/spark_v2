@@ -3,6 +3,7 @@ import LogoTitle from "../../components/logo/LogoTitle";
 import kakaoBubbleSVG from "../../kakao_svgrepo_com.svg";
 import MockupSVG from "../../assets/login_image.png";
 import { useNavigate } from "react-router-dom";
+import { analyticsButtonLogEvent } from "../../libs/analytics";
 
 function Login() {
   const LoginBackgroundColor = styled.div`
@@ -100,6 +101,7 @@ function Login() {
   const navigate = useNavigate();
 
   const createUserHandler = () => {
+    analyticsButtonLogEvent(`KaKao Login Button`);
     window.location.href = kakaoURL;
   };
 

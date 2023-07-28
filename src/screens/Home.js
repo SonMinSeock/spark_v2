@@ -18,6 +18,7 @@ import {
 } from "firebase/firestore";
 import Backdrop from "./UI/Modal/Backdrop";
 import Modal from "./UI/Modal/Modal";
+import { analyticsButtonLogEvent } from "../libs/analytics";
 
 const HomeBackgroundBox = styled.div`
   height: 100vh;
@@ -300,11 +301,12 @@ function Home() {
             {users.map((friend) => (
               <ChatFriend
                 key={friend.id}
-                onClick={() =>
+                onClick={() => {
+                  analyticsButtonLogEvent(`Chat Friend ${friend.name}`);
                   navigate(`/profile/${friend.id}`, {
                     state: { userInfo, friend, users },
-                  })
-                }
+                  });
+                }}
               >
                 <ProfileImg
                   src={friend.gender === "female" ? FemaleImage : MaleImage}

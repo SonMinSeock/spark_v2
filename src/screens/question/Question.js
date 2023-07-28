@@ -9,6 +9,7 @@ import SecondQuestion from "./QuestionList/SecondQuestion";
 import ThirdQuestion from "./QuestionList/ThirdQuestion";
 import FourQuestion from "./QuestionList/FourQuestion";
 import FiveQuestion from "./QuestionList/FiveQuestion";
+import { analyticsButtonLogEvent } from "../../libs/analytics";
 
 // styled code
 const Header = styled.header`
@@ -96,6 +97,7 @@ function Question() {
     } else {
       setActiveStep((prev) => prev + 1);
     }
+    analyticsButtonLogEvent(`Question Next Button`);
   };
 
   const inputQuestionHandler = (questionNum, value, anotherValue) => {
