@@ -5,31 +5,26 @@ import CoinIcon from "../assets/akar-icons_coin.png";
 import FemaleImage from "../assets/female_image.png";
 import MaleImage from "../assets/male_image.png";
 import RobotSmileImage from "../assets/robot_smile.png";
+import FmaleHartImage from "../assets/female_hart.png";
+import MaleHartImage from "../assets/male_hart.png";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { dbService } from "../db/firebase";
-import {
-  collection,
-  onSnapshot,
-  orderBy,
-  query,
-  doc,
-  updateDoc,
-} from "firebase/firestore";
+import { collection, onSnapshot, orderBy, query, doc, updateDoc } from "firebase/firestore";
 import Backdrop from "./UI/Modal/Backdrop";
 import Modal from "./UI/Modal/Modal";
 import { analyticsButtonLogEvent } from "../libs/analytics";
 
 const HomeBackgroundBox = styled.div`
   height: 100vh;
-  background-color: #e2ebf0;
+  background-color: #ffffff;
   @media (min-width: 40rem) {
     margin: 0 auto;
     max-width: 25rem;
   }
 `;
 const Header = styled.header`
-  background-color: #58c5b0;
+  background-color: #18af71;
   color: #ffffff;
   border-bottom-left-radius: 0.8rem;
   border-bottom-right-radius: 0.8rem;
@@ -107,8 +102,10 @@ const RecomendFriend = styled.div`
 `;
 const ProfileImg = styled.img`
   display: block;
-  width: 3rem;
-  height: 3rem;
+  width: 100%;
+  height: 100%;
+  /* width: 3rem; */
+  /* height: 3rem; */
 `;
 const Main = styled.main`
   padding: 0 1.2rem;
@@ -127,17 +124,70 @@ const TextBox = styled.div`
 `;
 const ChatFriends = styled.div`
   height: calc(100vh - 22rem);
+  padding: 0.5rem;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-rows: 200px;
+  gap: 0.8rem;
   overflow: scroll;
+  @media (max-width: 300px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 const ChatFriend = styled.div`
-  display: flex;
+  /* display: flex;
   align-items: center;
+  */
+  position: relative;
   background-color: #ffffff;
   border-radius: 0.5rem;
   margin-bottom: 0.5rem;
   padding: 0.4rem 0.8rem;
+  box-shadow: 0 0 10px gray;
   cursor: pointer;
+`;
+
+const ProfileNickname = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  & span:first-child {
+    font-size: 0.5rem;
+    margin-bottom: 0.2rem;
+  }
+  & span:last-child {
+    font-weight: bold;
+  }
+`;
+
+const ProfileMbti = styled.div`
+  position: absolute;
+  bottom: 2px;
+  right: 0px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  & span:first-child {
+    margin-left: 5px;
+    font-size: 0.5rem;
+    color: #ffffff;
+    background-color: #000;
+    border-radius: 0.5rem;
+    padding: 0.2rem 0.5rem;
+  }
+
+  & span:last-child {
+    & img {
+      width: 25px;
+      height: 25px;
+      margin-right: 5px;
+    }
+  }
 `;
 
 const FriendInfo = styled.div`
@@ -193,9 +243,7 @@ function Home() {
   // 출석 보상.
   const rewordCoin = () => {
     const date = new Date();
-    const currentDate = `${date.getFullYear()}.${
-      date.getMonth() + 1
-    }.${date.getDate()}`;
+    const currentDate = `${date.getFullYear()}.${date.getMonth() + 1}.${date.getDate()}`;
 
     // 첫 출석인지 아닌지, 첫 출석이면 보상X, 출석하면 보상.
     if (userInfo.dateViewList.length === 0) {
@@ -209,10 +257,7 @@ function Home() {
   };
 
   const readUsers = () => {
-    const q = query(
-      collection(dbService, "users"),
-      orderBy("createdAt", "desc")
-    );
+    const q = query(collection(dbService, "users"), orderBy("createdAt", "desc"));
 
     onSnapshot(q, (snapshot) => {
       let docUsers = snapshot.docs.map((doc) => ({
@@ -260,9 +305,7 @@ function Home() {
           })
         }
       >
-        <ProfileImg
-          src={friend.gender === "female" ? FemaleImage : MaleImage}
-        />
+        <ProfileImg src={friend.gender === "female" ? FemaleImage : MaleImage} />
         <span>{friend.name}</span>
       </RecomendFriend>
     ));
@@ -308,13 +351,21 @@ function Home() {
                   });
                 }}
               >
-                <ProfileImg
-                  src={friend.gender === "female" ? FemaleImage : MaleImage}
-                />
-                <FriendInfo>
+                <ProfileImg src={friend.gender === "female" ? FemaleImage : MaleImage} />
+                <ProfileNickname>
+                  <span>{friend.school}</span>
+                  <span>{friend.name}</span>
+                </ProfileNickname>
+                {/* <FriendInfo>
                   <span>{friend.name}</span>
                   <span>{friend.school}</span>
-                </FriendInfo>
+                </FriendInfo> */}
+                <ProfileMbti>
+                  <span>{friend.mbti}</span>
+                  <span>
+                    <img src={friend.gender === "female" ? FmaleHartImage : MaleHartImage} />
+                  </span>
+                </ProfileMbti>
               </ChatFriend>
             ))}
           </ChatFriends>

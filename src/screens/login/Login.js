@@ -114,7 +114,7 @@ function Login() {
         </Header>
         <Main>
           <section>
-            <img className="login__img" src={MockupSVG} />
+            <img className="login__img" alt="spark_image" src={MockupSVG} />
           </section>
         </Main>
         <Footer>
