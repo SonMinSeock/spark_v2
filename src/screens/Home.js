@@ -1,9 +1,9 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { IoMdContact } from "react-icons/io";
-import CoinIcon from "../assets/akar-icons_coin.png";
-import FemaleImage from "../assets/female_image.png";
-import MaleImage from "../assets/male_image.png";
+import CoinImage from "../assets/coin_image.png";
+import FemaleImage from "../assets/female_basic.png";
+import MaleImage from "../assets/male_basic.png";
 import RobotSmileImage from "../assets/robot_smile.png";
 import FmaleHartImage from "../assets/female_hart.png";
 import MaleHartImage from "../assets/male_hart.png";
@@ -26,8 +26,7 @@ const HomeBackgroundBox = styled.div`
 const Header = styled.header`
   background-color: #18af71;
   color: #ffffff;
-  border-bottom-left-radius: 0.8rem;
-  border-bottom-right-radius: 0.8rem;
+  padding-top: 2rem;
 `;
 const Top = styled.div`
   padding: 1rem 1.2rem;
@@ -36,10 +35,14 @@ const Top = styled.div`
   /* margin-bottom: 1.5rem; */
   & div {
     display: flex;
-    align-items: center;
+    flex-direction: column;
     & span {
+      font-weight: bold;
+      font-size: 0.9rem;
+    }
+    & span:first-child {
       font-size: 1.3rem;
-      margin-left: 0.6rem;
+      margin-bottom: 0.5rem;
     }
   }
   & svg {
@@ -73,6 +76,10 @@ const Text = styled.div`
 const RecomendFriends = styled.div`
   display: flex;
   padding: 0 1.2rem;
+  height: 200px;
+  white-space: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
 `;
 const RecomendFriend = styled.div`
   display: flex;
@@ -80,10 +87,10 @@ const RecomendFriend = styled.div`
   justify-content: center;
   align-items: center;
   background-color: #ffffff;
-  width: 6.5rem;
-  height: 7.6rem;
+  height: 100%;
   border-radius: 0.4rem;
   margin: 0rem 0.5rem;
+  padding-left: 2rem;
   &:first-child {
     margin-left: 0rem;
   }
@@ -99,6 +106,66 @@ const RecomendFriend = styled.div`
     margin-top: 0.4rem;
     font-weight: bold;
   }
+  & div {
+    display: flex;
+    justify-content: center;
+    & div .friend__info {
+      display: flex;
+      flex-direction: column;
+      & span {
+        text-align: end;
+        &:first-child {
+          font-size: 0.8rem;
+          font-weight: 400;
+        }
+        &:last-child {
+          font-size: 1.5rem;
+          font-weight: bold;
+        }
+      }
+    }
+
+    & div .friend__gender {
+      & img {
+        width: 45px;
+        height: 45px;
+      }
+    }
+  }
+  & div .recomendProfileImgContainer {
+    position: relative;
+    width: 135px;
+    height: 135px;
+    background-color: #24cd8829;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    & .mbti__container {
+      font-size: 0.8rem;
+      position: absolute;
+      bottom: -14px;
+      color: #ffffff;
+      background-color: #000;
+      border-radius: 2rem;
+      padding: 0.3rem 0.6rem;
+      left: 39px;
+    }
+  }
+  & div .friend__info__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0rem 2rem;
+    & div:first-child {
+      margin-bottom: 1rem;
+    }
+  }
+`;
+
+const RecomendProfileImg = styled.img`
+  width: 100px;
+  height: auto;
 `;
 const ProfileImg = styled.img`
   display: block;
@@ -116,6 +183,44 @@ const Main = styled.main`
     color: #000;
     font-weight: bold;
     margin-bottom: 1rem;
+  }
+`;
+
+const CoinDisplay = styled.div`
+  display: flex;
+  padding: 0.8rem 0;
+  padding-left: 1rem;
+  background-color: #ffefc6;
+  border-radius: 1.5rem;
+  margin-bottom: 1.5rem;
+`;
+
+const CoinContainer = styled.div`
+  display: flex;
+`;
+
+const CoinContext = styled.div`
+  & img {
+    width: 60px;
+    height: 60px;
+    margin-right: 0.5rem;
+  }
+  &:last-child {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    & span:first-child {
+      font-size: 0.8rem;
+      margin-bottom: 0.5rem;
+      & .highligt {
+        font-size: 0.8rem;
+        font-weight: bold;
+      }
+    }
+    & span:last-child {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
   }
 `;
 const TextBox = styled.div`
@@ -305,8 +410,21 @@ function Home() {
           })
         }
       >
-        <ProfileImg src={friend.gender === "female" ? FemaleImage : MaleImage} />
-        <span>{friend.name}</span>
+        <div>
+          <div className="recomendProfileImgContainer">
+            <RecomendProfileImg src={friend.gender === "female" ? FemaleImage : MaleImage} />
+            <span className="mbti__container">{friend.mbti}</span>
+          </div>
+          <div className="friend__info__container">
+            <div className="friend__info">
+              <span>{friend.school}</span>
+              <span>{friend.name}</span>
+            </div>
+            <div className="friend__gender">
+              <img src={friend.gender === "female" ? FmaleHartImage : MaleHartImage} />
+            </div>
+          </div>
+        </div>
       </RecomendFriend>
     ));
   };
@@ -323,23 +441,30 @@ function Home() {
         <Header>
           <Top>
             <div>
-              <CoinLogo src={CoinIcon} />
-              <span>남은 횟수 {userInfo.coin}</span>
+              <span>스파크가 추천하는 오늘의 친구</span>
+              <span>{userInfo.name}님과 맞는 친구 3명을 소개합니다.</span>
             </div>
             <IoMdContact size={28} color="white" onClick={onNavigate} />
           </Top>
-          <TextBox>
-            <span>코인은 매일 3개씩 지급돼요!</span>
-          </TextBox>
           <RecomendBox>
-            <Text>
-              <span>새로운 친구들을 만나보세요!</span>
-            </Text>
             <RecomendFriends>{showRecomend()}</RecomendFriends>
           </RecomendBox>
         </Header>
         <Main>
-          <span>모든 대화방</span>
+          <CoinDisplay>
+            <CoinContainer>
+              <CoinContext>
+                <img src={CoinImage} />
+              </CoinContext>
+              <CoinContext>
+                <span>
+                  접속하기만 하면 <span className="highligt">매일 3포인트</span>가 지급돼요!
+                </span>
+                <span>남은 포인트 {userInfo.coin}P</span>
+              </CoinContext>
+            </CoinContainer>
+          </CoinDisplay>
+          <span>더 다양한 친구들을 만나볼까요?</span>
           <ChatFriends>
             {users.map((friend) => (
               <ChatFriend
