@@ -76,7 +76,9 @@ const Text = styled.div`
 const RecomendFriends = styled.div`
   display: flex;
   padding: 0 1.2rem;
-  height: 200px;
+  height: 190px;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
   white-space: nowrap;
   overflow-x: auto;
   overflow-y: hidden;
@@ -134,22 +136,22 @@ const RecomendFriend = styled.div`
   }
   & div .recomendProfileImgContainer {
     position: relative;
-    width: 135px;
-    height: 135px;
+    width: 120px;
+    height: 115px;
     background-color: #24cd8829;
     border-radius: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     & .mbti__container {
-      font-size: 0.8rem;
+      font-size: 0.6rem;
       position: absolute;
-      bottom: -14px;
+      bottom: -7px;
       color: #ffffff;
       background-color: #000;
       border-radius: 2rem;
       padding: 0.3rem 0.6rem;
-      left: 39px;
+      left: 35px;
     }
   }
   & div .friend__info__container {
@@ -164,16 +166,16 @@ const RecomendFriend = styled.div`
 `;
 
 const RecomendProfileImg = styled.img`
-  width: 100px;
+  width: 75px;
   height: auto;
 `;
+
 const ProfileImg = styled.img`
   display: block;
   width: 100%;
-  height: 100%;
-  /* width: 3rem; */
-  /* height: 3rem; */
+  height: auto;
 `;
+
 const Main = styled.main`
   padding: 0 1.2rem;
   padding-top: 0.6rem;
@@ -232,7 +234,7 @@ const ChatFriends = styled.div`
   padding: 0.5rem;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-auto-rows: 200px;
+  grid-auto-rows: 170px;
   gap: 0.8rem;
   overflow: scroll;
   @media (max-width: 300px) {
@@ -241,9 +243,8 @@ const ChatFriends = styled.div`
 `;
 
 const ChatFriend = styled.div`
-  /* display: flex;
-  align-items: center;
-  */
+  display: flex;
+  align-items: flex-end;
   position: relative;
   background-color: #ffffff;
   border-radius: 0.5rem;
