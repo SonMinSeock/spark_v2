@@ -37,7 +37,7 @@ const Main = styled.main`
     padding: 0 1.2rem;
     margin-top: 2rem;
     .hilight {
-      color: #8cd7c7;
+      color: #248fcd;
     }
   }
 
@@ -56,6 +56,7 @@ const StepbarContainer = styled.div`
 `;
 
 const Footer = styled.footer`
+  padding: 0 1.2rem;
   @media (min-width: 40rem) {
     margin: 0 auto;
     max-width: 25rem;
@@ -109,8 +110,7 @@ function Question() {
     } else if (questionNum === 2) {
       setEnteredUserInfo((prev) => ({
         ...prev,
-        secondQuestion:
-          value === "" ? (anotherValue !== "" ? anotherValue : "") : value,
+        secondQuestion: value === "" ? (anotherValue !== "" ? anotherValue : "") : value,
       }));
     } else if (questionNum === 3) {
       setEnteredUserInfo((prev) => ({
@@ -120,8 +120,7 @@ function Question() {
     } else if (questionNum === 4) {
       setEnteredUserInfo((prev) => ({
         ...prev,
-        fourQuestion:
-          value === "" ? (anotherValue !== "" ? anotherValue : "") : value,
+        fourQuestion: value === "" ? (anotherValue !== "" ? anotherValue : "") : value,
       }));
     } else if (questionNum === 5) {
       setEnteredUserInfo((prev) => ({
@@ -133,65 +132,30 @@ function Question() {
 
   const showQuestion = () => {
     if (activeStep === 0)
-      return (
-        <FirstQuestion
-          inputQuestionHandler={inputQuestionHandler}
-          mbti={enteredUserInfo.mbti}
-        />
-      );
+      return <FirstQuestion inputQuestionHandler={inputQuestionHandler} mbti={enteredUserInfo.mbti} />;
     else if (activeStep === 1)
-      return (
-        <SecondQuestion
-          inputQuestionHandler={inputQuestionHandler}
-          question={enteredUserInfo.secondQuestion}
-        />
-      );
+      return <SecondQuestion inputQuestionHandler={inputQuestionHandler} question={enteredUserInfo.secondQuestion} />;
     else if (activeStep === 2)
-      return (
-        <ThirdQuestion
-          inputQuestionHandler={inputQuestionHandler}
-          question={enteredUserInfo.thirdQuestion}
-        />
-      );
+      return <ThirdQuestion inputQuestionHandler={inputQuestionHandler} question={enteredUserInfo.thirdQuestion} />;
     else if (activeStep === 3)
-      return (
-        <FourQuestion
-          inputQuestionHandler={inputQuestionHandler}
-          question={enteredUserInfo.fourQuestion}
-        />
-      );
+      return <FourQuestion inputQuestionHandler={inputQuestionHandler} question={enteredUserInfo.fourQuestion} />;
     else if (activeStep === 4)
-      return (
-        <FiveQuestion
-          inputQuestionHandler={inputQuestionHandler}
-          question={enteredUserInfo.fiveQuestion}
-        />
-      );
+      return <FiveQuestion inputQuestionHandler={inputQuestionHandler} question={enteredUserInfo.fiveQuestion} />;
   };
 
   return (
     <>
       <Header>
-        <IoIosArrowBack
-          size={25}
-          className="back__icon"
-          onClick={backHandler}
-        />
+        <IoIosArrowBack size={25} className="back__icon" onClick={backHandler} />
       </Header>
       <StepbarContainer>
         <Stepper
-          steps={[
-            { title: "" },
-            { title: "" },
-            { title: "" },
-            { title: "" },
-            { title: "" },
-          ]}
+          steps={[{ title: "" }, { title: "" }, { title: "" }, { title: "" }, { title: "" }]}
           activeStep={activeStep}
-          activeColor="#58c5b0"
-          completeColor="#58c5b0"
-          completeBarColor="#58c5b0"
-          defaultBarColor="#58c5b0"
+          activeColor="#18AF71"
+          completeColor="#18AF71"
+          completeBarColor="#18AF71"
+          defaultBarColor="#18AF71"
         />
       </StepbarContainer>
       <Main>{showQuestion()}</Main>

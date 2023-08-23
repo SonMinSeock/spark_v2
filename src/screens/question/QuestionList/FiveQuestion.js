@@ -41,7 +41,7 @@ const Textarea = styled.textarea`
   border-radius: 0.5rem;
   font-size: 0.9rem;
   &:focus {
-    border-color: #58c5b0;
+    border-color: #248fcd;
   }
 `;
 function FiveQuestion({ inputQuestionHandler, question }) {

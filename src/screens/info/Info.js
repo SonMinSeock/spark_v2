@@ -31,7 +31,7 @@ const Main = styled.main`
     font-size: 1.6rem;
     padding: 0 1.2rem;
     .hilight {
-      color: #8cd7c7;
+      color: #248fcd;
     }
   }
 
@@ -48,13 +48,13 @@ const Form = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  padding: 0 1.2rem;
   & label {
     font-weight: bold;
   }
   & > div {
     display: flex;
     flex-direction: column;
-    padding: 0 1.2rem;
   }
   & .InfoImageContainer {
     display: flex;
@@ -94,7 +94,7 @@ const Input = styled.input`
   border-radius: 0.5rem;
   font-size: 0.9rem;
   &:focus {
-    border-color: #58c5b0;
+    border-color: #248fcd;
   }
   & + .info__text {
     color: gray;
@@ -236,8 +236,7 @@ function Info() {
           />
           <span className="info__text">
             <span className="star__char">*</span>
-            오픈채팅방은 반드시 <span className="hilight">1:1 채팅방</span>으로
-            생성해야합니다(그룹채팅방 X)
+            오픈채팅방은 반드시 <span className="hilight">1:1 채팅방</span>으로 생성해야합니다(그룹채팅방 X)
           </span>
         </div>
         <div className="InfoImageContainer">

@@ -29,7 +29,7 @@ const Main = styled.main`
     font-size: 1.6rem;
     padding: 0 1.2rem;
     .hilight {
-      color: #8cd7c7;
+      color: #248fcd;
     }
   }
   margin-bottom: 2rem;
@@ -43,9 +43,7 @@ const Form = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  & > div {
-    padding: 0 1.2rem;
-  }
+  padding: 0 1.2rem;
   div label {
     display: block;
     margin-bottom: 1rem;
@@ -82,7 +80,7 @@ const Input = styled.input`
   border-radius: 0.5rem;
   border: 2px solid gray;
   &:focus {
-    border-color: #58c5b0;
+    border-color: #248fcd;
   }
 `;
 
@@ -97,7 +95,7 @@ const Select = styled.select`
   outline: none;
   color: black;
   &:focus {
-    border: 2px solid #58c5b0;
+    border: 2px solid #248fcd;
   }
   &.invalid {
     border: 2px solid red;
@@ -119,7 +117,7 @@ const Box = styled.img`
   border: 3px solid gray;
   cursor: pointer;
   &.selected {
-    border-color: #a7dfd4;
+    border-color: #248fcd;
   }
 `;
 const Femail = styled(Box)``;
@@ -183,10 +181,7 @@ function New() {
 
   // db read users
   const readUsers = () => {
-    const q = query(
-      collection(dbService, "users"),
-      orderBy("createdAt", "desc")
-    );
+    const q = query(collection(dbService, "users"), orderBy("createdAt", "desc"));
 
     onSnapshot(q, (snapshot) => {
       const docUsers = snapshot.docs.map((doc) => ({
@@ -235,11 +230,7 @@ function New() {
   return (
     <>
       <Header>
-        <IoIosArrowBack
-          size={25}
-          className="back__icon"
-          onClick={backHandler}
-        />
+        <IoIosArrowBack size={25} className="back__icon" onClick={backHandler} />
       </Header>
       <Main>
         <section>
@@ -265,11 +256,7 @@ function New() {
             onBlur={nameBlurHandler}
             value={enteredName}
           />
-          {nameInputHasError ? (
-            <ErrorMessage>
-              *닉네임 공백 혹은 이미 사용중인 닉네임 입니다.
-            </ErrorMessage>
-          ) : null}
+          {nameInputHasError ? <ErrorMessage>*닉네임 공백 혹은 이미 사용중인 닉네임 입니다.</ErrorMessage> : null}
           <span className="info__text">
             <span className="star__char">*</span>
             닉네임은 변경 불가능합니다
@@ -294,9 +281,7 @@ function New() {
             <div className="IoMdArrowDropdown">
               <IoMdArrowDropdown size={30} color="gray" />
             </div>
-            {schoolSelectHasError ? (
-              <ErrorMessage>*학교 선택 안했습니다.</ErrorMessage>
-            ) : null}
+            {schoolSelectHasError ? <ErrorMessage>*학교 선택 안했습니다.</ErrorMessage> : null}
           </div>
         </div>
         <GenderContainer>
@@ -315,15 +300,9 @@ function New() {
               onClick={toggleGenderHandler}
             />
           </div>
-          {isGnder === "" ? (
-            <ErrorMessage>*성별 선택 안했습니다.</ErrorMessage>
-          ) : null}
+          {isGnder === "" ? <ErrorMessage>*성별 선택 안했습니다.</ErrorMessage> : null}
         </GenderContainer>
-        <Button
-          type="submit"
-          className={!formIsValid ? "disabled__btn" : ""}
-          disabled={!formIsValid}
-        >
+        <Button type="submit" className={!formIsValid ? "disabled__btn" : ""} disabled={!formIsValid}>
           다음
         </Button>
       </Form>
