@@ -19,8 +19,8 @@ const Section = styled.section`
           margin-top: 1rem;
         }
         &.selected {
-          background-color: #58c5b0;
-          border-color: #58c5b0;
+          background-color: #248fcd;
+          border-color: #248fcd;
           color: white;
         }
         border-radius: 1rem;
@@ -44,7 +44,7 @@ const Input = styled.input`
   box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   font-size: 0.9rem;
   &:focus {
-    border-color: #58c5b0;
+    border-color: #248fcd;
   }
 `;
 function SecondQuestion({ inputQuestionHandler, question, anotherQuestion }) {
@@ -88,12 +88,7 @@ function SecondQuestion({ inputQuestionHandler, question, anotherQuestion }) {
       </Section>
       <Form>
         <label>원하는 선택지가 없다면?</label>
-        <Input
-          type="text"
-          placeholder="자유롭게 대답해주세요~!"
-          onChange={onChangeHandler}
-          value={enteredQuestion}
-        />
+        <Input type="text" placeholder="자유롭게 대답해주세요~!" onChange={onChangeHandler} value={enteredQuestion} />
       </Form>
     </>
   );

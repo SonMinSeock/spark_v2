@@ -43,6 +43,7 @@ const Form = styled.form`
     max-width: 25rem;
     height: calc(100vh - 6rem - 11.3rem);
   }
+  padding: 0 1.2rem;
 `;
 
 const Textarea = styled.textarea`
@@ -56,7 +57,7 @@ const Textarea = styled.textarea`
   border: 2px solid gray;
   font-size: 0.9rem;
   &:focus {
-    border-color: #58c5b0;
+    border-color: #248fcd;
   }
 `;
 const ButtonContainer = styled.div`
@@ -143,11 +144,7 @@ function Report() {
         </Modal>
       ) : null}
       <Header>
-        <IoIosArrowBack
-          size={25}
-          className="back__icon"
-          onClick={backHandler}
-        />
+        <IoIosArrowBack size={25} className="back__icon" onClick={backHandler} />
         <div>
           <span>신고하기</span>
         </div>

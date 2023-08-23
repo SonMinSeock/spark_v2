@@ -50,7 +50,7 @@ function FirstQuestion({ inputQuestionHandler, mbti: enteredMbti }) {
       font-size: 1.1rem;
       cursor: pointer;
       &.selected {
-        background-color: #a7dfd4;
+        background-color: #248fcd;
         color: white;
         border-color: #a7dfd4;
       }
