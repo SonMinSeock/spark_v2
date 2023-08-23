@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { IoMdContact, IoIosArrowBack } from "react-icons/io";
+import { IoIosArrowBack } from "react-icons/io";
 import WhiteQuestionImage from "../../assets/twemoji_white-question-mark.png";
 import RedQuestionImage from "../../assets/red-question-mark.png";
 import LinkBold from "../../assets/ph_link-bold.png";
@@ -13,7 +13,7 @@ import RobotImage from "../../assets/robot_sad_image.png";
 import RobotSmileImage from "../../assets/robot_smile.png";
 import NoLinkFemaleImage from "../../assets/modal_nolink.png";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { collection, doc, updateDoc } from "firebase/firestore";
+import { doc, updateDoc } from "firebase/firestore";
 import Backdrop from "../UI/Modal/Backdrop";
 import Modal from "../UI/Modal/Modal";
 import { dbService } from "../../db/firebase";
@@ -56,12 +56,12 @@ function Profile() {
     }
   `;
 
-  const RecomendBox = styled.div`
+  const ProfileBox = styled.div`
     color: white;
     margin-bottom: 1rem;
   `;
 
-  const RecomendFriends = styled.div`
+  const ProfileContainer = styled.div`
     display: flex;
     padding: 0 1.2rem;
     height: 190px;
@@ -71,7 +71,7 @@ function Profile() {
     overflow-x: auto;
     overflow-y: hidden;
   `;
-  const RecomendFriend = styled.div`
+  const Profile = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -155,30 +155,15 @@ function Profile() {
     }
   `;
 
-  const RecomendProfileImg = styled.img`
-    width: 85px;
-    height: auto;
-  `;
-
   const CoinLogo = styled.img`
     width: 1.3rem;
     height: 1.3rem;
     margin-left: 0.6rem;
   `;
-  const UserProfile = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    & span {
-      font-weight: bold;
-    }
-  `;
+
   const ProfileImg = styled.img`
-    display: block;
-    width: 5.5rem;
-    height: 5.5rem;
-    margin-bottom: 0.6rem;
+    width: 85px;
+    height: auto;
   `;
   const Main = styled.main`
     padding: 0 1.2rem;
@@ -420,14 +405,14 @@ function Profile() {
 
   const showProfile = () => {
     return (
-      <RecomendFriend>
+      <Profile>
         <div>
           <div className="wrapper">
             <div className="recomendProfileImgContainer">
               {!isMe ? (
-                <RecomendProfileImg src={friend.gender === "female" ? FemaleImage : MaleImage} />
+                <ProfileImg src={friend.gender === "female" ? FemaleImage : MaleImage} />
               ) : (
-                <RecomendProfileImg src={userInfo.gender === "female" ? FemaleImage : MaleImage} />
+                <ProfileImg src={userInfo.gender === "female" ? FemaleImage : MaleImage} />
               )}
             </div>
           </div>
@@ -438,7 +423,7 @@ function Profile() {
             </div>
           </div>
         </div>
-      </RecomendFriend>
+      </Profile>
     );
   };
 
@@ -470,9 +455,9 @@ function Profile() {
           </div>
           {!isMe ? <img className="remport--img" src={ReportIcon} onClick={onNavigateReport} /> : null}
         </Top>
-        <RecomendBox>
-          <RecomendFriends>{showProfile()}</RecomendFriends>
-        </RecomendBox>
+        <ProfileBox>
+          <ProfileContainer>{showProfile()}</ProfileContainer>
+        </ProfileBox>
       </Header>
       <Main>
         <UserInfoContainer>
