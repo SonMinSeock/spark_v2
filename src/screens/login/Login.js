@@ -115,12 +115,13 @@ function Login() {
         <Main>
           <section>
             <img className="login__img" alt="spark_image" src={MockupSVG} />
+            <p>내 주변 대학 친구를 간편하게 사귀고 싶다면?</p>
           </section>
         </Main>
         <Footer>
           <div className="login__btn" onClick={createUserHandler}>
             <img className="kakaoBubble" src={kakaoBubbleSVG} />
-            <span>카카오계정으로 로그인</span>
+            <span>카카오 계정으로 회원가입</span>
           </div>
         </Footer>
       </LoginBackgroundColor>

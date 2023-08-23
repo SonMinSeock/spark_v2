@@ -14,7 +14,7 @@ const Main = styled.main`
     font-weight: bold;
     padding: 2rem 1.2rem;
     .hilight {
-      color: #8cd7c7;
+      color: #248fcd;
     }
     @media (min-width: 800px) {
       & {
@@ -81,6 +81,7 @@ const Footer = styled.footer`
   display: flex;
   align-items: flex-end;
   height: calc(100vh - 37rem);
+  padding: 0 1.2rem;
   @media (min-width: 40rem) {
     margin: 0 auto;
     max-width: 25rem;
@@ -104,8 +105,6 @@ function Intro() {
       <Main>
         <section>
           <h2>
-            <span className="hilight">질문</span>에 답하고
-            <br />
             <span className="hilight">1분만</span>에 나와 맞는
             <br />
             대학교 <span className="hilight">친구</span>를 찾아보세요

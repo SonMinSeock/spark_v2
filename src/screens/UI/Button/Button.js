@@ -1,15 +1,11 @@
 import styled from "styled-components";
 
-function Button({
-  type = "button",
-  children,
-  onClick,
-  className = "",
-  disabled = false,
-}) {
+function Button({ type = "button", children, onClick, className = "", disabled = false }) {
   const Button = styled.button`
     width: 100%;
-    background-color: #58c5b0;
+    background-color: #18af71;
+    margin-bottom: 1rem;
+    border-radius: 1.5rem;
     border: none;
     padding: 1rem;
     color: #ffffff;
@@ -23,12 +19,7 @@ function Button({
   `;
 
   return (
-    <Button
-      type={type}
-      onClick={onClick}
-      className={className}
-      disabled={disabled}
-    >
+    <Button type={type} onClick={onClick} className={className} disabled={disabled}>
       {children}
     </Button>
   );

@@ -19,8 +19,8 @@ const Section = styled.section`
           margin-top: 1rem;
         }
         &.selected {
-          background-color: #58c5b0;
-          border-color: #58c5b0;
+          background-color: #248fcd;
+          border-color: #248fcd;
           color: white;
         }
         border-radius: 1rem;
@@ -43,7 +43,7 @@ const Input = styled.input`
   border: 2px solid gray;
   font-size: 0.9rem;
   &:focus {
-    border-color: #58c5b0;
+    border-color: #248fcd;
   }
 `;
 function FourQuestion({ inputQuestionHandler, question, anotherQuestion }) {

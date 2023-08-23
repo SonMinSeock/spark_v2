@@ -28,11 +28,16 @@ function Modal({ children, type = "default" }) {
       text-align: center;
       line-height: 1.1rem;
     }
+    & .highlight {
+      font-size: 1rem;
+      color: #248fcd;
+    }
     & span:first-child {
       margin-top: 1rem;
       font-size: 1rem;
       font-weight: bold;
       color: black;
+      line-height: 23px;
     }
     & span:last-child {
       margin-bottom: 0;
@@ -48,7 +53,7 @@ function Modal({ children, type = "default" }) {
     }
     & button {
       width: 100%;
-      background-color: #59c6b0;
+      background-color: #248fcd;
       color: #ffffff;
       font-size: 1.2rem;
       font-weight: bold;
