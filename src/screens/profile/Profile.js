@@ -13,11 +13,12 @@ import RobotImage from "../../assets/robot_sad_image.png";
 import RobotSmileImage from "../../assets/robot_smile.png";
 import NoLinkFemaleImage from "../../assets/modal_nolink.png";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
-import { doc, updateDoc } from "firebase/firestore";
+import { addDoc, collection, doc, updateDoc } from "firebase/firestore";
 import Backdrop from "../UI/Modal/Backdrop";
 import Modal from "../UI/Modal/Modal";
 import { dbService } from "../../db/firebase";
 import { analyticsButtonLogEvent } from "../../libs/analytics";
+import { calcDate } from "../../controllers";
 
 function Profile() {
   const HomeBackgroundBox = styled.div`
@@ -288,6 +289,29 @@ function Profile() {
 
   const isMe = +id === userInfo.id;
 
+  // 소비 컬렉션 만들기
+  const createdConsumption = async () => {
+    await addDoc(collection(dbService, "consumption"), {
+      sendDate: calcDate(),
+      fromSendUser: {
+        name: userInfo.name,
+        mbti: userInfo.mbti,
+        email: userInfo.email,
+        gender: userInfo.gender,
+        id: userInfo.id,
+        document_id: userInfo.document_id,
+      },
+      toUser: {
+        name: friend.name,
+        mbti: friend.mbti,
+        email: friend.email,
+        gender: friend.gender,
+        id: friend.id,
+        document_id: friend.document_id,
+      },
+    });
+  };
+
   const backHandler = () => {
     navigate(-1);
   };
@@ -358,7 +382,8 @@ function Profile() {
     await updateDoc(userRef, {
       coin: userInfo.coin - 1,
     });
-    setUpdate(true);
+
+    await setUpdate(true);
     window.location.href = openChatLink;
   };
 
@@ -368,7 +393,8 @@ function Profile() {
       if (isMe) {
         alert("링크 복사했습니다.");
       } else {
-        updateUser();
+        await updateUser();
+        // 소비 컬렉션 만들기
         setLinkModal(false);
         alert("링크 복사했습니다.");
       }
@@ -387,8 +413,9 @@ function Profile() {
 
   const showLinkModal = () => setLinkModal((prev) => !prev);
 
-  const redirectOpenChat = (openChatLink) => {
-    updateUser(openChatLink);
+  const redirectOpenChat = async (openChatLink) => {
+    await updateUser(openChatLink);
+    await createdConsumption();
     analyticsButtonLogEvent(`Friend Profile ${friend.name} Send Message`);
   };
   const onMessageBtnClickHandler = () => {
@@ -437,7 +464,7 @@ function Profile() {
           <span>메세지 보내실건가요? 코인 1감소 됩니다.</span>
           <img src={NoLinkFemaleImage} />
           <div className="btn__container">
-            <button className="confirm" onClick={() => onConfirm(friend.openChatLink)}>
+            <button className="confirm" onClick={() => onConfirm(friend.openChatLink.url)}>
               확인
             </button>
             <button className="cancle" onClick={onCancle}>
