@@ -199,7 +199,7 @@ function Profile() {
         font-weight: bold;
       }
     }
-    & span:last-child {
+    & span:nth-child(2) {
       font-size: 0.8rem;
       margin-left: 1.4rem;
       border-radius: 0.8rem;
@@ -516,7 +516,13 @@ function Profile() {
             <span className="text_color_green">
               <img src={RedQuestionImage} /> SPARK에서 만나고 싶은 사람은
             </span>
-            <span className="bg_gray">{isMe ? userInfo.fiveQuestion : friend.fiveQuestion}</span>
+            {isMe ? (
+              userInfo.fiveQuestion !== "" ? (
+                <span className="bg_gray">{userInfo.fiveQuestion}</span>
+              ) : null
+            ) : friend.fiveQuestion !== "" ? (
+              <span className="bg_gray">{friend.fiveQuestion}</span>
+            ) : null}
           </UserInfo>
         </UserInfoContainer>
       </Main>
