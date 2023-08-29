@@ -312,7 +312,7 @@ function Profile() {
     navigate("/info", { state: { userId: userInfo.id, user: userInfo } });
   };
   const conditionalShowModal = () => {
-    if (isMe && userInfo.openChatLink === "") {
+    if (isMe && userInfo.openChatLink.url === "") {
       return (
         <Modal>
           <span>혹시 오픈채팅 링크 등록했나요?</span>
@@ -393,9 +393,9 @@ function Profile() {
   };
   const onMessageBtnClickHandler = () => {
     if (isMe) {
-      userInfo.coin !== 0 && userInfo.openChatLink !== "" ? onClipboard(userInfo.openChatLink) : onModal();
+      userInfo.coin !== 0 && userInfo.openChatLink.url !== "" ? onClipboard(userInfo.openChatLink.url) : onModal();
     } else {
-      userInfo.coin !== 0 && friend.openChatLink !== ""
+      userInfo.coin !== 0 && friend.openChatLink.url !== ""
         ? showLinkModal()
         : //? redirectOpenChat(friend.openChatLink)
           // ? showLinkModal()

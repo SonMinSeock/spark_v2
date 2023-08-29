@@ -9,6 +9,7 @@ import { dbService } from "../../db/firebase";
 import { collection, addDoc, doc, updateDoc } from "firebase/firestore";
 import Modal from "../UI/Modal/Modal";
 import Backdrop from "../UI/Modal/Backdrop";
+import { calcDate } from "../../controllers";
 
 const Header = styled.header`
   height: 6rem;
@@ -122,6 +123,25 @@ function Info() {
     navigate(-1);
   };
 
+  // 현재 날짜, 시간 계산
+  // const calcDate = () => {
+  //   const date = new Date();
+
+  //   const dateFormat =
+  //     date.getFullYear() +
+  //     "-" +
+  //     (date.getMonth() + 1) +
+  //     "-" +
+  //     date.getDay() +
+  //     "  " +
+  //     date.getHours() +
+  //     ":" +
+  //     date.getMinutes() +
+  //     ":" +
+  //     date.getSeconds();
+
+  //   return dateFormat;
+  // };
   const createUser = async () => {
     userInfo.coin += 3;
 
@@ -131,9 +151,9 @@ function Info() {
 
     await addDoc(collection(dbService, "users"), {
       ...userInfo,
-      openChatLink: openChatUrl,
+      openChatLink: { url: openChatUrl, from: openChatUrl !== "" ? "회원가입 페이지" : "프로필에서 링크 추가할 예정" },
       coin: userInfo.coin,
-      createdAt: Date.now(),
+      createdAt: calcDate(),
     });
   };
 
@@ -142,7 +162,7 @@ function Info() {
       const userRef = doc(dbService, "users", `${user.document_id}`);
       await updateDoc(userRef, {
         coin: user.coin + 2,
-        openChatLink: openChatUrl,
+        openChatLink: { url: openChatUrl, from: openChatUrl !== "" ? "프로필 페이지" : "프로필에서 링크 추가할 예정" },
       });
     }
   };
