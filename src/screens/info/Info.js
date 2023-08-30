@@ -146,9 +146,10 @@ function Info() {
   const createUser = async () => {
     userInfo.coin += 3;
 
-    if (openChatUrl !== "") {
-      userInfo.coin += 2;
-    }
+    // 오픈채팅방 만들면 2포인트 더 줄지 확실하지 않아 주석 처리.
+    // if (openChatUrl !== "") {
+    //   userInfo.coin += 2;
+    // }
 
     await addDoc(collection(dbService, "users"), {
       ...userInfo,
