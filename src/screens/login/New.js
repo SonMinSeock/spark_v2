@@ -8,6 +8,7 @@ import useInput from "../../hooks/use-input";
 import { useState, useEffect } from "react";
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { dbService } from "../../db/firebase";
+import { analyticsButtonLogEvent } from "../../libs/analytics";
 
 const Header = styled.header`
   height: 6rem;
@@ -210,9 +211,10 @@ function New() {
       gender: isGnder,
       reportList: [],
       currentDate: "",
-      dateViewList: [],
+      coinReceivedRecord: [],
     };
 
+    analyticsButtonLogEvent(`Spark 회원정보 입력 완료한 사용자 수`);
     navigate("/intro", { state: { userObj } });
   };
 
@@ -221,6 +223,7 @@ function New() {
   };
 
   useEffect(() => {
+    analyticsButtonLogEvent(`카카오 회원가입을 완료한 사용자 수`);
     readUsers();
   }, []);
 

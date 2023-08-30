@@ -13,7 +13,7 @@ import { dbService } from "../db/firebase";
 import { collection, onSnapshot, orderBy, query, doc, updateDoc } from "firebase/firestore";
 import Backdrop from "./UI/Modal/Backdrop";
 import Modal from "./UI/Modal/Modal";
-import { analyticsButtonLogEvent } from "../libs/analytics";
+import { calcDate } from "../controllers";
 
 const HomeBackgroundBox = styled.div`
   height: 100vh;
@@ -335,27 +335,26 @@ function Home() {
       await updateDoc(userRef, {
         coin: userInfo.coin + 3,
         currentDate: date,
-        dateViewList: [...userInfo.dateViewList, date],
+        coinReceivedRecord: [...userInfo.coinReceivedRecord, date],
       });
       setRewordModal(true);
     } else {
       await updateDoc(userRef, {
         currentDate: date,
-        dateViewList: [...userInfo.dateViewList, date],
+        coinReceivedRecord: [...userInfo.coinReceivedRecord, date],
       });
     }
   };
 
   // 출석 보상.
   const rewordCoin = () => {
-    const date = new Date();
-    const currentDate = `${date.getFullYear()}.${date.getMonth() + 1}.${date.getDate()}`;
+    const currentDate = calcDate();
 
     // 첫 출석인지 아닌지, 첫 출석이면 보상X, 출석하면 보상.
-    if (userInfo.dateViewList.length === 0) {
+    if (userInfo.coinReceivedRecord.length === 0) {
       updateUser(currentDate, false);
     } else {
-      if (userInfo.currentDate !== currentDate) {
+      if (userInfo.currentDate.split("  ")[0] !== currentDate.split("  ")[0]) {
         updateUser(currentDate, true);
         // toggleModal();
       }
@@ -471,7 +470,6 @@ function Home() {
               <ChatFriend
                 key={friend.id}
                 onClick={() => {
-                  analyticsButtonLogEvent(`Chat Friend ${friend.name}`);
                   navigate(`/profile/${friend.id}`, {
                     state: { userInfo, friend, users },
                   });

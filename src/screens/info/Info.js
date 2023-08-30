@@ -9,6 +9,8 @@ import { dbService } from "../../db/firebase";
 import { collection, addDoc, doc, updateDoc } from "firebase/firestore";
 import Modal from "../UI/Modal/Modal";
 import Backdrop from "../UI/Modal/Backdrop";
+import { calcDate } from "../../controllers";
+import { analyticsButtonLogEvent } from "../../libs/analytics";
 
 const Header = styled.header`
   height: 6rem;
@@ -122,18 +124,38 @@ function Info() {
     navigate(-1);
   };
 
+  // 현재 날짜, 시간 계산
+  // const calcDate = () => {
+  //   const date = new Date();
+
+  //   const dateFormat =
+  //     date.getFullYear() +
+  //     "-" +
+  //     (date.getMonth() + 1) +
+  //     "-" +
+  //     date.getDay() +
+  //     "  " +
+  //     date.getHours() +
+  //     ":" +
+  //     date.getMinutes() +
+  //     ":" +
+  //     date.getSeconds();
+
+  //   return dateFormat;
+  // };
   const createUser = async () => {
     userInfo.coin += 3;
 
-    if (openChatUrl !== "") {
-      userInfo.coin += 2;
-    }
+    // 오픈채팅방 만들면 2포인트 더 줄지 확실하지 않아 주석 처리.
+    // if (openChatUrl !== "") {
+    //   userInfo.coin += 2;
+    // }
 
     await addDoc(collection(dbService, "users"), {
       ...userInfo,
-      openChatLink: openChatUrl,
+      openChatLink: { url: openChatUrl, from: openChatUrl !== "" ? "회원가입 페이지" : "프로필에서 링크 추가할 예정" },
       coin: userInfo.coin,
-      createdAt: Date.now(),
+      createdAt: calcDate(),
     });
   };
 
@@ -142,7 +164,7 @@ function Info() {
       const userRef = doc(dbService, "users", `${user.document_id}`);
       await updateDoc(userRef, {
         coin: user.coin + 2,
-        openChatLink: openChatUrl,
+        openChatLink: { url: openChatUrl, from: openChatUrl !== "" ? "프로필 페이지" : "프로필에서 링크 추가할 예정" },
       });
     }
   };
@@ -159,6 +181,7 @@ function Info() {
   const toggleModal = () => setModal((prev) => !prev);
   const onConfirm = () => {
     toggleModal();
+    analyticsButtonLogEvent(`카카오 오픈채칭 링크 스킵을 한 사용자 수`);
     condtitonal();
   };
   const onCancle = () => {
@@ -173,6 +196,8 @@ function Info() {
       } else {
         if (openChatUrl !== "") {
           createUser();
+          analyticsButtonLogEvent(`카카오 오픈채칭 링크 입력 한 사용자 수`);
+          analyticsButtonLogEvent(`최종적으로 회원가입 후 홈화면으로 도달한 사용자 수`);
           navigate("/", { state: { userInfo } });
         }
       }
