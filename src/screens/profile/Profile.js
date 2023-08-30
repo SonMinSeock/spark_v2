@@ -402,7 +402,7 @@ function Profile() {
     }
   };
 
-  const onConfirm = (openChatLink) => {
+  const onConfirm = async (openChatLink) => {
     //onClipboard(openChatLink);
     redirectOpenChat(openChatLink);
     setLinkModal((prev) => !prev);
