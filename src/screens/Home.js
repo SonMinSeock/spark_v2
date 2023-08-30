@@ -342,7 +342,7 @@ function Home() {
     } else {
       await updateDoc(userRef, {
         currentDate: date,
-        dateViewList: [...userInfo.dateViewList, date],
+        coinReceivedRecord: [...userInfo.coinReceivedRecord, date],
       });
     }
   };
@@ -352,10 +352,10 @@ function Home() {
     const currentDate = calcDate();
 
     // 첫 출석인지 아닌지, 첫 출석이면 보상X, 출석하면 보상.
-    if (userInfo.dateViewList.length === 0) {
+    if (userInfo.coinReceivedRecord.length === 0) {
       updateUser(currentDate, false);
     } else {
-      if (userInfo.currentDate !== currentDate) {
+      if (userInfo.currentDate.split("  ")[0] !== currentDate.split("  ")[0]) {
         updateUser(currentDate, true);
         // toggleModal();
       }
