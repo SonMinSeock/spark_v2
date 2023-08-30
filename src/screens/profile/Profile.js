@@ -17,7 +17,6 @@ import { addDoc, collection, doc, updateDoc } from "firebase/firestore";
 import Backdrop from "../UI/Modal/Backdrop";
 import Modal from "../UI/Modal/Modal";
 import { dbService } from "../../db/firebase";
-import { analyticsButtonLogEvent } from "../../libs/analytics";
 import { calcDate } from "../../controllers";
 
 function Profile() {
@@ -416,7 +415,6 @@ function Profile() {
   const redirectOpenChat = async (openChatLink) => {
     await updateUser(openChatLink);
     await createdConsumption();
-    analyticsButtonLogEvent(`Friend Profile ${friend.name} Send Message`);
   };
   const onMessageBtnClickHandler = () => {
     if (isMe) {

@@ -10,6 +10,7 @@ import { collection, addDoc, doc, updateDoc } from "firebase/firestore";
 import Modal from "../UI/Modal/Modal";
 import Backdrop from "../UI/Modal/Backdrop";
 import { calcDate } from "../../controllers";
+import { analyticsButtonLogEvent } from "../../libs/analytics";
 
 const Header = styled.header`
   height: 6rem;
@@ -179,6 +180,7 @@ function Info() {
   const toggleModal = () => setModal((prev) => !prev);
   const onConfirm = () => {
     toggleModal();
+    analyticsButtonLogEvent(`카카오 오픈채칭 링크 스킵을 한 사용자 수`);
     condtitonal();
   };
   const onCancle = () => {
@@ -193,6 +195,8 @@ function Info() {
       } else {
         if (openChatUrl !== "") {
           createUser();
+          analyticsButtonLogEvent(`카카오 오픈채칭 링크 입력 한 사용자 수`);
+          analyticsButtonLogEvent(`최종적으로 회원가입 후 홈화면으로 도달한 사용자 수`);
           navigate("/", { state: { userInfo } });
         }
       }

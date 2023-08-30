@@ -13,7 +13,6 @@ import { dbService } from "../db/firebase";
 import { collection, onSnapshot, orderBy, query, doc, updateDoc } from "firebase/firestore";
 import Backdrop from "./UI/Modal/Backdrop";
 import Modal from "./UI/Modal/Modal";
-import { analyticsButtonLogEvent } from "../libs/analytics";
 import { calcDate } from "../controllers";
 
 const HomeBackgroundBox = styled.div`
@@ -471,7 +470,6 @@ function Home() {
               <ChatFriend
                 key={friend.id}
                 onClick={() => {
-                  analyticsButtonLogEvent(`Chat Friend ${friend.name}`);
                   navigate(`/profile/${friend.id}`, {
                     state: { userInfo, friend, users },
                   });

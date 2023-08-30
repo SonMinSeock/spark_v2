@@ -2,8 +2,8 @@ import styled from "styled-components";
 import LogoTitle from "../../components/logo/LogoTitle";
 import kakaoBubbleSVG from "../../kakao_svgrepo_com.svg";
 import MockupSVG from "../../assets/login_image.png";
-import { useNavigate } from "react-router-dom";
 import { analyticsButtonLogEvent } from "../../libs/analytics";
+import { useEffect } from "react";
 
 function Login() {
   const LoginBackgroundColor = styled.div`
@@ -98,12 +98,14 @@ function Login() {
   const kakaoURL = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}
   `;
 
-  const navigate = useNavigate();
-
   const createUserHandler = () => {
-    analyticsButtonLogEvent(`KaKao Login Button`);
+    analyticsButtonLogEvent(`카카오 회원가입 버튼 클릭한 사용자 수`);
     window.location.href = kakaoURL;
   };
+
+  useEffect(() => {
+    analyticsButtonLogEvent(`엔트리 화면에 들어온 사용자 수`);
+  }, []);
 
   return (
     <div>
