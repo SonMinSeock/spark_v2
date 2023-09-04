@@ -8,6 +8,7 @@ import useInput from "../../hooks/use-input";
 import { useState, useEffect } from "react";
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { dbService } from "../../db/firebase";
+import { analyticsButtonLogEvent } from "../../libs/analytics";
 
 const Header = styled.header`
   height: 6rem;
@@ -167,7 +168,7 @@ function New() {
     valueChangeHandler: schoolNameChangeHandler,
     inputBlurHandler: schoolNameBlurHandler,
     reset: resetSchoolNameSelect,
-  } = useInput((value) => ["강남대학교", "단국대학교"].includes(value.trim()));
+  } = useInput((value) => ["경운대학교", "금오공과대학교"].includes(value.trim()));
 
   let formIsValid = false;
 
@@ -210,9 +211,10 @@ function New() {
       gender: isGnder,
       reportList: [],
       currentDate: "",
-      dateViewList: [],
+      coinReceivedRecord: [],
     };
 
+    analyticsButtonLogEvent(`Spark 회원정보 입력 완료한 사용자 수`);
     navigate("/intro", { state: { userObj } });
   };
 
@@ -221,6 +223,7 @@ function New() {
   };
 
   useEffect(() => {
+    analyticsButtonLogEvent(`카카오 회원가입을 완료한 사용자 수`);
     readUsers();
   }, []);
 
@@ -275,8 +278,8 @@ function New() {
               <option value="" className="placeholder__text">
                 본인의 학교를 입력해주세요
               </option>
-              <option value="강남대학교">강남대학교</option>
-              <option value="단국대학교">단국대학교</option>
+              <option value="경운대학교">경운대학교</option>
+              <option value="금오공과대학교">금오공과대학교</option>
             </Select>
             <div className="IoMdArrowDropdown">
               <IoMdArrowDropdown size={30} color="gray" />

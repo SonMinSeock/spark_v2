@@ -97,8 +97,9 @@ function Question() {
       navigate("/info", { state: { enteredUserInfo } });
     } else {
       setActiveStep((prev) => prev + 1);
+      console.log(`${activeStep + 1}번 질문 완료한 사용자 수`);
+      analyticsButtonLogEvent(`${activeStep + 1}번 질문 완료한 사용자 수`);
     }
-    analyticsButtonLogEvent(`Question Next Button`);
   };
 
   const inputQuestionHandler = (questionNum, value, anotherValue) => {
