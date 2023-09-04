@@ -120,6 +120,12 @@ const Box = styled.img`
   &.selected {
     border-color: #248fcd;
   }
+  @media (max-width: 17.5rem) {
+    & {
+      width: 7rem;
+      height: auto;
+    }
+  }
 `;
 const Femail = styled(Box)``;
 const Mail = styled(Box)``;

@@ -133,6 +133,12 @@ function Profile() {
       justify-content: center;
       align-items: center;
       margin-left: 2rem;
+      @media (max-width: 17.5rem) {
+        & {
+          width: 114px;
+          height: 112px;
+        }
+      }
       & .mbti__container {
         font-size: 0.6rem;
         position: absolute;
@@ -164,6 +170,11 @@ function Profile() {
   const ProfileImg = styled.img`
     width: 85px;
     height: auto;
+    @media (max-width: 17.5rem) {
+      & {
+        width: 78px;
+      }
+    }
   `;
   const Main = styled.main`
     padding: 0 1.2rem;

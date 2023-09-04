@@ -16,6 +16,11 @@ const Main = styled.main`
     .hilight {
       color: #248fcd;
     }
+    @media (max-width: 17.5rem) {
+      & {
+        font-size: 1.4rem;
+      }
+    }
     @media (min-width: 800px) {
       & {
         font-size: 2.2rem;

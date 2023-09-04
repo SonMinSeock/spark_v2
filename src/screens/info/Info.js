@@ -35,6 +35,12 @@ const Main = styled.main`
     .hilight {
       color: #248fcd;
     }
+    @media (max-width: 17.5rem) {
+      & {
+        line-height: 1.5rem;
+        font-size: 1.3rem;
+      }
+    }
   }
 
   @media (min-width: 40rem) {
@@ -83,7 +89,13 @@ const Form = styled.form`
     & .InfoImageContainer {
       & img {
         width: 40%;
+        height: auto;
         margin: 1.2rem 0;
+        @media (max-width: 17.5rem) {
+          & {
+            width: 50%;
+          }
+        }
       }
     }
   }
