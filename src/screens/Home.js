@@ -39,10 +39,20 @@ const Top = styled.div`
     & span {
       font-weight: bold;
       font-size: 0.9rem;
+      @media (max-width: 17.5rem) {
+        & {
+          font-size: 0.7rem;
+        }
+      }
     }
     & span:first-child {
       font-size: 1.3rem;
       margin-bottom: 0.5rem;
+      @media (max-width: 17.5rem) {
+        & {
+          font-size: 1rem;
+        }
+      }
     }
   }
   & svg {
@@ -172,8 +182,8 @@ const RecomendProfileImg = styled.img`
 
 const ProfileImg = styled.img`
   display: block;
-  width: 100%;
-  height: auto;
+  width: auto;
+  height: 100%;
 `;
 
 const Main = styled.main`
@@ -206,6 +216,12 @@ const CoinContext = styled.div`
     width: 60px;
     height: 60px;
     margin-right: 0.5rem;
+    @media (max-width: 17.5rem) {
+      & {
+        width: 45px;
+        height: 45px;
+      }
+    }
   }
   &:last-child {
     display: flex;
@@ -214,14 +230,35 @@ const CoinContext = styled.div`
     & span:first-child {
       font-size: 0.8rem;
       margin-bottom: 0.5rem;
+      @media (max-width: 17.5rem) {
+        & {
+          font-size: 0.3rem;
+        }
+      }
       & .highligt {
-        font-size: 0.8rem;
+        font-size: 0.9rem;
         font-weight: bold;
+      }
+      & span:last-child {
+        font-size: 0.9rem;
+        font-weight: bold;
+        @media (max-width: 17.5rem) {
+          & {
+            font-size: 0.7rem;
+          }
+        }
       }
     }
     & span:last-child {
-      font-size: 1.5rem;
-      font-weight: bold;
+      & {
+        font-size: 1.2rem;
+        font-weight: bold;
+      }
+      @media (max-width: 17.5rem) {
+        & {
+          font-size: 1rem;
+        }
+      }
     }
   }
 `;
