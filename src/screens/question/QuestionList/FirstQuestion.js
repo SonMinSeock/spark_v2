@@ -29,6 +29,11 @@ function FirstQuestion({ inputQuestionHandler, mbti: enteredMbti }) {
     &:last-child {
       justify-content: space-between;
       width: 68%;
+      @media (max-width: 17.5rem) {
+        & {
+          width: 71%;
+        }
+      }
       & button:last-child {
         @media (min-width: 33rem) {
           width: 140px;
@@ -38,6 +43,7 @@ function FirstQuestion({ inputQuestionHandler, mbti: enteredMbti }) {
         }
         @media (max-width: 290px) {
           width: 120px;
+          margin-left: 1rem;
         }
       }
     }
