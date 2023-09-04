@@ -33,11 +33,16 @@ const Main = styled.main`
   height: calc(100vh - 6rem - 9.4rem);
   section h2 {
     line-height: 2.1rem;
-    font-size: 1.6rem;
+    font-size: 1.3rem;
     padding: 0 1.2rem;
     margin-top: 2rem;
     .hilight {
       color: #248fcd;
+    }
+    @media (max-width: 17.5rem) {
+      & {
+        font-size: 1.26rem;
+      }
     }
   }
 
