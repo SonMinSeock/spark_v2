@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import LogoTitle from "../../components/logo/LogoTitle";
 import kakaoBubbleSVG from "../../kakao_svgrepo_com.svg";
-import MockupSVG from "../../assets/login__image.png";
+import MockupSVG from "../../assets/mockup__image.png";
 import { analyticsButtonLogEvent } from "../../libs/analytics";
 import { useEffect } from "react";
 
@@ -19,14 +19,29 @@ function Login() {
     align-items: center;
     height: 10rem;
     & h2 {
-      font-size: 1.5rem;
-      font-weight: bold;
-      margin-top: 0.3rem;
+      font-size: 1.25rem;
+      /* font-weight: bold; */
+      font-weight: 800;
+      margin-top: 0.8rem;
     }
 
+    @media (max-width: 17.5rem) {
+      & h2 {
+        font-size: 1rem;
+      }
+    }
     @media (min-width: 24rem) {
       & h2 {
         font-size: 1.7rem;
+      }
+    }
+
+    @media (min-width: 390px) {
+      & h1 {
+        font-size: 3.2rem;
+      }
+      & h2 {
+        font-size: 1.4rem;
       }
     }
 
@@ -144,7 +159,9 @@ function Login() {
       <LoginBackgroundColor>
         <Header>
           <LogoTitle>spark</LogoTitle>
-          <h2>대학교 친구 찾기 서비스</h2>
+          {/* <h2>대학교 친구 찾기 서비스</h2> */}
+          {/* <h2>강남대 X 단국대</h2> */}
+          <h2>관심사 기반 대학 친구 찾기 서비스</h2>
         </Header>
         <Main>
           <section>
