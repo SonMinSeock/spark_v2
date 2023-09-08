@@ -174,7 +174,7 @@ function New() {
     valueChangeHandler: schoolNameChangeHandler,
     inputBlurHandler: schoolNameBlurHandler,
     reset: resetSchoolNameSelect,
-  } = useInput((value) => ["경운대학교", "금오공과대학교"].includes(value.trim()));
+  } = useInput((value) => ["단국대학교", "강남대학교"].includes(value.trim()));
 
   let formIsValid = false;
 
@@ -221,7 +221,7 @@ function New() {
     };
 
     analyticsButtonLogEvent(`Spark 회원정보 입력 완료한 사용자 수`);
-    navigate("/intro", { state: { userObj } });
+    navigate("/login/new/question", { state: { userObj } });
   };
 
   const toggleGenderHandler = (event) => {
@@ -284,8 +284,8 @@ function New() {
               <option value="" className="placeholder__text">
                 본인의 학교를 입력해주세요
               </option>
-              <option value="경운대학교">경운대학교</option>
-              <option value="금오공과대학교">금오공과대학교</option>
+              <option value="단국대학교">단국대학교</option>
+              <option value="강남대학교">강남대학교</option>
             </Select>
             <div className="IoMdArrowDropdown">
               <IoMdArrowDropdown size={30} color="gray" />
