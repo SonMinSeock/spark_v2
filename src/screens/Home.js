@@ -315,11 +315,19 @@ const ProfileMbti = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  & span:first-child {
+  & .profile__mbti {
     margin-left: 5px;
     font-size: 0.5rem;
     color: #ffffff;
     background-color: #000;
+    border-radius: 0.5rem;
+    padding: 0.2rem 0.5rem;
+  }
+  & .profile__none__mbti {
+    margin-left: 5px;
+    font-size: 0.5rem;
+    color: #ffffff;
+    background-color: none;
     border-radius: 0.5rem;
     padding: 0.2rem 0.5rem;
   }
@@ -450,7 +458,7 @@ function Home() {
         <div>
           <div className="recomendProfileImgContainer">
             <RecomendProfileImg src={friend.gender === "female" ? FemaleImage : MaleImage} />
-            <span className="mbti__container">{friend.mbti}</span>
+            {friend.mbti !== "관심없어요" ? <span className="mbti__container">{friend.mbti}</span> : null}
           </div>
           <div className="friend__info__container">
             <div className="friend__info">
@@ -522,8 +530,12 @@ function Home() {
                   <span>{friend.school}</span>
                 </FriendInfo> */}
                 <ProfileMbti>
-                  <span>{friend.mbti}</span>
-                  <span>
+                  {friend.mbti !== "관심없어요" ? (
+                    <span className="profile__mbti">{friend.mbti}</span>
+                  ) : (
+                    <span className="profile__none__mbti">{""}</span>
+                  )}
+                  <span className="profile__heart__icon">
                     <img src={friend.gender === "female" ? FmaleHartImage : MaleHartImage} />
                   </span>
                 </ProfileMbti>

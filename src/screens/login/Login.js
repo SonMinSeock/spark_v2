@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import LogoTitle from "../../components/logo/LogoTitle";
 import kakaoBubbleSVG from "../../kakao_svgrepo_com.svg";
-import MockupSVG from "../../assets/login_image.png";
+import MockupSVG from "../../assets/login__image.png";
 import { analyticsButtonLogEvent } from "../../libs/analytics";
 import { useEffect } from "react";
 
