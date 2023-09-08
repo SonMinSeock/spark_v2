@@ -174,7 +174,7 @@ function New() {
     valueChangeHandler: schoolNameChangeHandler,
     inputBlurHandler: schoolNameBlurHandler,
     reset: resetSchoolNameSelect,
-  } = useInput((value) => ["단국대학교", "강남대학교"].includes(value.trim()));
+  } = useInput((value) => ["강남대학교", "단국대학교"].includes(value.trim()));
 
   let formIsValid = false;
 
@@ -284,8 +284,8 @@ function New() {
               <option value="" className="placeholder__text">
                 본인의 학교를 입력해주세요
               </option>
-              <option value="단국대학교">단국대학교</option>
               <option value="강남대학교">강남대학교</option>
+              <option value="단국대학교">단국대학교</option>
             </Select>
             <div className="IoMdArrowDropdown">
               <IoMdArrowDropdown size={30} color="gray" />
