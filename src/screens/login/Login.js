@@ -17,12 +17,16 @@ function Login() {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 10rem;
+    height: 12rem;
     & h2 {
-      font-size: 1.25rem;
+      font-size: 1.1rem;
       /* font-weight: bold; */
       font-weight: 800;
       margin-top: 0.8rem;
+      text-align: center;
+      & .highlight {
+        color: #278eff;
+      }
     }
 
     @media (max-width: 17.5rem) {
@@ -56,7 +60,7 @@ function Login() {
   const Main = styled.main`
     /* height: calc(100vh - 14rem - 5rem); */
     /* padding: 0 1.2rem; */
-    height: calc(100% - 16rem);
+    height: calc(100% - 18rem);
     & section {
       display: flex;
       height: 100%;
@@ -158,10 +162,14 @@ function Login() {
     <div>
       <LoginBackgroundColor>
         <Header>
+          <h2>강남대 X 단국대</h2>
           <LogoTitle>spark</LogoTitle>
           {/* <h2>대학교 친구 찾기 서비스</h2> */}
           {/* <h2>강남대 X 단국대</h2> */}
-          <h2>관심사 기반 대학 친구 찾기 서비스</h2>
+          <h2>
+            1분만에
+            <span className="highlight"> 관심사가 같은 친구</span>를 만나봐요!
+          </h2>
         </Header>
         <Main>
           <section>
