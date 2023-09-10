@@ -13,10 +13,10 @@ import { analyticsButtonLogEvent } from "../../libs/analytics";
 
 // styled code
 const Header = styled.header`
-  height: 6rem;
+  height: 9rem;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  justify-content: center;
   padding: 0 1.2rem;
   .back__icon {
     cursor: pointer;
@@ -30,18 +30,22 @@ const Header = styled.header`
   }
 `;
 const Main = styled.main`
-  height: calc(100vh - 6rem - 9.4rem);
+  height: calc(100% - 14rem);
   section h2 {
     line-height: 2.1rem;
     font-size: 1.3rem;
     padding: 0 1.2rem;
-    margin-top: 2rem;
     .hilight {
       color: #248fcd;
     }
     @media (max-width: 17.5rem) {
       & {
         font-size: 1.26rem;
+      }
+    }
+    @media (min-width: 24rem) {
+      & {
+        font-size: 1.35rem;
       }
     }
   }
@@ -53,18 +57,19 @@ const Main = styled.main`
   }
 `;
 
-const StepbarContainer = styled.div`
-  @media (min-width: 40rem) {
-    margin: 0 auto;
-    max-width: 25rem;
-  }
-`;
+const StepbarContainer = styled.div``;
 
 const Footer = styled.footer`
+  display: flex;
+  align-items: center;
+  height: 5rem;
   padding: 0 1.2rem;
   @media (min-width: 40rem) {
     margin: 0 auto;
     max-width: 25rem;
+  }
+  & button {
+    margin-bottom: 0;
   }
 `;
 function Question() {
@@ -153,17 +158,17 @@ function Question() {
     <>
       <Header>
         <IoIosArrowBack size={25} className="back__icon" onClick={backHandler} />
+        <StepbarContainer>
+          <Stepper
+            steps={[{ title: "" }, { title: "" }, { title: "" }, { title: "" }, { title: "" }]}
+            activeStep={activeStep}
+            activeColor="#18AF71"
+            completeColor="#18AF71"
+            completeBarColor="#18AF71"
+            defaultBarColor="#18AF71"
+          />
+        </StepbarContainer>
       </Header>
-      <StepbarContainer>
-        <Stepper
-          steps={[{ title: "" }, { title: "" }, { title: "" }, { title: "" }, { title: "" }]}
-          activeStep={activeStep}
-          activeColor="#18AF71"
-          completeColor="#18AF71"
-          completeBarColor="#18AF71"
-          defaultBarColor="#18AF71"
-        />
-      </StepbarContainer>
       <Main>{showQuestion()}</Main>
       <Footer>
         <Button onClick={nextBtnClick}>다음</Button>
