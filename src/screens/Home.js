@@ -430,22 +430,12 @@ function Home() {
   };
 
   const showRecomend = () => {
-    const recomendUsers = users.map((user) => {
-      if (user.coin >= 1) {
-        return user;
-      } else if (
-        user.openChatLink !== "" ||
-        user.firstQuestion !== "" ||
-        user.secondQuestion !== "" ||
-        user.thirdQuestion !== "" ||
-        user.fourQuestion !== "" ||
-        user.fiveQuestion !== ""
-      ) {
-        return user;
-      } else {
+    let recomendUsers = users.map((user) => {
+      if (userInfo.id !== user.id) {
         return user;
       }
     });
+    recomendUsers = recomendUsers.filter((user) => user !== undefined);
     return recomendUsers.slice(0, 3).map((friend, idx) => (
       <RecomendFriend
         key={idx}

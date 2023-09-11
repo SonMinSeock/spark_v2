@@ -85,6 +85,7 @@ function Login() {
     & .login__img {
       width: 100%;
       height: auto;
+
       @media (min-width: 31.25rem) {
         & {
           width: 70%;
