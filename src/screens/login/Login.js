@@ -181,7 +181,7 @@ function Login() {
         <Footer>
           <div className="login__btn" onClick={createUserHandler}>
             <img className="kakaoBubble" src={kakaoBubbleSVG} />
-            <span>카카오 계정으로 회원가입</span>
+            <span>카카오 계정으로 회원가입/로그인</span>
           </div>
         </Footer>
       </LoginBackgroundColor>
