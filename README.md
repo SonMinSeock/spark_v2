@@ -10,12 +10,9 @@
 
 ## 팀원 구성
 
-<div align="center">
-
 | **전민서** | **박서윤** | **손민석** |
 | :------: |  :------: | :------: |
-
-</div>
+|<img width="140" height="140" alt="스크린샷 2023-09-13 오후 3 20 10" src="https://github.com/SonMinSeock/spark_v2/assets/44064257/9e6476fb-a5b0-4bfe-bea9-8c9219218f68"><br/>PO|<img width="150" height="140" alt="스크린샷 2023-09-13 오후 3 20 14" src="https://github.com/SonMinSeock/spark_v2/assets/44064257/3802e669-be87-4a0f-ad67-19fb8f61c367"><br/>디자이너|<img src="https://github.com/phjjj/mate/assets/44064257/8092aa37-a306-45ad-93d2-78463030d1cb" width=140 height=140 /><br/>프론트엔드|
 
 ## 개발 환경
 - FrontEnd : React, JavaScript, styled-components
@@ -53,10 +50,3 @@
 | **홈** | **자신 프로필** | **상대방 프로필** | **신고 작성** |
 | :------: | :------: | :------: | :------: |
 |![홈](https://github.com/SonMinSeock/spark_v2/assets/44064257/b2a5cc62-eff3-4fa1-82dc-8b70e5d72607)|![자신프로필](https://github.com/SonMinSeock/spark_v2/assets/44064257/4b41240a-712d-4aac-91fe-78be113baba3)|![상대방프로필](https://github.com/SonMinSeock/spark_v2/assets/44064257/d6189b9d-0fe5-47fc-b405-8b537b5ad03b)|![신고](https://github.com/SonMinSeock/spark_v2/assets/44064257/137157c9-bd58-4f0a-92e9-fae6f29a1e81)|
-
-
-
-
-
-
-
