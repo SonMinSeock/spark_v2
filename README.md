@@ -49,4 +49,4 @@
 
 | **홈** | **자신 프로필** | **상대방 프로필** | **신고 작성** |
 | :------: | :------: | :------: | :------: |
-|![홈](https://github.com/SonMinSeock/spark_v2/assets/44064257/b2a5cc62-eff3-4fa1-82dc-8b70e5d72607)|![자신프로필](https://github.com/SonMinSeock/spark_v2/assets/44064257/4b41240a-712d-4aac-91fe-78be113baba3)|![상대방프로필](https://github.com/SonMinSeock/spark_v2/assets/44064257/d6189b9d-0fe5-47fc-b405-8b537b5ad03b)|![신고](https://github.com/SonMinSeock/spark_v2/assets/44064257/137157c9-bd58-4f0a-92e9-fae6f29a1e81)|
+|![홈](https://github.com/SonMinSeock/spark_v2/assets/44064257/4b41240a-712d-4aac-91fe-78be113baba3)|![자신프로필](https://github.com/SonMinSeock/spark_v2/assets/44064257/b2a5cc62-eff3-4fa1-82dc-8b70e5d72607)|![상대방프로필](https://github.com/SonMinSeock/spark_v2/assets/44064257/d6189b9d-0fe5-47fc-b405-8b537b5ad03b)|![신고](https://github.com/SonMinSeock/spark_v2/assets/44064257/137157c9-bd58-4f0a-92e9-fae6f29a1e81)|
