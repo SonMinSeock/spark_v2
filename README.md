@@ -12,7 +12,7 @@
 
 | **전민서** | **박서윤** | **손민석** |
 | :------: |  :------: | :------: |
-|<img width="140" height="140" alt="스크린샷 2023-09-13 오후 3 20 10" src="https://github.com/SonMinSeock/spark_v2/assets/44064257/9e6476fb-a5b0-4bfe-bea9-8c9219218f68"><br/>PO|<img width="150" height="140" alt="스크린샷 2023-09-13 오후 3 20 14" src="https://github.com/SonMinSeock/spark_v2/assets/44064257/3802e669-be87-4a0f-ad67-19fb8f61c367"><br/>디자이너|<img width="140" height="140" src="https://github.com/SonMinSeock/spark_v2/assets/44064257/890ddfb8-f197-40a3-9e89-1ee7f068b4bd" /><br/>프론트엔드|
+|<img width="140" height="140" alt="스크린샷 2023-09-13 오후 3 20 10" src="https://github.com/SonMinSeock/spark_v2/assets/44064257/9e6476fb-a5b0-4bfe-bea9-8c9219218f68"><br/>PO|<img width="150" height="140" alt="스크린샷 2023-09-13 오후 3 20 14" src="https://github.com/SonMinSeock/spark_v2/assets/44064257/3802e669-be87-4a0f-ad67-19fb8f61c367"><br/>디자이너|<img width="140" height="140" src="https://avatars.githubusercontent.com/u/44064257?s=400&u=c0f84c43a6aaa80ecc32bf82f47e893e26400fbf&v=4" /><br/>프론트엔드|
 
 ## 개발 환경
 - FrontEnd : React, JavaScript, styled-components
