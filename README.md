@@ -46,8 +46,12 @@
   - Feat 브랜치는 기능 단위로 독립적인 개발 환경을 위하여 사용하고 merge 후 각 브랜치를 삭제해주었습니다.
 
 ## 화면 구성
-| **초기화면** | **회원가입** | **질문작성** | **오픈채팅 링크 등록** | **홈** | **자신 프로필** | **상대방 프로필** | **신고 작성** | **메시지 보내기** |
-| :------: |  :------: | :------: | :------: | :------: | :------: | :------: | :------: | :------: |
-| <img width="375" alt="스크린샷 2023-09-13 오후 2 42 27" src="https://github.com/SonMinSeock/spark_v2/assets/44064257/dd9516bb-f78f-45fa-bf69-0646f9b2c209"> |![회원가입](https://github.com/SonMinSeock/spark_v2/assets/44064257/01b07230-2289-4d95-9440-710abe4b758a)|
+| **초기화면** | **회원가입** | **질문작성** | **홈** | **자신 프로필** | **상대방 프로필** | **신고 작성** |
+| :------: |  :------: | :------: | :------: | :------: | :------: | :------: |
+| <img width="375" alt="스크린샷 2023-09-13 오후 2 42 27" src="https://github.com/SonMinSeock/spark_v2/assets/44064257/dd9516bb-f78f-45fa-bf69-0646f9b2c209"> |![회원가입](https://github.com/SonMinSeock/spark_v2/assets/44064257/01b07230-2289-4d95-9440-710abe4b758a)|![질문등록](https://github.com/SonMinSeock/spark_v2/assets/44064257/783c16fc-278e-42b3-ab71-e0de1c29f923)|![홈](https://github.com/SonMinSeock/spark_v2/assets/44064257/b2a5cc62-eff3-4fa1-82dc-8b70e5d72607)|![자신프로필](https://github.com/SonMinSeock/spark_v2/assets/44064257/4b41240a-712d-4aac-91fe-78be113baba3)|![상대방프로필](https://github.com/SonMinSeock/spark_v2/assets/44064257/d6189b9d-0fe5-47fc-b405-8b537b5ad03b)|![신고](https://github.com/SonMinSeock/spark_v2/assets/44064257/137157c9-bd58-4f0a-92e9-fae6f29a1e81)|
+
+
+
+
 
 
