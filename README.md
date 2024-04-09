@@ -1,7 +1,9 @@
 # 관심사 기반 대학 친구 찾기 서비스
 <img width="710" alt="스크린샷 2023-09-12 오후 7 38 35" src="https://github.com/SonMinSeock/spark_v2/assets/44064257/9ca94662-7713-4285-9680-4e4f3eddb1d5">
 
-- 배포 URL : [스파크](https://spark-v2-d78f1.web.app)
+- 배포 URL : [스파크 - 관심사 기반 대학 친구 찾기 서비스](https://spark-v2-d78f1.web.app)
+- 스파크 인스타그램 : [스파크](https://www.instagram.com/spark_univ?igsh=NWwxeXNmdXBkbGxt)
+  
 ## 목차
   - [프로젝트 소개](#프로젝트-소개)
   - [프로젝트 기간](#프로젝트-기간)
